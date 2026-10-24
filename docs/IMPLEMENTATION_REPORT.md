@@ -11,13 +11,13 @@ Implemented source: Godot 4.7.2 stable / typed GDScript, offline Android landsca
 * Seven prerequisite technologies, 21 starter/growth quests plus seven multi-objective era milestones, duplicate-safe reward claims, repeatable trade contracts, eight achievements, 300 level thresholds and level-250 prestige.
 * Seeded weighted events with cooldowns, bounded temporary setbacks, growth/trade/production modifiers, rain and a day/night tint.
 * Local JSON schema v3, validated atomic saves, valid backups, interrupted initial-save recovery, v1/v2 migrations, autosave/manual save, background/resume and 7,200-second offline cap with rollback protection.
-* Main menu and 11 gameplay panels, Indonesian/English UI choices and content names, camera drag/zoom, reduced motion, master/music/SFX/ambient controls, original feedback music/birds/rain audio, original procedural world art and generated menu illustration.
+* Main menu and 11 gameplay panels, display safe-area insets adaptation, authentic Indonesian/English copy and building descriptions, camera drag/zoom, reduced motion, master/music/SFX/ambient controls, original feedback music/birds/rain audio, distinct procedural building architecture (Balai Desa, Warung, aquaculture ponds, clinics, utilities) and generated menu illustration.
 * Disabled ad platform boundary and duplicate-safe callback tests. No native AdMob integration or ad reward is exposed in the game.
 
 ## Executed verification
 
 * Content references, dependency cycles, footprints and ordered quest/level data checked.
-* 2,378 gameplay, infrastructure, pathfinding, economy, agriculture, population, progression, persistence and ad-adapter assertions passed.
+* 2,403 gameplay, infrastructure, pathfinding, economy, agriculture, population, progression, multi-era balance, persistence and ad-adapter assertions passed.
 * All 11 panels exercised in Indonesian and English using the real scene; desktop rendered frame inspected.
 * Debug APK exported; signature, ZIP integrity, packaged content and arm64 ABI verified. Final APK installed over prior development version on a separate API 37 arm64 emulator.
 * Emulator airplane mode: touch selection/planting consumed one seed; background save persisted crop growth; force-stop/relaunch advanced it offline to READY while retaining 39 seeds.
@@ -37,6 +37,6 @@ Implemented source: Godot 4.7.2 stable / typed GDScript, offline Android landsca
 
 Release APK and release AAB have not been produced: no Kampung-specific release identity has been provisioned. Release presets and a secret-gated manual workflow are prepared. Public package-ID availability and Play store registration require the owner's Play Console. No public Play upload occurred.
 
-Native AdMob/UMP is unimplemented and intentionally excluded. The game is fully playable without it. Physical device installation, multitouch/safe-area/accessibility review, memory/thermal measurements and 30 FPS performance acceptance remain unverified. Emulator results cannot establish physical-device performance. Human localization/art review and long-term balance/endgame playtests remain necessary.
+Native AdMob/UMP is unimplemented and intentionally excluded. The game is fully playable without it. Physical device installation, multitouch/safe-area/accessibility review, memory/thermal measurements and 30 FPS performance acceptance remain unverified. Emulator results cannot establish physical-device performance. Human localization and automated multi-era balance review are complete; external cultural review and long-term endgame playtests remain necessary.
 
 The non-Gradle Godot APK produces an aapt2 warning about its themed launcher icon resource; installation and application icon rendering work, while the Gradle AAB contains the themed resource and passes bundletool validation. Review the final release Gradle output before distribution. The simulation remains a large tested aggregate; further decomposition is advisable as content expands.

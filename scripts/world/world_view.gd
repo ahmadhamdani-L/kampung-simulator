@@ -190,6 +190,16 @@ func draw_building(b: Dictionary) -> void:
 				var planted: bool = b.crop in ["READY","GROWING","PLANTED"]
 				draw_line(crop_pos,crop_pos+Vector2(0,-11 if planted else -2),Color("edcb62") if ready else Color("bfd477"),3)
 		if b.crop=="READY": draw_circle(p+Vector2(0,-32+sin(clock*3)*2),7,Color("ffda79"))
+	elif b.type in ["catfish","tilapia"]:
+		diamond(p,Color("4a5c53"),88,43)
+		diamond(p,Color("265868"),78,38)
+		for i in range(mini(int(b.animals)*2+2,8)):
+			var phase := clock*2.2+float(i)*1.4
+			var fx := cos(phase)*26.0+sin(float(i)*2.1)*8.0
+			var fy := sin(phase)*12.0
+			var fp := p+Vector2(fx,fy)
+			draw_line(fp-Vector2(4,2),fp+Vector2(4,2),Color("16333c") if b.type=="catfish" else Color("d46b50"),3)
+			draw_circle(fp,1.5,Color("d8eef0"))
 	elif category=="ternak":
 		diamond(p,Color("c8b387"),85,42)
 		for i in range(mini(int(b.animals),8)):
@@ -201,6 +211,38 @@ func draw_building(b: Dictionary) -> void:
 		diamond(p,Color("80aa60"),85,42)
 		draw_circle(p+Vector2(0,-16),24,Color("437d50"))
 		draw_line(p+Vector2(-35,10),p+Vector2(25,40),Color("e0cd95"),6)
+	elif b.type=="hall":
+		draw_ellipse_shadow(p,w)
+		poly([p+Vector2(-w,0),p+Vector2(0,w*0.5),p+Vector2(0,w*0.5-h),p+Vector2(-w,-h)],Color("c9a473"))
+		poly([p+Vector2(0,w*0.5),p+Vector2(w,0),p+Vector2(w,-h),p+Vector2(0,w*0.5-h)],Color("deb885"))
+		# Joglo tiered roof
+		poly([p+Vector2(-w-8,-h),p+Vector2(0,-h-26),p+Vector2(w+8,-h),p+Vector2(0,-h+w*0.5)],Color("944432"))
+		poly([p+Vector2(-w-8,-h),p+Vector2(0,-h-26),p+Vector2(0,-h+w*0.5)],Color("ad5540"))
+		poly([p+Vector2(-w*0.55,-h-22),p+Vector2(0,-h-48),p+Vector2(w*0.55,-h-22),p+Vector2(0,-h-6)],Color("7a3526"))
+		poly([p+Vector2(-w*0.55,-h-22),p+Vector2(0,-h-48),p+Vector2(0,-h-6)],Color("8f4231"))
+		# Pendopo open pillars
+		for j in range(4):
+			var px := -w*0.6+float(j)*(w*0.4)
+			draw_line(p+Vector2(px,-2),p+Vector2(px,-h+10),Color("4a3022"),5)
+		# Flagpole with Merah-Putih
+		var flag_base := p+Vector2(w-8,8)
+		draw_line(flag_base,flag_base-Vector2(0,44),Color("e8eceb"),2)
+		poly([flag_base-Vector2(0,44),flag_base+Vector2(14,-41),flag_base+Vector2(14,-34),flag_base-Vector2(0,37)],Color("d93829"))
+		poly([flag_base-Vector2(0,37),flag_base+Vector2(14,-34),flag_base+Vector2(14,-27),flag_base-Vector2(0,30)],Color("ffffff"))
+	elif b.type=="water":
+		draw_ellipse_shadow(p,w)
+		poly([p+Vector2(-w*0.7,0),p+Vector2(0,w*0.35),p+Vector2(0,w*0.35-h-20),p+Vector2(-w*0.7,-h-20)],Color("436b7a"))
+		poly([p+Vector2(0,w*0.35),p+Vector2(w*0.7,0),p+Vector2(w*0.7,-h-20),p+Vector2(0,w*0.35-h-20)],Color("578a9c"))
+		poly([p+Vector2(-w*0.75,-h-20),p+Vector2(0,-h-34),p+Vector2(w*0.75,-h-20),p+Vector2(0,-h-6)],Color("2f4d59"))
+		draw_line(p+Vector2(w*0.35,-4),p+Vector2(w*0.35,-h-12),Color("79a3b2"),6)
+	elif b.type=="power":
+		draw_ellipse_shadow(p,w)
+		poly([p+Vector2(-w,0),p+Vector2(0,w*0.5),p+Vector2(0,w*0.5-h),p+Vector2(-w,-h)],Color("5c6966"))
+		poly([p+Vector2(0,w*0.5),p+Vector2(w,0),p+Vector2(w,-h),p+Vector2(0,w*0.5-h)],Color("72827f"))
+		poly([p+Vector2(-w-3,-h),p+Vector2(0,-h-16),p+Vector2(w+3,-h),p+Vector2(0,-h+w*0.4)],Color("3b4543"))
+		draw_line(p+Vector2(0,-h*0.5),p+Vector2(6,-h*0.5-12),Color("ffd152"),4)
+		draw_line(p+Vector2(6,-h*0.5-12),p+Vector2(-3,-h*0.5-12),Color("ffd152"),4)
+		draw_line(p+Vector2(-3,-h*0.5-12),p+Vector2(3,-h*0.5-24),Color("ffd152"),4)
 	else:
 		var colors := {"rumah":Color("e8cc99"),"niaga":Color("e9ab78"),"industri":Color("a6b4b0"),"layanan":Color("e4e4c5"),"jalan":Color("a5c8c4")}
 		var wall: Color = colors.get(category,Color("e8cc99"))
@@ -209,11 +251,28 @@ func draw_building(b: Dictionary) -> void:
 		poly([p+Vector2(-w,0),p+Vector2(0,w*0.5),p+Vector2(0,w*0.5-h),p+Vector2(-w,-h)],wall.darkened(0.12))
 		poly([p+Vector2(0,w*0.5),p+Vector2(w,0),p+Vector2(w,-h),p+Vector2(0,w*0.5-h)],wall)
 		var roof := Color("bd6850") if category=="rumah" else Color("487b78")
+		if b.type=="bamboo": roof = Color("5c4938")
 		poly([p+Vector2(-w-5,-h),p+Vector2(0,-h-30),p+Vector2(w+5,-h),p+Vector2(0,-h+w*0.5)],roof)
 		poly([p+Vector2(-w-5,-h),p+Vector2(0,-h-30),p+Vector2(0,-h+w*0.5)],roof.lightened(0.16))
 		draw_line(p+Vector2(16,-2),p+Vector2(16,-24),Color("405b55"),12)
 		for j in range(2): draw_line(p+Vector2(-w+12+j*18,-h+12),p+Vector2(-w+12+j*18,-h+24),Color("597d77"),8)
-		if category=="niaga": draw_line(p+Vector2(3,-h+25),p+Vector2(w-2,-h+5),Color("f0cd77"),9)
+		if b.type=="warung":
+			# Indonesian roadside warung striped awning (red/white)
+			poly([p+Vector2(-w+2,-10),p+Vector2(0,-1),p+Vector2(0,-16),p+Vector2(-w+2,-25)],Color("bf392c"))
+			for k in range(3):
+				var sx := -w+8+float(k)*10
+				draw_line(p+Vector2(sx,-14-float(k)*2),p+Vector2(sx+6,-11-float(k)*2),Color("f4eedb"),4)
+		elif category=="niaga":
+			draw_line(p+Vector2(3,-h+25),p+Vector2(w-2,-h+5),Color("f0cd77"),9)
+		if b.type in ["clinic","hospital"]:
+			var cross_color := Color("2da866") if b.type=="clinic" else Color("d63636")
+			var cp := p+Vector2(w*0.5,-h*0.5-6)
+			draw_line(cp-Vector2(7,0),cp+Vector2(7,0),cross_color,4)
+			draw_line(cp-Vector2(0,7),cp+Vector2(0,7),cross_color,4)
+		elif b.type=="school":
+			var flag_p := p+Vector2(0,-h-30)
+			draw_line(flag_p,flag_p-Vector2(0,20),Color("d0d5d4"),2)
+			poly([flag_p-Vector2(0,20),flag_p+Vector2(10,-18),flag_p+Vector2(10,-12),flag_p-Vector2(0,14)],Color("d93829"))
 		if category=="industri":
 			draw_line(p+Vector2(25,-h-5),p+Vector2(25,-h-50),Color("929891"),12)
 			if not bool(sim.state.settings.get("reduced_motion",false)):

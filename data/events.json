@@ -1,79 +1,93 @@
 [
   {
     "id": "festival",
-    "name": "Festival panen",
+    "name": "Festival Panen",
     "weight": 3,
     "duration": 50,
     "cooldown": 180,
     "level": 1,
     "effect": "price",
     "multiplier": 1.3,
-    "name_en": "Harvest festival"
+    "name_en": "Harvest Festival",
+    "description": "Warga mengadakan pesta panen raya desa, harga jual komoditas meningkat pesat!",
+    "description_en": "Villagers celebrate a grand harvest festival, increasing commodity market prices!"
   },
   {
     "id": "rain",
-    "name": "Hujan tropis",
+    "name": "Hujan Tropis",
     "weight": 4,
     "duration": 45,
     "cooldown": 180,
     "level": 1,
     "effect": "growth",
     "multiplier": 1.3,
-    "name_en": "Tropical rain"
+    "name_en": "Tropical Rain",
+    "description": "Hujan tropis menyirami persawahan dan mempercepat masa pertumbuhan tanaman.",
+    "description_en": "Tropical rain nourishes all fields and accelerates crop growth."
   },
   {
     "id": "dry",
-    "name": "Musim kemarau",
+    "name": "Musim Kemarau",
     "weight": 2,
     "duration": 40,
     "cooldown": 180,
     "level": 3,
     "effect": "growth",
     "multiplier": 0.75,
-    "name_en": "Dry season"
+    "name_en": "Dry Season",
+    "description": "Musim kemarau memperlambat pertumbuhan tanaman, siram sawah secara berkala.",
+    "description_en": "Dry weather slows down crop growth; regular watering is advised."
   },
   {
     "id": "pests",
-    "name": "Hama tanaman",
+    "name": "Hama Tanaman",
     "weight": 1,
     "duration": 30,
     "cooldown": 180,
     "level": 5,
     "effect": "growth",
     "multiplier": 0.8,
-    "name_en": "Crop pests"
+    "name_en": "Crop Pests",
+    "description": "Hama menyerang sebagian ladang, memperlambat pertumbuhan tanaman sementara.",
+    "description_en": "Pests attack crops, temporarily slowing agricultural growth."
   },
   {
     "id": "flood",
-    "name": "Banjir sungai",
+    "name": "Banjir Sungai",
     "weight": 1,
     "duration": 25,
     "cooldown": 180,
     "level": 10,
     "effect": "production",
     "multiplier": 0.7,
-    "name_en": "River flood"
+    "name_en": "River Flood",
+    "description": "Debit sungai meningkat tajam, menghambat aktivitas produksi pabrik desa.",
+    "description_en": "High river water levels temporarily slow down factory operations."
   },
   {
     "id": "tourism",
-    "name": "Wisata kampung",
+    "name": "Wisata Kampung",
     "weight": 2,
     "duration": 40,
     "cooldown": 180,
     "level": 8,
     "effect": "price",
     "multiplier": 1.5,
-    "name_en": "Village tourism"
+    "name_en": "Village Tourism",
+    "description": "Wisatawan berdatangan menikmati panorama desa, mendongkrak harga jual produk!",
+    "description_en": "Tourists visit the scenic village, significantly boosting sales prices!"
   },
   {
     "id": "labor",
-    "name": "Kekurangan tenaga kerja",
+    "name": "Kurang Tenaga Kerja",
     "weight": 1,
     "duration": 25,
     "cooldown": 180,
     "level": 8,
     "effect": "production",
     "multiplier": 0.8,
-    "name_en": "Labor shortage"
+    "name_en": "Labor Shortage",
+    "description": "Sebagian pekerja libur musiman, memperlambat laju pengolahan industri.",
+    "description_en": "Seasonal worker shortages temporarily reduce factory output."
   }
 ]

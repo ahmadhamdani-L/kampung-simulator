@@ -9,7 +9,9 @@
     "dependencies": [],
     "effect": "yield",
     "bonus": 0.2,
-    "name_en": "Better seeds"
+    "name_en": "Better seeds",
+    "description": "Seleksi bibit padi dan palawija unggul tahan hama untuk melipatgandakan hasil panen sawah.",
+    "description_en": "Selective breeding of resilient crop seeds to increase agricultural yield."
   },
   "irrigation": {
     "name": "Irigasi",
@@ -23,7 +25,9 @@
     ],
     "effect": "growth",
     "bonus": 0.2,
-    "name_en": "Irrigation"
+    "name_en": "Irrigation",
+    "description": "Pembangunan saluran irigasi subak teratur agar pasokan air lancar dan mempercepat masa tanam.",
+    "description_en": "Structured irrigation canal systems to improve water supply and accelerate crop growth."
   },
   "fertilizer": {
     "name": "Pupuk Organik",
@@ -37,7 +41,9 @@
     ],
     "effect": "yield",
     "bonus": 0.2,
-    "name_en": "Organic fertilizer"
+    "name_en": "Organic fertilizer",
+    "description": "Pemanfaatan pupuk kompos dan kotoran ternak organik untuk menyuburkan tanah pertanian.",
+    "description_en": "Use of organic compost and livestock manure to enrich farmland soil fertility and yields."
   },
   "mechanization": {
     "name": "Mekanisasi",
@@ -51,7 +57,9 @@
     ],
     "effect": "growth",
     "bonus": 0.2,
-    "name_en": "Mechanized farming"
+    "name_en": "Mechanized farming",
+    "description": "Penggunaan traktor tangan dan peralatan mekanis modern untuk mempercepat pembajakan lahan.",
+    "description_en": "Modern machinery and tractors accelerating soil tillage and farm operations."
   },
   "processing": {
     "name": "Pengolahan Industri",
@@ -65,7 +73,9 @@
     ],
     "effect": "production",
     "bonus": 0.2,
-    "name_en": "Industrial processing"
+    "name_en": "Industrial processing",
+    "description": "Standardisasi mesin pabrik penggilingan dan fermentasi untuk mendongkrak efisiensi produksi.",
+    "description_en": "Standardized milling and processing machines boosting industrial manufacturing efficiency."
   },
   "logistics": {
     "name": "Logistik",
@@ -79,7 +89,9 @@
     ],
     "effect": "price",
     "bonus": 0.2,
-    "name_en": "Logistics optimization"
+    "name_en": "Logistics optimization",
+    "description": "Optimasi jalur pengiriman dan manajemen pergudangan desa guna menaikkan margin harga jual.",
+    "description_en": "Optimized transport routes and storage logistics improving commodity trade margins."
   },
   "renewables": {
     "name": "Energi Terbarukan",
@@ -93,6 +105,8 @@
     ],
     "effect": "happiness",
     "bonus": 0.2,
-    "name_en": "Renewable energy"
+    "name_en": "Renewable energy",
+    "description": "Pemanfaatan pembangkit mikro hidro dan surya ramah lingkungan demi kenyamanan dan kebahagiaan warga.",
+    "description_en": "Clean micro-hydro and solar rural electrification enhancing citizen happiness and comfort."
   }
 }

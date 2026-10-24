@@ -3,7 +3,7 @@
     "id": "bamboo",
     "name": "Rumah Bambu",
     "name_en": "Bamboo house",
-    "description": "Rumah Bambu meningkatkan kapasitas dan produktivitas kampung.",
+    "description": "Rumah tradisional berdinding anyaman bambu (gedek). Cepat dan hemat biaya untuk menampung warga perintis.",
     "category": "rumah",
     "price": 630,
     "resources": {},
@@ -22,13 +22,13 @@
     "sprite": "procedural://rumah",
     "production": {},
     "storage": 0,
-    "description_en": "Bamboo house adds village capacity and productivity. Connect it to the village road network to activate its effects."
+    "description_en": "Traditional home with woven bamboo walls. Fast and affordable shelter for early pioneer villagers."
   },
   "wood_house": {
     "id": "wood_house",
     "name": "Rumah Kayu",
     "name_en": "Timber house",
-    "description": "Rumah Kayu meningkatkan kapasitas dan produktivitas kampung.",
+    "description": "Rumah panggung kayu dengan sirkulasi udara alami yang sejuk dan konstruksi kokoh.",
     "category": "rumah",
     "price": 1090,
     "resources": {},
@@ -47,13 +47,13 @@
     "sprite": "procedural://rumah",
     "production": {},
     "storage": 0,
-    "description_en": "Timber house adds village capacity and productivity. Connect it to the village road network to activate its effects."
+    "description_en": "Elevated timber house with cool natural ventilation and sturdy wood craftsmanship."
   },
   "simple_house": {
     "id": "simple_house",
     "name": "Rumah Sederhana",
     "name_en": "Simple house",
-    "description": "Rumah Sederhana meningkatkan kapasitas dan produktivitas kampung.",
+    "description": "Rumah semi-permanen dengan lantai plester semen dan dinding papan rapi.",
     "category": "rumah",
     "price": 2090,
     "resources": {},
@@ -72,13 +72,13 @@
     "sprite": "procedural://rumah",
     "production": {},
     "storage": 0,
-    "description_en": "Simple house adds village capacity and productivity. Connect it to the village road network to activate its effects."
+    "description_en": "Semi-permanent home with smooth concrete flooring and neatly paneled timber walls."
   },
   "permanent": {
     "id": "permanent",
     "name": "Rumah Permanen",
     "name_en": "Brick house",
-    "description": "Rumah Permanen meningkatkan kapasitas dan produktivitas kampung.",
+    "description": "Rumah bata merah beratap genting tanah liat. Tempat tinggal nyaman untuk keluarga mapan.",
     "category": "rumah",
     "price": 3450,
     "resources": {
@@ -100,13 +100,13 @@
     "sprite": "procedural://rumah",
     "production": {},
     "storage": 0,
-    "description_en": "Brick house adds village capacity and productivity. Connect it to the village road network to activate its effects."
+    "description_en": "Permanent brick residence with terracotta roof tiles, offering comfortable long-term living."
   },
   "housing": {
     "id": "housing",
     "name": "Perumahan",
     "name_en": "Housing estate",
-    "description": "Perumahan meningkatkan kapasitas dan produktivitas kampung.",
+    "description": "Kawasan pemukiman tertata dengan halaman asri dan jalan lingkungan yang nyaman.",
     "category": "rumah",
     "price": 7150,
     "resources": {
@@ -128,13 +128,13 @@
     "sprite": "procedural://rumah",
     "production": {},
     "storage": 0,
-    "description_en": "Housing estate adds village capacity and productivity. Connect it to the village road network to activate its effects."
+    "description_en": "Planned residential cluster with pleasant yards and convenient neighborhood pathways."
   },
   "apartment": {
     "id": "apartment",
     "name": "Apartemen",
     "name_en": "Apartment",
-    "description": "Apartemen meningkatkan kapasitas dan produktivitas kampung.",
+    "description": "Hunian vertikal modern bertingkat yang menampung banyak warga di lahan terbatas.",
     "category": "rumah",
     "price": 18950,
     "resources": {
@@ -156,13 +156,13 @@
     "sprite": "procedural://rumah",
     "production": {},
     "storage": 0,
-    "description_en": "Apartment adds village capacity and productivity. Connect it to the village road network to activate its effects."
+    "description_en": "Modern multi-story residential building housing many residents within a compact footprint."
   },
   "condo": {
     "id": "condo",
     "name": "Kondominium",
     "name_en": "Condominium",
-    "description": "Kondominium meningkatkan kapasitas dan produktivitas kampung.",
+    "description": "Kondominium perkotaan dengan fasilitas lengkap dan hunian nyaman berstandar tinggi.",
     "category": "rumah",
     "price": 33450,
     "resources": {
@@ -184,13 +184,13 @@
     "sprite": "procedural://rumah",
     "production": {},
     "storage": 0,
-    "description_en": "Condominium adds village capacity and productivity. Connect it to the village road network to activate its effects."
+    "description_en": "Urban condominium with comprehensive amenities and upscale residential units."
   },
   "rice_field": {
     "id": "rice_field",
     "name": "Sawah",
     "name_en": "Rice paddy",
-    "description": "Sawah meningkatkan kapasitas dan produktivitas kampung.",
+    "description": "Petak sawah berteras untuk menanam padi. Kebutuhan pangan pokok bagi seluruh warga kampung.",
     "category": "tani",
     "price": 630,
     "resources": {},
@@ -209,13 +209,13 @@
     "sprite": "procedural://tani",
     "production": {},
     "storage": 0,
-    "description_en": "Rice paddy adds village capacity and productivity. Connect it to the village road network to activate its effects."
+    "description_en": "Terraced paddy field for growing rice, the essential staple food of the entire village."
   },
   "corn_field": {
     "id": "corn_field",
     "name": "Kebun Jagung",
     "name_en": "Corn field",
-    "description": "Kebun Jagung meningkatkan kapasitas dan produktivitas kampung.",
+    "description": "Kebun jagung tropis penghasil bulir jagung manis untuk konsumsi dan bahan pakan ternak.",
     "category": "tani",
     "price": 910,
     "resources": {},
@@ -234,13 +234,13 @@
     "sprite": "procedural://tani",
     "production": {},
     "storage": 0,
-    "description_en": "Corn field adds village capacity and productivity. Connect it to the village road network to activate its effects."
+    "description_en": "Tropical corn plantation producing sweet corn for resident food and livestock feed processing."
   },
   "chili_field": {
     "id": "chili_field",
     "name": "Kebun Cabai",
     "name_en": "Chili garden",
-    "description": "Kebun Cabai meningkatkan kapasitas dan produktivitas kampung.",
+    "description": "Kebun cabai rawit pedas dengan nilai jual tinggi di pasar tradisional maupun pedagang kota.",
     "category": "tani",
     "price": 1370,
     "resources": {},
@@ -259,13 +259,13 @@
     "sprite": "procedural://tani",
     "production": {},
     "storage": 0,
-    "description_en": "Chili garden adds village capacity and productivity. Connect it to the village road network to activate its effects."
+    "description_en": "Spicy chili pepper plantation yielding high-value cash crops for traditional and city markets."
   },
   "cassava_field": {
     "id": "cassava_field",
     "name": "Kebun Singkong",
     "name_en": "Cassava field",
-    "description": "Kebun Singkong meningkatkan kapasitas dan produktivitas kampung.",
+    "description": "Ladang singkong tahan kemarau penghasil umbi kaya karbohidrat untuk cadangan pangan.",
     "category": "tani",
     "price": 1830,
     "resources": {},
@@ -284,13 +284,13 @@
     "sprite": "procedural://tani",
     "production": {},
     "storage": 0,
-    "description_en": "Cassava field adds village capacity and productivity. Connect it to the village road network to activate its effects."
+    "description_en": "Drought-resistant cassava patch yielding versatile carbohydrate-rich root crops."
   },
   "banana_field": {
     "id": "banana_field",
     "name": "Kebun Pisang",
     "name_en": "Banana plantation",
-    "description": "Kebun Pisang meningkatkan kapasitas dan produktivitas kampung.",
+    "description": "Kebun pisang tropis rimbun yang menghasilkan tandan buah manis sepanjang musim.",
     "category": "tani",
     "price": 2650,
     "resources": {
@@ -312,13 +312,13 @@
     "sprite": "procedural://tani",
     "production": {},
     "storage": 0,
-    "description_en": "Banana plantation adds village capacity and productivity. Connect it to the village road network to activate its effects."
+    "description_en": "Lush banana grove producing sweet tropical fruit bunches across all seasons."
   },
   "coconut_field": {
     "id": "coconut_field",
     "name": "Kebun Kelapa",
     "name_en": "Coconut grove",
-    "description": "Kebun Kelapa meningkatkan kapasitas dan produktivitas kampung.",
+    "description": "Perkebunan kelapa dengan pohon menjulang tinggi penghasil buah serbaguna dan minyak.",
     "category": "tani",
     "price": 3650,
     "resources": {
@@ -340,13 +340,13 @@
     "sprite": "procedural://tani",
     "production": {},
     "storage": 0,
-    "description_en": "Coconut grove adds village capacity and productivity. Connect it to the village road network to activate its effects."
+    "description_en": "Coconut grove with towering palms producing versatile coconuts for cooking, drinks and oil."
   },
   "coffee_field": {
     "id": "coffee_field",
     "name": "Kebun Kopi",
     "name_en": "Coffee plantation",
-    "description": "Kebun Kopi meningkatkan kapasitas dan produktivitas kampung.",
+    "description": "Perkebunan kopi lereng bukit penghasil biji kopi berkualitas dengan aroma khas nusantara.",
     "category": "tani",
     "price": 6450,
     "resources": {
@@ -368,13 +368,13 @@
     "sprite": "procedural://tani",
     "production": {},
     "storage": 0,
-    "description_en": "Coffee plantation adds village capacity and productivity. Connect it to the village road network to activate its effects."
+    "description_en": "Hillside coffee plantation yielding premium coffee beans with distinct archipelago aroma."
   },
   "chicken": {
     "id": "chicken",
     "name": "Kandang Ayam",
     "name_en": "Chicken coop",
-    "description": "Kandang Ayam meningkatkan kapasitas dan produktivitas kampung.",
+    "description": "Kandang ayam kampung penghasil telur segar berprotein tinggi untuk kebutuhan warga.",
     "category": "ternak",
     "price": 990,
     "resources": {},
@@ -393,13 +393,13 @@
     "sprite": "procedural://ternak",
     "production": {},
     "storage": 0,
-    "description_en": "Chicken coop adds village capacity and productivity. Connect it to the village road network to activate its effects."
+    "description_en": "Free-range chicken coop producing fresh, nutritious eggs for village households."
   },
   "duck": {
     "id": "duck",
     "name": "Peternakan Bebek",
     "name_en": "Duck farm",
-    "description": "Peternakan Bebek meningkatkan kapasitas dan produktivitas kampung.",
+    "description": "Peternakan bebek petelur dekat aliran air penghasil telur bebek berkualitas gurih.",
     "category": "ternak",
     "price": 1990,
     "resources": {},
@@ -418,13 +418,13 @@
     "sprite": "procedural://ternak",
     "production": {},
     "storage": 0,
-    "description_en": "Duck farm adds village capacity and productivity. Connect it to the village road network to activate its effects."
+    "description_en": "Duck farm situated near waterways producing savory, high-protein duck eggs."
   },
   "goat": {
     "id": "goat",
     "name": "Peternakan Kambing",
     "name_en": "Goat farm",
-    "description": "Peternakan Kambing meningkatkan kapasitas dan produktivitas kampung.",
+    "description": "Peternakan kambing peranakan etawa penghasil susu dan daging berkualitas tinggi.",
     "category": "ternak",
     "price": 2810,
     "resources": {
@@ -446,13 +446,13 @@
     "sprite": "procedural://ternak",
     "production": {},
     "storage": 0,
-    "description_en": "Goat farm adds village capacity and productivity. Connect it to the village road network to activate its effects."
+    "description_en": "Goat farm producing high-quality meat and fresh milk for the community."
   },
   "cow": {
     "id": "cow",
     "name": "Peternakan Sapi",
     "name_en": "Dairy farm",
-    "description": "Peternakan Sapi meningkatkan kapasitas dan produktivitas kampung.",
+    "description": "Peternakan sapi perah dan potong penghasil susu segar serta daging berkualitas.",
     "category": "ternak",
     "price": 4350,
     "resources": {
@@ -474,13 +474,13 @@
     "sprite": "procedural://ternak",
     "production": {},
     "storage": 0,
-    "description_en": "Dairy farm adds village capacity and productivity. Connect it to the village road network to activate its effects."
+    "description_en": "Cattle ranch producing fresh milk and quality meat, supporting dairy trade."
   },
   "catfish": {
     "id": "catfish",
     "name": "Kolam Lele",
     "name_en": "Catfish pond",
-    "description": "Kolam Lele meningkatkan kapasitas dan produktivitas kampung.",
+    "description": "Kolam budidaya ikan lele air tawar dengan sistem bioflok yang cepat panen dan tahan penyakit.",
     "category": "ternak",
     "price": 2290,
     "resources": {},
@@ -499,13 +499,13 @@
     "sprite": "procedural://ternak",
     "production": {},
     "storage": 0,
-    "description_en": "Catfish pond adds village capacity and productivity. Connect it to the village road network to activate its effects."
+    "description_en": "Freshwater catfish aquaculture pond with efficient growth and resilient yields."
   },
   "tilapia": {
     "id": "tilapia",
     "name": "Kolam Nila",
     "name_en": "Tilapia pond",
-    "description": "Kolam Nila meningkatkan kapasitas dan produktivitas kampung.",
+    "description": "Kolam air tawar jernih untuk budidaya ikan nila kaya nutrisi bagi pasar lokal.",
     "category": "ternak",
     "price": 3650,
     "resources": {
@@ -527,13 +527,13 @@
     "sprite": "procedural://ternak",
     "production": {},
     "storage": 0,
-    "description_en": "Tilapia pond adds village capacity and productivity. Connect it to the village road network to activate its effects."
+    "description_en": "Clean freshwater pond culturing nutritious tilapia fish for local dining and market trade."
   },
   "warung": {
     "id": "warung",
     "name": "Warung",
     "name_en": "Village stall",
-    "description": "Warung meningkatkan kapasitas dan produktivitas kampung.",
+    "description": "Warung kopi dan kelontong bersahaja tempat warga mengobrol santai dan membeli kebutuhan harian.",
     "category": "niaga",
     "price": 630,
     "resources": {},
@@ -552,13 +552,13 @@
     "sprite": "procedural://niaga",
     "production": {},
     "storage": 0,
-    "description_en": "Village stall adds village capacity and productivity. Connect it to the village road network to activate its effects."
+    "description_en": "Modest village coffee stall and sundries counter where neighbors gather and shop daily."
   },
   "shop": {
     "id": "shop",
     "name": "Toko Kelontong",
     "name_en": "Grocery shop",
-    "description": "Toko Kelontong meningkatkan kapasitas dan produktivitas kampung.",
+    "description": "Toko kelontong serba ada yang menyediakan sembako dan perlengkapan rumah tangga.",
     "category": "niaga",
     "price": 1450,
     "resources": {},
@@ -577,13 +577,13 @@
     "sprite": "procedural://niaga",
     "production": {},
     "storage": 0,
-    "description_en": "Grocery shop adds village capacity and productivity. Connect it to the village road network to activate its effects."
+    "description_en": "General merchandise shop supplying grocery staples and everyday household goods."
   },
   "market": {
     "id": "market",
     "name": "Pasar Tradisional",
     "name_en": "Traditional market",
-    "description": "Pasar Tradisional meningkatkan kapasitas dan produktivitas kampung.",
+    "description": "Pasar tradisional ramai tempat pertukaran hasil panen, kerajinan tangan, dan produk desa.",
     "category": "niaga",
     "price": 2450,
     "resources": {
@@ -605,13 +605,13 @@
     "sprite": "procedural://niaga",
     "production": {},
     "storage": 0,
-    "description_en": "Traditional market adds village capacity and productivity. Connect it to the village road network to activate its effects."
+    "description_en": "Bustling open-air market where farmers, artisans and vendors trade fresh produce and wares."
   },
   "minimarket": {
     "id": "minimarket",
     "name": "Minimarket",
     "name_en": "Convenience store",
-    "description": "Minimarket meningkatkan kapasitas dan produktivitas kampung.",
+    "description": "Toko swalayan berpendingin ruangan dengan variasi produk pangan kemasan yang lengkap.",
     "category": "niaga",
     "price": 5250,
     "resources": {
@@ -633,13 +633,13 @@
     "sprite": "procedural://niaga",
     "production": {},
     "storage": 0,
-    "description_en": "Convenience store adds village capacity and productivity. Connect it to the village road network to activate its effects."
+    "description_en": "Air-conditioned convenience store offering a wide variety of packaged consumer goods."
   },
   "supermarket": {
     "id": "supermarket",
     "name": "Supermarket",
     "name_en": "Supermarket",
-    "description": "Supermarket meningkatkan kapasitas dan produktivitas kampung.",
+    "description": "Pusat perbelanjaan modern yang melayani kebutuhan seluruh distrik permukiman kota.",
     "category": "niaga",
     "price": 12550,
     "resources": {
@@ -661,13 +661,13 @@
     "sprite": "procedural://niaga",
     "production": {},
     "storage": 0,
-    "description_en": "Supermarket adds village capacity and productivity. Connect it to the village road network to activate its effects."
+    "description_en": "Modern supermarket catering to extensive commercial needs across residential districts."
   },
   "restaurant": {
     "id": "restaurant",
     "name": "Restoran",
     "name_en": "Restaurant",
-    "description": "Restoran meningkatkan kapasitas dan produktivitas kampung.",
+    "description": "Rumah makan yang menyajikan hidangan lezat khas nusantara untuk warga dan pengunjung.",
     "category": "niaga",
     "price": 8150,
     "resources": {
@@ -689,13 +689,13 @@
     "sprite": "procedural://niaga",
     "production": {},
     "storage": 0,
-    "description_en": "Restaurant adds village capacity and productivity. Connect it to the village road network to activate its effects."
+    "description_en": "Restaurant serving flavorful traditional cuisine to local residents and visiting travelers."
   },
   "hotel": {
     "id": "hotel",
     "name": "Hotel",
     "name_en": "Hotel",
-    "description": "Hotel meningkatkan kapasitas dan produktivitas kampung.",
+    "description": "Penginapan ramah dan nyaman bagi wisatawan yang ingin menikmati suasana asri kampung.",
     "category": "niaga",
     "price": 15450,
     "resources": {
@@ -717,13 +717,13 @@
     "sprite": "procedural://niaga",
     "production": {},
     "storage": 0,
-    "description_en": "Hotel adds village capacity and productivity. Connect it to the village road network to activate its effects."
+    "description_en": "Hospitality inn welcoming tourists and business travelers enjoying the village atmosphere."
   },
   "mill": {
     "id": "mill",
     "name": "Penggilingan Padi",
     "name_en": "Rice mill",
-    "description": "Penggilingan Padi meningkatkan kapasitas dan produktivitas kampung.",
+    "description": "Pabrik penggilingan gabah yang memproses padi hasil panen menjadi beras putih bersih.",
     "category": "industri",
     "price": 1350,
     "resources": {},
@@ -744,13 +744,13 @@
       "rice": 3
     },
     "storage": 0,
-    "description_en": "Rice mill adds village capacity and productivity. Connect it to the village road network to activate its effects."
+    "description_en": "Rice mill processing harvested raw paddy into clean, polished white table rice."
   },
   "tofu_factory": {
     "id": "tofu_factory",
     "name": "Pabrik Tahu",
     "name_en": "Tofu factory",
-    "description": "Pabrik Tahu meningkatkan kapasitas dan produktivitas kampung.",
+    "description": "Sentra pengolahan kedelai lokal menjadi tahu putih lembut kaya gizi.",
     "category": "industri",
     "price": 2710,
     "resources": {
@@ -774,13 +774,13 @@
       "tofu": 4
     },
     "storage": 0,
-    "description_en": "Tofu factory adds village capacity and productivity. Connect it to the village road network to activate its effects."
+    "description_en": "Local soybean processing workshop handcrafting nutritious, tender white tofu."
   },
   "tempe_factory": {
     "id": "tempe_factory",
     "name": "Pabrik Tempe",
     "name_en": "Tempe factory",
-    "description": "Pabrik Tempe meningkatkan kapasitas dan produktivitas kampung.",
+    "description": "Rumah produksi fermentasi kedelai menjadi tempe higienis bercita rasa gurih alami.",
     "category": "industri",
     "price": 3350,
     "resources": {
@@ -804,13 +804,13 @@
       "tempe": 4
     },
     "storage": 0,
-    "description_en": "Tempe factory adds village capacity and productivity. Connect it to the village road network to activate its effects."
+    "description_en": "Soy fermentation house producing hygienic, protein-dense traditional tempe cakes."
   },
   "flour_factory": {
     "id": "flour_factory",
     "name": "Pabrik Tepung",
     "name_en": "Flour mill",
-    "description": "Pabrik Tepung meningkatkan kapasitas dan produktivitas kampung.",
+    "description": "Pabrik penepungan jagung dan beras menjadi tepung halus untuk aneka kuliner.",
     "category": "industri",
     "price": 4350,
     "resources": {
@@ -834,13 +834,13 @@
       "flour": 4
     },
     "storage": 0,
-    "description_en": "Flour mill adds village capacity and productivity. Connect it to the village road network to activate its effects."
+    "description_en": "Milling facility grinding corn and grains into fine flour for bakery and cooking uses."
   },
   "food_factory": {
     "id": "food_factory",
     "name": "Pabrik Makanan",
     "name_en": "Food factory",
-    "description": "Pabrik Makanan meningkatkan kapasitas dan produktivitas kampung.",
+    "description": "Pabrik pengolahan makanan siap saji berkualitas untuk dipasarkan ke kota-kota sekitar.",
     "category": "industri",
     "price": 8050,
     "resources": {
@@ -864,13 +864,13 @@
       "food": 4
     },
     "storage": 0,
-    "description_en": "Food factory adds village capacity and productivity. Connect it to the village road network to activate its effects."
+    "description_en": "Food packaging plant crafting prepared meals and culinary goods for regional distribution."
   },
   "warehouse": {
     "id": "warehouse",
     "name": "Gudang",
     "name_en": "Warehouse",
-    "description": "Gudang meningkatkan kapasitas dan produktivitas kampung.",
+    "description": "Gudang penyimpanan komoditas luas dan teratur untuk menambah daya tampung inventaris desa.",
     "category": "industri",
     "price": 1490,
     "resources": {},
@@ -889,13 +889,13 @@
     "sprite": "procedural://industri",
     "production": {},
     "storage": 500,
-    "description_en": "Warehouse adds village capacity and productivity. Connect it to the village road network to activate its effects."
+    "description_en": "Commodity warehouse expanding village storage capacity for agricultural crops and goods."
   },
   "industrial": {
     "id": "industrial",
     "name": "Kawasan Industri",
     "name_en": "Industrial district",
-    "description": "Kawasan Industri meningkatkan kapasitas dan produktivitas kampung.",
+    "description": "Kawasan industri terpadu penyedia lapangan kerja manufaktur skala besar.",
     "category": "industri",
     "price": 20850,
     "resources": {
@@ -917,13 +917,13 @@
     "sprite": "procedural://industri",
     "production": {},
     "storage": 0,
-    "description_en": "Industrial district adds village capacity and productivity. Connect it to the village road network to activate its effects."
+    "description_en": "Integrated industrial park providing large-scale manufacturing jobs and high output."
   },
   "sawmill": {
     "id": "sawmill",
     "name": "Pengolahan Kayu",
     "name_en": "Sawmill",
-    "description": "Pengolahan Kayu meningkatkan kapasitas dan produktivitas kampung.",
+    "description": "Tempat penggergajian kayu gelondongan menjadi papan material bangunan siap pakai.",
     "category": "industri",
     "price": 2230,
     "resources": {},
@@ -944,13 +944,13 @@
       "planks": 4
     },
     "storage": 0,
-    "description_en": "Sawmill adds village capacity and productivity. Connect it to the village road network to activate its effects."
+    "description_en": "Sawmill cutting raw forestry timber into standardized planks for building construction."
   },
   "school": {
     "id": "school",
     "name": "Sekolah",
     "name_en": "School",
-    "description": "Sekolah meningkatkan kapasitas dan produktivitas kampung.",
+    "description": "Sekolah dasar desa untuk mencerdaskan generasi penerus kampung dengan lingkungan belajar nyaman.",
     "category": "layanan",
     "price": 1350,
     "resources": {},
@@ -969,13 +969,13 @@
     "sprite": "procedural://layanan",
     "production": {},
     "storage": 0,
-    "description_en": "School adds village capacity and productivity. Connect it to the village road network to activate its effects."
+    "description_en": "Village school educating the younger generation within an encouraging, friendly environment."
   },
   "clinic": {
     "id": "clinic",
     "name": "Puskesmas",
     "name_en": "Village clinic",
-    "description": "Puskesmas meningkatkan kapasitas dan produktivitas kampung.",
+    "description": "Puskesmas pelayanan kesehatan pertama bagi warga yang sakit atau membutuhkan pemeriksaan.",
     "category": "layanan",
     "price": 1630,
     "resources": {},
@@ -994,13 +994,13 @@
     "sprite": "procedural://layanan",
     "production": {},
     "storage": 0,
-    "description_en": "Village clinic adds village capacity and productivity. Connect it to the village road network to activate its effects."
+    "description_en": "Community healthcare clinic providing primary medical consultations and treatment."
   },
   "hospital": {
     "id": "hospital",
     "name": "Rumah Sakit",
     "name_en": "Hospital",
-    "description": "Rumah Sakit meningkatkan kapasitas dan produktivitas kampung.",
+    "description": "Rumah sakit umum berfasilitas lengkap untuk penanganan medis tingkat lanjut dan rawat inap.",
     "category": "layanan",
     "price": 11450,
     "resources": {
@@ -1022,13 +1022,13 @@
     "sprite": "procedural://layanan",
     "production": {},
     "storage": 0,
-    "description_en": "Hospital adds village capacity and productivity. Connect it to the village road network to activate its effects."
+    "description_en": "Full-service general hospital providing inpatient treatment and advanced healthcare services."
   },
   "hall": {
     "id": "hall",
     "name": "Kantor Desa",
     "name_en": "Village hall",
-    "description": "Kantor Desa meningkatkan kapasitas dan produktivitas kampung.",
+    "description": "Kantor dan balai warga desa sebagai pusat administrasi, musyawarah, dan koordinasi kampung.",
     "category": "layanan",
     "price": 930,
     "resources": {},
@@ -1047,13 +1047,13 @@
     "sprite": "procedural://layanan",
     "production": {},
     "storage": 0,
-    "description_en": "Village hall adds village capacity and productivity. Connect it to the village road network to activate its effects."
+    "description_en": "Village hall and civic center serving as the hub for governance, meetings and community life."
   },
   "police": {
     "id": "police",
     "name": "Kantor Polisi",
     "name_en": "Police station",
-    "description": "Kantor Polisi meningkatkan kapasitas dan produktivitas kampung.",
+    "description": "Pos polisi lingkungan yang menjaga ketertiban, kedamaian, dan keamanan warga.",
     "category": "layanan",
     "price": 3550,
     "resources": {
@@ -1075,13 +1075,13 @@
     "sprite": "procedural://layanan",
     "production": {},
     "storage": 0,
-    "description_en": "Police station adds village capacity and productivity. Connect it to the village road network to activate its effects."
+    "description_en": "Neighborhood police post safeguarding community safety, law enforcement and public order."
   },
   "fire": {
     "id": "fire",
     "name": "Pemadam Kebakaran",
     "name_en": "Fire station",
-    "description": "Pemadam Kebakaran meningkatkan kapasitas dan produktivitas kampung.",
+    "description": "Pos pemadam kebakaran sigap yang melindungi pemukiman warga dari bahaya kebakaran.",
     "category": "layanan",
     "price": 5450,
     "resources": {
@@ -1103,13 +1103,13 @@
     "sprite": "procedural://layanan",
     "production": {},
     "storage": 0,
-    "description_en": "Fire station adds village capacity and productivity. Connect it to the village road network to activate its effects."
+    "description_en": "Emergency fire station ready around the clock to safeguard structures and citizens."
   },
   "park": {
     "id": "park",
     "name": "Taman Kota",
     "name_en": "City park",
-    "description": "Taman Kota meningkatkan kapasitas dan produktivitas kampung.",
+    "description": "Taman hijau teduh dengan pepohonan rindang tempat warga bersantai dan melepas penat.",
     "category": "layanan",
     "price": 1410,
     "resources": {},
@@ -1128,13 +1128,13 @@
     "sprite": "procedural://layanan",
     "production": {},
     "storage": 0,
-    "description_en": "City park adds village capacity and productivity. Connect it to the village road network to activate its effects."
+    "description_en": "Shaded green public park with lush trees where villagers relax and families socialize."
   },
   "library": {
     "id": "library",
     "name": "Perpustakaan",
     "name_en": "Library",
-    "description": "Perpustakaan meningkatkan kapasitas dan produktivitas kampung.",
+    "description": "Perpustakaan desa tempat membaca buku, menambah wawasan, dan ruang belajar bersama.",
     "category": "layanan",
     "price": 4750,
     "resources": {
@@ -1156,13 +1156,13 @@
     "sprite": "procedural://layanan",
     "production": {},
     "storage": 0,
-    "description_en": "Library adds village capacity and productivity. Connect it to the village road network to activate its effects."
+    "description_en": "Village library providing books, educational resources and study spaces for community members."
   },
   "road": {
     "id": "road",
     "name": "Jalan Tanah",
     "name_en": "Dirt road",
-    "description": "Jalan Tanah meningkatkan kapasitas dan produktivitas kampung.",
+    "description": "Jalan tanah yang menghubungkan bangunan ke balai desa dan membuka akses pemukiman.",
     "category": "jalan",
     "price": 80,
     "resources": {},
@@ -1181,13 +1181,13 @@
     "sprite": "procedural://jalan",
     "production": {},
     "storage": 0,
-    "description_en": "Dirt road adds village capacity and productivity. Connect it to the village road network to activate its effects."
+    "description_en": "Dirt pathway connecting buildings to the village hall and opening neighborhood access."
   },
   "asphalt": {
     "id": "asphalt",
     "name": "Jalan Aspal",
     "name_en": "Asphalt road",
-    "description": "Jalan Aspal meningkatkan kapasitas dan produktivitas kampung.",
+    "description": "Jalan beraspal mulus yang memperlancar mobilitas warga dan distribusi hasil bumi.",
     "category": "jalan",
     "price": 80,
     "resources": {
@@ -1209,13 +1209,13 @@
     "sprite": "procedural://jalan",
     "production": {},
     "storage": 0,
-    "description_en": "Asphalt road adds village capacity and productivity. Connect it to the village road network to activate its effects."
+    "description_en": "Smooth paved asphalt road facilitating rapid mobility and efficient cargo transport."
   },
   "highway": {
     "id": "highway",
     "name": "Jalan Raya",
     "name_en": "Highway",
-    "description": "Jalan Raya meningkatkan kapasitas dan produktivitas kampung.",
+    "description": "Jalan arteri kota berkapasitas tinggi untuk mempercepat pergerakan perdagangan antar distrik.",
     "category": "jalan",
     "price": 80,
     "resources": {
@@ -1237,13 +1237,13 @@
     "sprite": "procedural://jalan",
     "production": {},
     "storage": 0,
-    "description_en": "Highway adds village capacity and productivity. Connect it to the village road network to activate its effects."
+    "description_en": "High-capacity urban highway expediting commerce and transit across sprawling districts."
   },
   "bridge": {
     "id": "bridge",
     "name": "Jembatan",
     "name_en": "Bridge",
-    "description": "Jembatan meningkatkan kapasitas dan produktivitas kampung.",
+    "description": "Jembatan penghubung yang melintasi sungai untuk membuka akses ke seberang wilayah.",
     "category": "jalan",
     "price": 80,
     "resources": {
@@ -1265,13 +1265,13 @@
     "sprite": "procedural://jalan",
     "production": {},
     "storage": 0,
-    "description_en": "Bridge adds village capacity and productivity. Connect it to the village road network to activate its effects."
+    "description_en": "Sturdy bridge spanning the river to connect isolated riverbanks and expand accessible territory."
   },
   "terminal": {
     "id": "terminal",
     "name": "Terminal",
     "name_en": "Bus terminal",
-    "description": "Terminal meningkatkan kapasitas dan produktivitas kampung.",
+    "description": "Terminal transportasi umum tempat angkutan pedesaan dan bus kota menaikkan penumpang.",
     "category": "jalan",
     "price": 6250,
     "resources": {
@@ -1293,13 +1293,13 @@
     "sprite": "procedural://jalan",
     "production": {},
     "storage": 0,
-    "description_en": "Bus terminal adds village capacity and productivity. Connect it to the village road network to activate its effects."
+    "description_en": "Public transit terminal where rural minibuses and city transit buses serve commuting residents."
   },
   "station": {
     "id": "station",
     "name": "Stasiun",
     "name_en": "Train station",
-    "description": "Stasiun meningkatkan kapasitas dan produktivitas kampung.",
+    "description": "Stasiun kereta api penghubung kampung dengan jaringan rel kota besar untuk logistik massal.",
     "category": "jalan",
     "price": 15350,
     "resources": {
@@ -1321,13 +1321,13 @@
     "sprite": "procedural://jalan",
     "production": {},
     "storage": 0,
-    "description_en": "Train station adds village capacity and productivity. Connect it to the village road network to activate its effects."
+    "description_en": "Railway passenger and freight station connecting the township to regional metropolitan rail lines."
   },
   "power": {
     "id": "power",
     "name": "Pembangkit Listrik",
     "name_en": "Power station",
-    "description": "Pembangkit Listrik meningkatkan kapasitas dan produktivitas kampung.",
+    "description": "Pembangkit listrik desa untuk menyuplai energi penerangan malam dan mesin produksi industri.",
     "category": "jalan",
     "price": 4650,
     "resources": {
@@ -1349,13 +1349,13 @@
     "sprite": "procedural://jalan",
     "production": {},
     "storage": 0,
-    "description_en": "Power station adds village capacity and productivity. Connect it to the village road network to activate its effects."
+    "description_en": "Municipal power station supplying dependable electricity for night lighting and machinery."
   },
   "water": {
     "id": "water",
     "name": "Pengolahan Air",
     "name_en": "Water treatment",
-    "description": "Pengolahan Air meningkatkan kapasitas dan produktivitas kampung.",
+    "description": "Instalasi pengolahan air bersih yang menyalurkan pasokan air higienis ke rumah dan sawah.",
     "category": "jalan",
     "price": 2050,
     "resources": {},
@@ -1374,13 +1374,13 @@
     "sprite": "procedural://jalan",
     "production": {},
     "storage": 0,
-    "description_en": "Water treatment adds village capacity and productivity. Connect it to the village road network to activate its effects."
+    "description_en": "Water treatment and distribution facility piping hygienic clean water to homes and farms."
   },
   "feed_mill": {
     "id": "feed_mill",
     "name": "Pabrik Pakan",
     "name_en": "Feed mill",
-    "description": "Mengolah jagung menjadi pakan untuk ternak.",
+    "description": "Pabrik pengolahan biji jagung dan dedak menjadi pelet pakan bergizi untuk ternak.",
     "category": "industri",
     "price": 1500,
     "resources": {},
@@ -1401,6 +1401,6 @@
       "feed": 6
     },
     "storage": 0,
-    "description_en": "Feed mill adds village capacity and productivity. Connect it to the village road network to activate its effects."
+    "description_en": "Feed mill formulating corn and grain byproducts into nutrient-rich livestock pellets."
   }
 }

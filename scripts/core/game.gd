@@ -132,12 +132,23 @@ func apply_audio() -> void:
 
 func create_ui() -> void:
 	var root: Control = ui.get_child(0)
+	var safe := DisplayServer.get_display_safe_area()
+	var win := DisplayServer.window_get_size()
+	var pad_top := 14
+	var pad_bottom := 18
+	var pad_left := 18
+	var pad_right := 18
+	if win.x > 0 and win.y > 0 and safe.size.x > 0 and safe.size.y > 0:
+		pad_top = maxi(14, safe.position.y + 4)
+		pad_bottom = maxi(18, win.y - (safe.position.y + safe.size.y) + 4)
+		pad_left = maxi(18, safe.position.x + 4)
+		pad_right = maxi(18, win.x - (safe.position.x + safe.size.x) + 4)
 	var top := PanelContainer.new()
 	top.set_anchors_and_offsets_preset(Control.PRESET_TOP_WIDE)
-	top.offset_left = 18
-	top.offset_right = -18
-	top.offset_top = 14
-	top.offset_bottom = 90
+	top.offset_left = pad_left
+	top.offset_right = -pad_right
+	top.offset_top = pad_top
+	top.offset_bottom = pad_top + 76
 	root.add_child(top)
 	var top_box := HBoxContainer.new()
 	top_box.add_theme_constant_override("separation",24)
@@ -153,10 +164,10 @@ func create_ui() -> void:
 	button(top_box,"☰",show_menu)
 	var bottom := HBoxContainer.new()
 	bottom.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_WIDE)
-	bottom.offset_left = 18
-	bottom.offset_right = -18
-	bottom.offset_top = -72
-	bottom.offset_bottom = -18
+	bottom.offset_left = pad_left
+	bottom.offset_right = -pad_right
+	bottom.offset_top = -pad_bottom - 54
+	bottom.offset_bottom = -pad_bottom
 	bottom.add_theme_constant_override("separation",8)
 	root.add_child(bottom)
 	for item in [["Bangun","Build","build"],["Bertani","Farm","farm"],["Gudang","Stock","inventory"],["Ekonomi","Trade","economy"],["Warga","People","population"],["Riset","Research","research"],["Misi","Quests","quests"],["Prestasi","Awards","achievements"]]:
@@ -308,20 +319,29 @@ func open_panel(kind: String) -> void:
 				label("%s · %d stok · Rp %d/u"%[product_name(id),int(sim.state.inventory.get(id,0)),sim.price(id)])
 				var row := HBoxContainer.new()
 				rows.add_child(row)
-				button(row,t("Jual 5","Sell 5"),func(): action_result(sim.trade(key,5)); open_panel("economy"))
+				button(row,t("Jual 5","Sell 5"),func(): action_result(sim.trade(key,5)); open_panel("economy"),int(sim.state.inventory.get(key,0))<5)
 				button(row,t("Beli 5","Buy 5"),func(): action_result(sim.trade(key,5,true)); open_panel("economy"))
-			button(rows,t("Kerja bakti · bantuan darurat","Community work · emergency aid"),func(): action_result(sim.recovery()); open_panel("economy"))
+			button(rows,t("Kerja bakti · bantuan darurat","Community work · emergency aid"),func(): action_result(sim.recovery()); open_panel("economy"),int(sim.state.money)>=800)
 		"population":
 			label(t("Penduduk %d / %d\nPekerja %d · Lowongan %d\nKebahagiaan %d%%\nKesehatan %d · Pendidikan %d\nKeamanan %d\nAir %d · Listrik %d\nPemeliharaan Rp %d / hari", "Residents %d / %d\nWorkers %d · Jobs %d\nHappiness %d%%\nHealth %d · Education %d\nSecurity %d\nWater %d · Power %d\nMaintenance Rp %d / day")%[int(sim.state.population),sim.metrics.housing,sim.metrics.workers,sim.metrics.jobs,int(sim.state.happiness),sim.metrics.health,sim.metrics.education,sim.metrics.security,sim.metrics.water,sim.metrics.power,sim.metrics.maintenance])
 			label(t("Sediakan beras, rumah, pekerjaan, dan layanan. Warga baru datang setiap hari saat bahagia.","Provide rice, homes, jobs and services. Happy villages attract residents each day."))
+			var coverage_names := {
+				"road": t("Jalan","Road"),
+				"water": t("Air Bersih","Clean Water"),
+				"power": t("Listrik","Power"),
+				"health": t("Kesehatan","Healthcare"),
+				"education": t("Pendidikan","Education"),
+				"security": t("Keamanan","Security")
+			}
 			for kind_value in ["road","water","power","health","education","security"]:
 				var coverage_kind: String = kind_value
-				button(rows,t("Peta cakupan: ","Coverage map: ")+coverage_kind,func(): world.overlay = true; world.overlay_kind = coverage_kind; close_panel())
+				button(rows,t("Peta cakupan: ","Coverage map: ")+coverage_names.get(coverage_kind,coverage_kind),func(): world.overlay = true; world.overlay_kind = coverage_kind; close_panel())
 		"research":
 			for id in sim.content.technologies:
 				var d: Dictionary = sim.content.technologies[id]
 				var key: String = id
-				label("%s · +%d%% %s\nLv %d · Rp %d · %s"%[d.get("name_en",d.name) if lang=="en" else d.name,int(float(d.bonus)*100),effect_name(d.effect),int(d.level),int(d.price),technology_dependencies(d.dependencies)])
+				var desc_str: String = str(d.get("description_en","") if lang=="en" else d.get("description",""))
+				label("%s · +%d%% %s\n%s\nLv %d · Rp %d · %s"%[d.get("name_en",d.name) if lang=="en" else d.name,int(float(d.bonus)*100),effect_name(d.effect),desc_str,int(d.level),int(d.price),technology_dependencies(d.dependencies)])
 				label(goods_text(d.resources))
 				button(rows,t("Dipelajari","Completed") if id in sim.state.research else t("Teliti","Research"),func(): action_result(sim.research(key)); open_panel("research"),id in sim.state.research)
 		"quests":
@@ -333,20 +353,39 @@ func open_panel(kind: String) -> void:
 				var progress_lines := ""
 				var values := sim.quest_progress(q)
 				for index in q.objectives.size():
-					progress_lines += "%s %s: %d / %d\n"%[q.objectives[index].kind,q.objectives[index].target,int(values[index]),int(q.objectives[index].count)]
+					progress_lines += objective_text(q.objectives[index],int(values[index]))+"\n"
 				label("%s\n%sRp %d + %d XP"%[q.get("name_en",q.name) if lang=="en" else q.name,progress_lines,int(q.rewards.money),int(q.rewards.xp)])
 				button(rows,t("Selesai","Completed") if done else t("Klaim hadiah","Claim reward"),func(): action_result(sim.claim_quest(key)); open_panel("quests"),not sim.quest_ready(q))
 			var contract := sim.repeatable()
 			button(rows,"%s · %d %s → Rp %d"%[contract.name,contract.amount,contract.product,contract.reward],func(): action_result(sim.claim_contract()); open_panel("quests"))
 		"achievements":
-			for name_value in ["First Harvest","First Business","100 Residents","First Factory","Millionaire Village","Happy Village","Industrial Leader","Metropolitan Founder"]: label(("✓ " if name_value in sim.state.achievements else "○ ")+name_value)
-			button(rows,"Prestige · Level 250",func(): confirm("Reset village for permanent starting capital bonus?",func(): action_result(sim.prestige()); open_panel("achievements")),int(sim.state.level)<250)
+			var achievement_names := {
+				"First Harvest": [t("Panen Perdana","First Harvest"),t("Panen padi pertama kali di sawah desa.","Harvest your first paddy crop.")],
+				"First Business": [t("Usaha Pertama","First Business"),t("Bangun warung pertama di pinggir jalan.","Build your first roadside warung.")],
+				"100 Residents": [t("100 Penduduk","100 Residents"),t("Kembangkan desa hingga mencapai 100 warga.","Grow your village to 100 residents.")],
+				"First Factory": [t("Pabrik Pertama","First Factory"),t("Bangun pabrik penggilingan padi desa.","Construct your first processing mill.")],
+				"Millionaire Village": [t("Desa Jutawan","Millionaire Village"),t("Kumpulkan kas desa hingga Rp 1.000.000.","Accumulate Rp 1,000,000 in village funds.")],
+				"Happy Village": [t("Kampung Bahagia","Happy Village"),t("Capai indeks kebahagiaan warga 90%.","Reach 90% village happiness.")],
+				"Industrial Leader": [t("Tokoh Industri","Industrial Leader"),t("Bangun kawasan industri terpadu.","Establish an integrated industrial park.")],
+				"Metropolitan Founder": [t("Pendiri Metropolis","Metropolitan Founder"),t("Bawa kampung berkembang hingga era Metropolitan.","Advance the village into the Metropolis era.")]
+			}
+			for name_value in ["First Harvest","First Business","100 Residents","First Factory","Millionaire Village","Happy Village","Industrial Leader","Metropolitan Founder"]:
+				var info: Array = achievement_names.get(name_value,[name_value,""])
+				var unlocked: bool = name_value in sim.state.achievements
+				label(("%s %s\n%s"%["✓" if unlocked else "○",info[0],info[1]]).strip_edges())
+			button(rows,"Prestige · Level 250",func(): confirm(t("Mulai ulang kampung demi bonus modal awal permanen?","Reset village for permanent starting capital bonus?"),func(): action_result(sim.prestige()); open_panel("achievements")),int(sim.state.level)<250)
 		"building": show_building()
 		"settings":
 			button(rows,t("Simpan sekarang","Save now"),save_game)
 			button(rows,"Bahasa Indonesia / English",func(): lang = "en" if lang=="id" else "id"; sim.state.settings.language = lang; update_hud(); open_panel("settings"))
+			var audio_names := {
+				"master": t("VOLUME UTAMA","MASTER VOLUME"),
+				"music": t("MUSIK DESA","VILLAGE MUSIC"),
+				"sfx": t("EFEK SUARA","SOUND EFFECTS"),
+				"ambient": t("SUASANA ALAM","AMBIENCE")
+			}
 			for key in ["master","music","sfx","ambient"]:
-				label(key.to_upper())
+				label(audio_names.get(key,key.to_upper()))
 				var slider := HSlider.new()
 				slider.min_value = 0
 				slider.max_value = 1
@@ -370,25 +409,32 @@ func show_building() -> void:
 	var b: Dictionary = selected
 	var d: Dictionary = sim.content.buildings[b.type]
 	panel_title.text = d.name_en if lang=="en" else d.name
-	label("Lv %d · (%d, %d)\n%s\n%s\n%.0fs"%[int(b.upgrade),int(b.x),int(b.y),d.get("description_en",d.description) if lang=="en" else d.description,t("Terhubung jalan","Road connected") if sim.connected(b) else t("Perlu jalan","Needs road"),float(b.construction)])
+	var construct_status: String = t("Sedang dibangun: %ds","Constructing: %ds")%ceili(b.construction) if float(b.construction)>0 else ""
+	label("Lv %d · (%d, %d)\n%s\n%s%s"%[int(b.upgrade),int(b.x),int(b.y),d.get("description_en",d.description) if lang=="en" else d.description,t("Terhubung jalan","Road connected") if sim.connected(b) else t("Perlu jalan","Needs road"),("\n"+construct_status) if not construct_status.is_empty() else ""])
 	if sim.content.crops.has(b.type):
 		button(rows,t("Siram · Rp 5","Water · Rp 5"),func(): action_result(sim.water_field(b)); open_panel("building"))
 		label(t("Kelembapan %.0f%%","Moisture %.0f%%")%float(b.get("moisture",100)))
 		label("%s · %.0f / %ds"%[crop_state(b.crop),float(b.progress),int(sim.content.crops[b.type].seconds)])
-		button(rows,t("Tanam · 1 benih","Plant · 1 seed"),func(): action_result(sim.plant(b)); open_panel("building"))
-		button(rows,t("Tanam + pupuk","Plant + fertilizer"),func(): action_result(sim.plant(b,true)); open_panel("building"))
+		button(rows,t("Tanam · 1 benih","Plant · 1 seed"),func(): action_result(sim.plant(b)); open_panel("building"),b.crop not in ["EMPTY","HARVESTED"])
+		button(rows,t("Tanam + pupuk","Plant + fertilizer"),func(): action_result(sim.plant(b,true)); open_panel("building"),b.crop not in ["EMPTY","HARVESTED"])
 		button(rows,t("Panen","Harvest"),func(): action_result(sim.harvest(b)); open_panel("building"),b.crop!="READY")
 	if sim.content.livestock.has(b.type):
-		label(t("%d hewan · %d produk · %.0f%% sehat","%d animals · %d goods · %.0f%% health")%[int(b.animals),int(b.stored),float(b.health)])
-		button(rows,t("Beli hewan · Rp 100","Buy animal · Rp 100"),func(): action_result(sim.acquire_animal(b)); open_panel("building"))
-		button(rows,t("Kumpulkan produk","Collect products"),func(): action_result(sim.collect(b)); open_panel("building"))
+		var animal_def: Dictionary = sim.content.livestock[b.type]
+		var at_capacity: bool = int(b.animals)>=int(animal_def.capacity)*int(b.upgrade)
+		label(t("%d/%d hewan · %d produk · %.0f%% sehat","%d/%d animals · %d goods · %.0f%% health")%[int(b.animals),int(animal_def.capacity)*int(b.upgrade),int(b.stored),float(b.health)])
+		button(rows,t("Kapasitas penuh","Max capacity") if at_capacity else t("Beli hewan · Rp %d","Buy animal · Rp %d")%int(animal_def.animal_cost),func(): action_result(sim.acquire_animal(b)); open_panel("building"),at_capacity)
+		button(rows,t("Kumpulkan produk","Collect products"),func(): action_result(sim.collect(b)); open_panel("building"),int(b.stored)<=0)
 	if sim.content.recipes.has(b.type):
 		var recipe: Dictionary = sim.content.recipes[b.type]
 		label(t("Resep: ","Recipe: ")+goods_text(recipe.input)+" → "+goods_text(recipe.output))
 		label(t("Kemajuan %.0f / %.0f detik","Progress %.0f / %.0f seconds")%[float(b.progress),float(recipe.seconds)])
 	label(t("Pekerjaan %d · Kapasitas warga %d\nPerawatan Rp %d / hari","Jobs %d · Housing %d\nMaintenance Rp %d / day")%[int(d.jobs)*int(b.upgrade),int(d.capacity)*int(b.upgrade),int(d.maintenance)*int(b.upgrade)])
-	label(t("Material peningkatan: ","Upgrade materials: ")+goods_text({"wood":int(b.upgrade)*2}))
-	button(rows,t("Tingkatkan · Rp %d","Upgrade · Rp %d")%(int(d.price)*int(b.upgrade)),func(): action_result(sim.upgrade(b)); open_panel("building"))
+	var max_upgrade: bool = int(b.upgrade)>=int(d.upgrade_levels)
+	if not max_upgrade:
+		label(t("Material peningkatan: ","Upgrade materials: ")+goods_text({"wood":int(b.upgrade)*2}))
+		button(rows,t("Tingkatkan · Rp %d","Upgrade · Rp %d")%(int(d.price)*int(b.upgrade)),func(): action_result(sim.upgrade(b)); open_panel("building"))
+	else:
+		button(rows,t("Tingkat Maksimal (Lv %d)","Max Level (Lv %d)")%int(b.upgrade),func(): pass,true)
 	button(rows,t("Bongkar · kembali 35%","Demolish · 35% refund"),func(): confirm(t("Bongkar bangunan ini?","Demolish this building?"),func(): action_result(sim.demolish(b)); close_panel()),b.type=="hall")
 
 func action_result(ok: bool) -> void:
@@ -505,6 +551,40 @@ func technology_dependencies(ids: Array) -> String:
 		var d: Dictionary = sim.content.technologies[id]
 		names.append(str(d.get("name_en",d.name) if lang=="en" else d.name))
 	return t("Tanpa prasyarat","No prerequisite") if names.is_empty() else ", ".join(names)
+
+func objective_text(obj: Dictionary, progress: int) -> String:
+	var kind: String = obj.kind
+	var target: String = obj.target
+	var count := int(obj.count)
+	match kind:
+		"build":
+			var name_str := building_name(target) if sim.content.buildings.has(target) else target
+			return t("Bangun %s: %d / %d","Build %s: %d / %d")%[name_str,progress,count]
+		"harvest":
+			var name_str := product_name(target) if sim.content.products.has(target) else target
+			return t("Panen %s: %d / %d","Harvest %s: %d / %d")%[name_str,progress,count]
+		"sell":
+			var name_str := product_name(target) if sim.content.products.has(target) else target
+			return t("Jual %s: %d / %d","Sell %s: %d / %d")%[name_str,progress,count]
+		"produce":
+			var name_str := product_name(target) if sim.content.products.has(target) else target
+			return t("Produksi %s: %d / %d","Produce %s: %d / %d")%[name_str,progress,count]
+		"research":
+			var tech_d: Dictionary = sim.content.technologies.get(target,{})
+			var name_str := str(tech_d.get("name_en",tech_d.get("name",target)) if lang=="en" else tech_d.get("name",target))
+			return t("Riset %s: %d / %d","Research %s: %d / %d")%[name_str,progress,count]
+		"population":
+			return t("Warga Kampung: %d / %d","Residents: %d / %d")%[progress,count]
+		"happiness":
+			return t("Kebahagiaan: %d%% / %d%%","Happiness: %d%% / %d%%")%[progress,count]
+		"level":
+			return t("Tingkat Level: %d / %d","Village Level: %d / %d")%[progress,count]
+		"expand":
+			return t("Perluas Wilayah: %d / %d","Expand Land: %d / %d")%[progress,count]
+		"profit":
+			return t("Laba: Rp %d / Rp %d","Profit: Rp %d / Rp %d")%[progress,count]
+		_:
+			return "%s %s: %d / %d"%[kind,target,progress,count]
 
 func play_feedback(kind: String) -> void:
 	if sfx==null or not feedback_streams.has(kind): return

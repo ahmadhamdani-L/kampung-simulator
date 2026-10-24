@@ -14,7 +14,7 @@
       "money": 650,
       "xp": 100
     },
-    "name_en": "01 · Build road"
+    "name_en": "01 · Build Dirt Road"
   },
   {
     "id": "q02",
@@ -33,11 +33,11 @@
       "money": 770,
       "xp": 130
     },
-    "name_en": "02 · Build rice field"
+    "name_en": "02 · Build Rice Field"
   },
   {
     "id": "q03",
-    "name": "03 · Panen paddy",
+    "name": "03 · Panen Padi Pertama",
     "objectives": [
       {
         "kind": "harvest",
@@ -52,11 +52,11 @@
       "money": 890,
       "xp": 160
     },
-    "name_en": "03 · Harvest paddy"
+    "name_en": "03 · First Paddy Harvest"
   },
   {
     "id": "q04",
-    "name": "04 · Jual paddy",
+    "name": "04 · Jual Hasil Panen",
     "objectives": [
       {
         "kind": "sell",
@@ -71,7 +71,7 @@
       "money": 1010,
       "xp": 190
     },
-    "name_en": "04 · Sell paddy"
+    "name_en": "04 · Sell Harvested Crops"
   },
   {
     "id": "q05",
@@ -90,11 +90,11 @@
       "money": 1130,
       "xp": 220
     },
-    "name_en": "05 · Build bamboo"
+    "name_en": "05 · Build Bamboo House"
   },
   {
     "id": "q06",
-    "name": "06 · Penduduk any",
+    "name": "06 · Ramai Warga (12 Jiwa)",
     "objectives": [
       {
         "kind": "population",
@@ -109,7 +109,7 @@
       "money": 1250,
       "xp": 250
     },
-    "name_en": "06 · Population any"
+    "name_en": "06 · Village Growth (12 Residents)"
   },
   {
     "id": "q07",
@@ -128,11 +128,11 @@
       "money": 1370,
       "xp": 280
     },
-    "name_en": "07 · Build warung"
+    "name_en": "07 · Build Roadside Warung"
   },
   {
     "id": "q08",
-    "name": "08 · Bangun Taman Kota",
+    "name": "08 · Bangun Taman Desa",
     "objectives": [
       {
         "kind": "build",
@@ -147,11 +147,11 @@
       "money": 1490,
       "xp": 310
     },
-    "name_en": "08 · Build park"
+    "name_en": "08 · Build Village Park"
   },
   {
     "id": "q09",
-    "name": "09 · Kebahagiaan any",
+    "name": "09 · Kampung Bahagia (65%)",
     "objectives": [
       {
         "kind": "happiness",
@@ -166,7 +166,7 @@
       "money": 1610,
       "xp": 340
     },
-    "name_en": "09 · Happiness any"
+    "name_en": "09 · Joyful Village (65% Happiness)"
   },
   {
     "id": "q10",
@@ -185,11 +185,11 @@
       "money": 1730,
       "xp": 370
     },
-    "name_en": "10 · Build mill"
+    "name_en": "10 · Build Rice Mill"
   },
   {
     "id": "q11",
-    "name": "11 · Produksi rice",
+    "name": "11 · Produksi Beras Bersih",
     "objectives": [
       {
         "kind": "produce",
@@ -204,11 +204,11 @@
       "money": 1850,
       "xp": 400
     },
-    "name_en": "11 · Produce rice"
+    "name_en": "11 · Produce Clean Rice"
   },
   {
     "id": "q12",
-    "name": "12 · Riset seeds",
+    "name": "12 · Riset Benih Unggul",
     "objectives": [
       {
         "kind": "research",
@@ -223,7 +223,7 @@
       "money": 1970,
       "xp": 430
     },
-    "name_en": "12 · Research seeds"
+    "name_en": "12 · Research Quality Seeds"
   },
   {
     "id": "q13",
@@ -242,11 +242,11 @@
       "money": 2090,
       "xp": 460
     },
-    "name_en": "13 · Build chicken"
+    "name_en": "13 · Build Chicken Coop"
   },
   {
     "id": "q14",
-    "name": "14 · Produksi egg",
+    "name": "14 · Kumpulkan Telur Segar",
     "objectives": [
       {
         "kind": "produce",
@@ -261,11 +261,11 @@
       "money": 2210,
       "xp": 490
     },
-    "name_en": "14 · Produce egg"
+    "name_en": "14 · Gather Fresh Eggs"
   },
   {
     "id": "q15",
-    "name": "15 · Bangun Sekolah",
+    "name": "15 · Bangun Sekolah Dasar",
     "objectives": [
       {
         "kind": "build",
@@ -280,7 +280,7 @@
       "money": 2330,
       "xp": 520
     },
-    "name_en": "15 · Build school"
+    "name_en": "15 · Build Village School"
   },
   {
     "id": "q16",
@@ -299,11 +299,11 @@
       "money": 2450,
       "xp": 550
     },
-    "name_en": "16 · Build clinic"
+    "name_en": "16 · Build Community Clinic"
   },
   {
     "id": "q17",
-    "name": "17 · Jual rice",
+    "name": "17 · Pasok Beras ke Pasar",
     "objectives": [
       {
         "kind": "sell",
@@ -318,11 +318,11 @@
       "money": 2570,
       "xp": 580
     },
-    "name_en": "17 · Sell rice"
+    "name_en": "17 · Supply Rice to Market"
   },
   {
     "id": "q18",
-    "name": "18 · Perluas any",
+    "name": "18 · Perluas Wilayah Desa",
     "objectives": [
       {
         "kind": "expand",
@@ -337,11 +337,11 @@
       "money": 2690,
       "xp": 610
     },
-    "name_en": "18 · Expand any"
+    "name_en": "18 · Expand Village Territory"
   },
   {
     "id": "q19",
-    "name": "19 · Riset irrigation",
+    "name": "19 · Riset Saluran Irigasi",
     "objectives": [
       {
         "kind": "research",
@@ -356,7 +356,7 @@
       "money": 2810,
       "xp": 640
     },
-    "name_en": "19 · Research irrigation"
+    "name_en": "19 · Research Irrigation System"
   },
   {
     "id": "q20",
@@ -375,11 +375,11 @@
       "money": 2930,
       "xp": 670
     },
-    "name_en": "20 · Build market"
+    "name_en": "20 · Build Traditional Market"
   },
   {
     "id": "q21",
-    "name": "21 · Penduduk any",
+    "name": "21 · Komunitas Mandiri (100 Jiwa)",
     "objectives": [
       {
         "kind": "population",
@@ -394,7 +394,7 @@
       "money": 3050,
       "xp": 700
     },
-    "name_en": "21 · Population any"
+    "name_en": "21 · Self-Reliant Community (100 Residents)"
   },
   {
     "id": "era2",
@@ -467,7 +467,7 @@
   {
     "id": "era4",
     "name": "Pusat Perdagangan",
-    "name_en": "Trading Center",
+    "name_en": "Trading Hub",
     "objectives": [
       {
         "kind": "level",
@@ -501,7 +501,7 @@
   {
     "id": "era5",
     "name": "Kota Industri",
-    "name_en": "Industrial City",
+    "name_en": "Industrial Town",
     "objectives": [
       {
         "kind": "level",

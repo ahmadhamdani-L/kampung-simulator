@@ -44,3 +44,18 @@ UI smoke now exercises all 11 panels in both Indonesian and English. Shell build
 Second milestone source pushed: `c35e96c74e63cf18b70a4a6006affbb5c8321202`. Ubuntu validation run 40070626330 passed. First Android CI attempt 40070628051 failed before reaching the game build because setup-android v3 defaults to the obsolete SDK package `tools`; the workflow now explicitly requests `platform-tools` and suppresses verbose license text. Re-running the corrected workflow is the next CI check.
 
 Touch follow-up: emulator swipes over child buttons initially failed to scroll long menus. Gameplay button/container mouse filters now pass drag events to ScrollContainer; text labels ignore pointer capture. The UI regression enables desktop touch emulation explicitly, swipes the real build catalog, checks that scrolling occurred and verifies no building was selected accidentally. It now exits nonzero on failed checks instead of leaving a running test scene. The updated APK was reinstalled; an actual emulator swipe revealed the harvest action, which was tapped successfully. Background save recorded HARVESTED, eight paddy, 39 seeds and 24 XP. Both bilingual panel and touch scrolling smoke checks pass.
+
+## Third milestone refinement: copy review, cultural visual art & progression tests
+
+- Replaced 51 identical boilerplate descriptions in `data/buildings.json` with authentic, culturally grounded Indonesian and English copy for each of the 52 buildings.
+- Refined quest titles in `data/quests.json` and introduced clean bilingual objective lines in `scripts/core/game.gd` replacing raw developer keys.
+- Localized achievements in Indonesian and English with descriptive text.
+- Integrated `DisplayServer.get_display_safe_area()` padding in `game.gd` to protect top HUD and bottom navigation controls from mobile camera cutouts and display notches.
+- Enhanced procedural rendering in `scripts/world/world_view.gd`: Balai Desa features a tiered Joglo roof, tiang pendopo and flagpole; roadside Warung displays a striped awning canopy; aquaculture ponds (catfish/tilapia) feature animated swimming fish streaks; clinics and hospitals display medical emblems; schools display flagpoles; utilities display distinct visual markers.
+- Expanded headless regression suite in `tests/run.gd` with multi-era progression testing covering pioneer setup, commerce, research, land expansion, and mid-era stability. Test suite expanded to 2,403 checks with 0 failures. UI smoke suite passes cleanly.
+
+## Third milestone verification
+
+- Content validation passed: 52 buildings, 28 quests and 300 levels. Godot headless suite passed 2,403 checks with zero failures; desktop UI smoke loaded all 11 panels in both languages and passed touch scrolling checks.
+- Rebuilt debug APK and development-signed AAB from the third milestone source. APK signing/package checks, AAB signing/package checks and bundletool validation passed. Exact artifact hashes and source commit are recorded in ignored `build/android/artifacts.json`.
+- Prior commit `924dc43` passed both GitHub validation (run 40070845307) and Android (run 40070859895) workflows. Third milestone workflow results should be checked after pushing this commit.
