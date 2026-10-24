@@ -40,3 +40,5 @@ Final regression suite after refinements: 2,378 checks, zero failures. One new i
 Final-source APK installed over the prior candidate successfully. On launch, the saved schema became v3, the missing starter connector appeared and the 39-seed inventory was preserved. Both APK and AAB declare no requested Android permissions. The AAB passed bundletool validation again after rebuilding; the non-Gradle APK has a non-blocking themed-launcher resource warning documented in IMPLEMENTATION_REPORT.md.
 
 UI smoke now exercises all 11 panels in both Indonesian and English. Shell build scripts passed `bash -n`; both workflow YAML files parsed successfully. No physical-device FPS/memory claim is made.
+
+Second milestone source pushed: `c35e96c74e63cf18b70a4a6006affbb5c8321202`. Ubuntu validation run 40070626330 passed. First Android CI attempt 40070628051 failed before reaching the game build because setup-android v3 defaults to the obsolete SDK package `tools`; the workflow now explicitly requests `platform-tools` and suppresses verbose license text. Re-running the corrected workflow is the next CI check.
