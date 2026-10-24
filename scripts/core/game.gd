@@ -193,6 +193,7 @@ func create_ui() -> void:
 	panel.size = Vector2(490,490)
 	root.add_child(panel)
 	var column := VBoxContainer.new()
+	column.mouse_filter = Control.MOUSE_FILTER_PASS
 	column.add_theme_constant_override("separation",12)
 	panel.add_child(column)
 	var title_row := HBoxContainer.new()
@@ -203,10 +204,12 @@ func create_ui() -> void:
 	title_row.add_child(panel_title)
 	button(title_row,"×",close_panel)
 	var scroll := ScrollContainer.new()
+	scroll.scroll_deadzone = 12
 	scroll.custom_minimum_size = Vector2(436,380)
 	scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	column.add_child(scroll)
 	rows = VBoxContainer.new()
+	rows.mouse_filter = Control.MOUSE_FILTER_PASS
 	rows.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	rows.add_theme_constant_override("separation",9)
 	scroll.add_child(rows)
@@ -218,6 +221,7 @@ func create_ui() -> void:
 
 func button(parent: Node, text_value: String, action: Callable, disabled: bool = false) -> Button:
 	var b := Button.new()
+	b.mouse_filter = Control.MOUSE_FILTER_PASS
 	b.text = text_value
 	b.custom_minimum_size.y = 48
 	b.disabled = disabled
@@ -228,6 +232,7 @@ func button(parent: Node, text_value: String, action: Callable, disabled: bool =
 
 func label(text_value: String) -> Label:
 	var l := Label.new()
+	l.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	l.text = text_value
 	l.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	l.custom_minimum_size.x = 425
