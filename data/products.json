@@ -1,0 +1,98 @@
+{
+  "rice": {
+    "price": 24,
+    "name": "Beras"
+  },
+  "paddy": {
+    "price": 14,
+    "name": "Padi"
+  },
+  "corn": {
+    "price": 20,
+    "name": "Jagung"
+  },
+  "chili": {
+    "price": 45,
+    "name": "Chili"
+  },
+  "cassava": {
+    "price": 17,
+    "name": "Cassava"
+  },
+  "banana": {
+    "price": 28,
+    "name": "Banana"
+  },
+  "coconut": {
+    "price": 32,
+    "name": "Coconut"
+  },
+  "coffee": {
+    "price": 65,
+    "name": "Coffee"
+  },
+  "soy": {
+    "price": 22,
+    "name": "Soy"
+  },
+  "egg": {
+    "price": 35,
+    "name": "Telur"
+  },
+  "milk": {
+    "price": 48,
+    "name": "Susu"
+  },
+  "meat": {
+    "price": 70,
+    "name": "Meat"
+  },
+  "fish": {
+    "price": 36,
+    "name": "Fish"
+  },
+  "wood": {
+    "price": 30,
+    "name": "Kayu"
+  },
+  "stone": {
+    "price": 35,
+    "name": "Batu"
+  },
+  "cement": {
+    "price": 80,
+    "name": "Cement"
+  },
+  "flour": {
+    "price": 42,
+    "name": "Flour"
+  },
+  "tofu": {
+    "price": 48,
+    "name": "Tofu"
+  },
+  "tempe": {
+    "price": 50,
+    "name": "Tempe"
+  },
+  "feed": {
+    "price": 15,
+    "name": "Feed"
+  },
+  "planks": {
+    "price": 65,
+    "name": "Planks"
+  },
+  "food": {
+    "price": 85,
+    "name": "Food"
+  },
+  "seed": {
+    "price": 8,
+    "name": "Benih"
+  },
+  "fertilizer": {
+    "price": 18,
+    "name": "Fertilizer"
+  }
+}

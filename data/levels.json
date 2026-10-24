@@ -1,0 +1,1502 @@
+[
+  {
+    "level": 1,
+    "xp": 0,
+    "era": "Dusun Perintis"
+  },
+  {
+    "level": 2,
+    "xp": 155,
+    "era": "Dusun Perintis"
+  },
+  {
+    "level": 3,
+    "xp": 320,
+    "era": "Dusun Perintis"
+  },
+  {
+    "level": 4,
+    "xp": 495,
+    "era": "Dusun Perintis"
+  },
+  {
+    "level": 5,
+    "xp": 680,
+    "era": "Dusun Perintis"
+  },
+  {
+    "level": 6,
+    "xp": 875,
+    "era": "Dusun Perintis"
+  },
+  {
+    "level": 7,
+    "xp": 1080,
+    "era": "Dusun Perintis"
+  },
+  {
+    "level": 8,
+    "xp": 1295,
+    "era": "Dusun Perintis"
+  },
+  {
+    "level": 9,
+    "xp": 1520,
+    "era": "Dusun Perintis"
+  },
+  {
+    "level": 10,
+    "xp": 1755,
+    "era": "Dusun Perintis"
+  },
+  {
+    "level": 11,
+    "xp": 2000,
+    "era": "Desa Berkembang"
+  },
+  {
+    "level": 12,
+    "xp": 2255,
+    "era": "Desa Berkembang"
+  },
+  {
+    "level": 13,
+    "xp": 2520,
+    "era": "Desa Berkembang"
+  },
+  {
+    "level": 14,
+    "xp": 2795,
+    "era": "Desa Berkembang"
+  },
+  {
+    "level": 15,
+    "xp": 3080,
+    "era": "Desa Berkembang"
+  },
+  {
+    "level": 16,
+    "xp": 3375,
+    "era": "Desa Berkembang"
+  },
+  {
+    "level": 17,
+    "xp": 3680,
+    "era": "Desa Berkembang"
+  },
+  {
+    "level": 18,
+    "xp": 3995,
+    "era": "Desa Berkembang"
+  },
+  {
+    "level": 19,
+    "xp": 4320,
+    "era": "Desa Berkembang"
+  },
+  {
+    "level": 20,
+    "xp": 4655,
+    "era": "Desa Berkembang"
+  },
+  {
+    "level": 21,
+    "xp": 5000,
+    "era": "Desa Berkembang"
+  },
+  {
+    "level": 22,
+    "xp": 5355,
+    "era": "Desa Berkembang"
+  },
+  {
+    "level": 23,
+    "xp": 5720,
+    "era": "Desa Berkembang"
+  },
+  {
+    "level": 24,
+    "xp": 6095,
+    "era": "Desa Berkembang"
+  },
+  {
+    "level": 25,
+    "xp": 6480,
+    "era": "Desa Berkembang"
+  },
+  {
+    "level": 26,
+    "xp": 6875,
+    "era": "Desa Berkembang"
+  },
+  {
+    "level": 27,
+    "xp": 7280,
+    "era": "Desa Berkembang"
+  },
+  {
+    "level": 28,
+    "xp": 7695,
+    "era": "Desa Berkembang"
+  },
+  {
+    "level": 29,
+    "xp": 8120,
+    "era": "Desa Berkembang"
+  },
+  {
+    "level": 30,
+    "xp": 8555,
+    "era": "Desa Berkembang"
+  },
+  {
+    "level": 31,
+    "xp": 9000,
+    "era": "Desa Mandiri"
+  },
+  {
+    "level": 32,
+    "xp": 9455,
+    "era": "Desa Mandiri"
+  },
+  {
+    "level": 33,
+    "xp": 9920,
+    "era": "Desa Mandiri"
+  },
+  {
+    "level": 34,
+    "xp": 10395,
+    "era": "Desa Mandiri"
+  },
+  {
+    "level": 35,
+    "xp": 10880,
+    "era": "Desa Mandiri"
+  },
+  {
+    "level": 36,
+    "xp": 11375,
+    "era": "Desa Mandiri"
+  },
+  {
+    "level": 37,
+    "xp": 11880,
+    "era": "Desa Mandiri"
+  },
+  {
+    "level": 38,
+    "xp": 12395,
+    "era": "Desa Mandiri"
+  },
+  {
+    "level": 39,
+    "xp": 12920,
+    "era": "Desa Mandiri"
+  },
+  {
+    "level": 40,
+    "xp": 13455,
+    "era": "Desa Mandiri"
+  },
+  {
+    "level": 41,
+    "xp": 14000,
+    "era": "Desa Mandiri"
+  },
+  {
+    "level": 42,
+    "xp": 14555,
+    "era": "Desa Mandiri"
+  },
+  {
+    "level": 43,
+    "xp": 15120,
+    "era": "Desa Mandiri"
+  },
+  {
+    "level": 44,
+    "xp": 15695,
+    "era": "Desa Mandiri"
+  },
+  {
+    "level": 45,
+    "xp": 16280,
+    "era": "Desa Mandiri"
+  },
+  {
+    "level": 46,
+    "xp": 16875,
+    "era": "Desa Mandiri"
+  },
+  {
+    "level": 47,
+    "xp": 17480,
+    "era": "Desa Mandiri"
+  },
+  {
+    "level": 48,
+    "xp": 18095,
+    "era": "Desa Mandiri"
+  },
+  {
+    "level": 49,
+    "xp": 18720,
+    "era": "Desa Mandiri"
+  },
+  {
+    "level": 50,
+    "xp": 19355,
+    "era": "Desa Mandiri"
+  },
+  {
+    "level": 51,
+    "xp": 20000,
+    "era": "Desa Mandiri"
+  },
+  {
+    "level": 52,
+    "xp": 20655,
+    "era": "Desa Mandiri"
+  },
+  {
+    "level": 53,
+    "xp": 21320,
+    "era": "Desa Mandiri"
+  },
+  {
+    "level": 54,
+    "xp": 21995,
+    "era": "Desa Mandiri"
+  },
+  {
+    "level": 55,
+    "xp": 22680,
+    "era": "Desa Mandiri"
+  },
+  {
+    "level": 56,
+    "xp": 23375,
+    "era": "Desa Mandiri"
+  },
+  {
+    "level": 57,
+    "xp": 24080,
+    "era": "Desa Mandiri"
+  },
+  {
+    "level": 58,
+    "xp": 24795,
+    "era": "Desa Mandiri"
+  },
+  {
+    "level": 59,
+    "xp": 25520,
+    "era": "Desa Mandiri"
+  },
+  {
+    "level": 60,
+    "xp": 26255,
+    "era": "Desa Mandiri"
+  },
+  {
+    "level": 61,
+    "xp": 27000,
+    "era": "Pusat Perdagangan"
+  },
+  {
+    "level": 62,
+    "xp": 27755,
+    "era": "Pusat Perdagangan"
+  },
+  {
+    "level": 63,
+    "xp": 28520,
+    "era": "Pusat Perdagangan"
+  },
+  {
+    "level": 64,
+    "xp": 29295,
+    "era": "Pusat Perdagangan"
+  },
+  {
+    "level": 65,
+    "xp": 30080,
+    "era": "Pusat Perdagangan"
+  },
+  {
+    "level": 66,
+    "xp": 30875,
+    "era": "Pusat Perdagangan"
+  },
+  {
+    "level": 67,
+    "xp": 31680,
+    "era": "Pusat Perdagangan"
+  },
+  {
+    "level": 68,
+    "xp": 32495,
+    "era": "Pusat Perdagangan"
+  },
+  {
+    "level": 69,
+    "xp": 33320,
+    "era": "Pusat Perdagangan"
+  },
+  {
+    "level": 70,
+    "xp": 34155,
+    "era": "Pusat Perdagangan"
+  },
+  {
+    "level": 71,
+    "xp": 35000,
+    "era": "Pusat Perdagangan"
+  },
+  {
+    "level": 72,
+    "xp": 35855,
+    "era": "Pusat Perdagangan"
+  },
+  {
+    "level": 73,
+    "xp": 36720,
+    "era": "Pusat Perdagangan"
+  },
+  {
+    "level": 74,
+    "xp": 37595,
+    "era": "Pusat Perdagangan"
+  },
+  {
+    "level": 75,
+    "xp": 38480,
+    "era": "Pusat Perdagangan"
+  },
+  {
+    "level": 76,
+    "xp": 39375,
+    "era": "Pusat Perdagangan"
+  },
+  {
+    "level": 77,
+    "xp": 40280,
+    "era": "Pusat Perdagangan"
+  },
+  {
+    "level": 78,
+    "xp": 41195,
+    "era": "Pusat Perdagangan"
+  },
+  {
+    "level": 79,
+    "xp": 42120,
+    "era": "Pusat Perdagangan"
+  },
+  {
+    "level": 80,
+    "xp": 43055,
+    "era": "Pusat Perdagangan"
+  },
+  {
+    "level": 81,
+    "xp": 44000,
+    "era": "Pusat Perdagangan"
+  },
+  {
+    "level": 82,
+    "xp": 44955,
+    "era": "Pusat Perdagangan"
+  },
+  {
+    "level": 83,
+    "xp": 45920,
+    "era": "Pusat Perdagangan"
+  },
+  {
+    "level": 84,
+    "xp": 46895,
+    "era": "Pusat Perdagangan"
+  },
+  {
+    "level": 85,
+    "xp": 47880,
+    "era": "Pusat Perdagangan"
+  },
+  {
+    "level": 86,
+    "xp": 48875,
+    "era": "Pusat Perdagangan"
+  },
+  {
+    "level": 87,
+    "xp": 49880,
+    "era": "Pusat Perdagangan"
+  },
+  {
+    "level": 88,
+    "xp": 50895,
+    "era": "Pusat Perdagangan"
+  },
+  {
+    "level": 89,
+    "xp": 51920,
+    "era": "Pusat Perdagangan"
+  },
+  {
+    "level": 90,
+    "xp": 52955,
+    "era": "Pusat Perdagangan"
+  },
+  {
+    "level": 91,
+    "xp": 54000,
+    "era": "Pusat Perdagangan"
+  },
+  {
+    "level": 92,
+    "xp": 55055,
+    "era": "Pusat Perdagangan"
+  },
+  {
+    "level": 93,
+    "xp": 56120,
+    "era": "Pusat Perdagangan"
+  },
+  {
+    "level": 94,
+    "xp": 57195,
+    "era": "Pusat Perdagangan"
+  },
+  {
+    "level": 95,
+    "xp": 58280,
+    "era": "Pusat Perdagangan"
+  },
+  {
+    "level": 96,
+    "xp": 59375,
+    "era": "Pusat Perdagangan"
+  },
+  {
+    "level": 97,
+    "xp": 60480,
+    "era": "Pusat Perdagangan"
+  },
+  {
+    "level": 98,
+    "xp": 61595,
+    "era": "Pusat Perdagangan"
+  },
+  {
+    "level": 99,
+    "xp": 62720,
+    "era": "Pusat Perdagangan"
+  },
+  {
+    "level": 100,
+    "xp": 63855,
+    "era": "Pusat Perdagangan"
+  },
+  {
+    "level": 101,
+    "xp": 65000,
+    "era": "Kota Industri"
+  },
+  {
+    "level": 102,
+    "xp": 66155,
+    "era": "Kota Industri"
+  },
+  {
+    "level": 103,
+    "xp": 67320,
+    "era": "Kota Industri"
+  },
+  {
+    "level": 104,
+    "xp": 68495,
+    "era": "Kota Industri"
+  },
+  {
+    "level": 105,
+    "xp": 69680,
+    "era": "Kota Industri"
+  },
+  {
+    "level": 106,
+    "xp": 70875,
+    "era": "Kota Industri"
+  },
+  {
+    "level": 107,
+    "xp": 72080,
+    "era": "Kota Industri"
+  },
+  {
+    "level": 108,
+    "xp": 73295,
+    "era": "Kota Industri"
+  },
+  {
+    "level": 109,
+    "xp": 74520,
+    "era": "Kota Industri"
+  },
+  {
+    "level": 110,
+    "xp": 75755,
+    "era": "Kota Industri"
+  },
+  {
+    "level": 111,
+    "xp": 77000,
+    "era": "Kota Industri"
+  },
+  {
+    "level": 112,
+    "xp": 78255,
+    "era": "Kota Industri"
+  },
+  {
+    "level": 113,
+    "xp": 79520,
+    "era": "Kota Industri"
+  },
+  {
+    "level": 114,
+    "xp": 80795,
+    "era": "Kota Industri"
+  },
+  {
+    "level": 115,
+    "xp": 82080,
+    "era": "Kota Industri"
+  },
+  {
+    "level": 116,
+    "xp": 83375,
+    "era": "Kota Industri"
+  },
+  {
+    "level": 117,
+    "xp": 84680,
+    "era": "Kota Industri"
+  },
+  {
+    "level": 118,
+    "xp": 85995,
+    "era": "Kota Industri"
+  },
+  {
+    "level": 119,
+    "xp": 87320,
+    "era": "Kota Industri"
+  },
+  {
+    "level": 120,
+    "xp": 88655,
+    "era": "Kota Industri"
+  },
+  {
+    "level": 121,
+    "xp": 90000,
+    "era": "Kota Industri"
+  },
+  {
+    "level": 122,
+    "xp": 91355,
+    "era": "Kota Industri"
+  },
+  {
+    "level": 123,
+    "xp": 92720,
+    "era": "Kota Industri"
+  },
+  {
+    "level": 124,
+    "xp": 94095,
+    "era": "Kota Industri"
+  },
+  {
+    "level": 125,
+    "xp": 95480,
+    "era": "Kota Industri"
+  },
+  {
+    "level": 126,
+    "xp": 96875,
+    "era": "Kota Industri"
+  },
+  {
+    "level": 127,
+    "xp": 98280,
+    "era": "Kota Industri"
+  },
+  {
+    "level": 128,
+    "xp": 99695,
+    "era": "Kota Industri"
+  },
+  {
+    "level": 129,
+    "xp": 101120,
+    "era": "Kota Industri"
+  },
+  {
+    "level": 130,
+    "xp": 102555,
+    "era": "Kota Industri"
+  },
+  {
+    "level": 131,
+    "xp": 104000,
+    "era": "Kota Industri"
+  },
+  {
+    "level": 132,
+    "xp": 105455,
+    "era": "Kota Industri"
+  },
+  {
+    "level": 133,
+    "xp": 106920,
+    "era": "Kota Industri"
+  },
+  {
+    "level": 134,
+    "xp": 108395,
+    "era": "Kota Industri"
+  },
+  {
+    "level": 135,
+    "xp": 109880,
+    "era": "Kota Industri"
+  },
+  {
+    "level": 136,
+    "xp": 111375,
+    "era": "Kota Industri"
+  },
+  {
+    "level": 137,
+    "xp": 112880,
+    "era": "Kota Industri"
+  },
+  {
+    "level": 138,
+    "xp": 114395,
+    "era": "Kota Industri"
+  },
+  {
+    "level": 139,
+    "xp": 115920,
+    "era": "Kota Industri"
+  },
+  {
+    "level": 140,
+    "xp": 117455,
+    "era": "Kota Industri"
+  },
+  {
+    "level": 141,
+    "xp": 119000,
+    "era": "Kota Industri"
+  },
+  {
+    "level": 142,
+    "xp": 120555,
+    "era": "Kota Industri"
+  },
+  {
+    "level": 143,
+    "xp": 122120,
+    "era": "Kota Industri"
+  },
+  {
+    "level": 144,
+    "xp": 123695,
+    "era": "Kota Industri"
+  },
+  {
+    "level": 145,
+    "xp": 125280,
+    "era": "Kota Industri"
+  },
+  {
+    "level": 146,
+    "xp": 126875,
+    "era": "Kota Industri"
+  },
+  {
+    "level": 147,
+    "xp": 128480,
+    "era": "Kota Industri"
+  },
+  {
+    "level": 148,
+    "xp": 130095,
+    "era": "Kota Industri"
+  },
+  {
+    "level": 149,
+    "xp": 131720,
+    "era": "Kota Industri"
+  },
+  {
+    "level": 150,
+    "xp": 133355,
+    "era": "Kota Industri"
+  },
+  {
+    "level": 151,
+    "xp": 135000,
+    "era": "Kota Industri"
+  },
+  {
+    "level": 152,
+    "xp": 136655,
+    "era": "Kota Industri"
+  },
+  {
+    "level": 153,
+    "xp": 138320,
+    "era": "Kota Industri"
+  },
+  {
+    "level": 154,
+    "xp": 139995,
+    "era": "Kota Industri"
+  },
+  {
+    "level": 155,
+    "xp": 141680,
+    "era": "Kota Industri"
+  },
+  {
+    "level": 156,
+    "xp": 143375,
+    "era": "Kota Industri"
+  },
+  {
+    "level": 157,
+    "xp": 145080,
+    "era": "Kota Industri"
+  },
+  {
+    "level": 158,
+    "xp": 146795,
+    "era": "Kota Industri"
+  },
+  {
+    "level": 159,
+    "xp": 148520,
+    "era": "Kota Industri"
+  },
+  {
+    "level": 160,
+    "xp": 150255,
+    "era": "Kota Industri"
+  },
+  {
+    "level": 161,
+    "xp": 152000,
+    "era": "Kota Modern"
+  },
+  {
+    "level": 162,
+    "xp": 153755,
+    "era": "Kota Modern"
+  },
+  {
+    "level": 163,
+    "xp": 155520,
+    "era": "Kota Modern"
+  },
+  {
+    "level": 164,
+    "xp": 157295,
+    "era": "Kota Modern"
+  },
+  {
+    "level": 165,
+    "xp": 159080,
+    "era": "Kota Modern"
+  },
+  {
+    "level": 166,
+    "xp": 160875,
+    "era": "Kota Modern"
+  },
+  {
+    "level": 167,
+    "xp": 162680,
+    "era": "Kota Modern"
+  },
+  {
+    "level": 168,
+    "xp": 164495,
+    "era": "Kota Modern"
+  },
+  {
+    "level": 169,
+    "xp": 166320,
+    "era": "Kota Modern"
+  },
+  {
+    "level": 170,
+    "xp": 168155,
+    "era": "Kota Modern"
+  },
+  {
+    "level": 171,
+    "xp": 170000,
+    "era": "Kota Modern"
+  },
+  {
+    "level": 172,
+    "xp": 171855,
+    "era": "Kota Modern"
+  },
+  {
+    "level": 173,
+    "xp": 173720,
+    "era": "Kota Modern"
+  },
+  {
+    "level": 174,
+    "xp": 175595,
+    "era": "Kota Modern"
+  },
+  {
+    "level": 175,
+    "xp": 177480,
+    "era": "Kota Modern"
+  },
+  {
+    "level": 176,
+    "xp": 179375,
+    "era": "Kota Modern"
+  },
+  {
+    "level": 177,
+    "xp": 181280,
+    "era": "Kota Modern"
+  },
+  {
+    "level": 178,
+    "xp": 183195,
+    "era": "Kota Modern"
+  },
+  {
+    "level": 179,
+    "xp": 185120,
+    "era": "Kota Modern"
+  },
+  {
+    "level": 180,
+    "xp": 187055,
+    "era": "Kota Modern"
+  },
+  {
+    "level": 181,
+    "xp": 189000,
+    "era": "Kota Modern"
+  },
+  {
+    "level": 182,
+    "xp": 190955,
+    "era": "Kota Modern"
+  },
+  {
+    "level": 183,
+    "xp": 192920,
+    "era": "Kota Modern"
+  },
+  {
+    "level": 184,
+    "xp": 194895,
+    "era": "Kota Modern"
+  },
+  {
+    "level": 185,
+    "xp": 196880,
+    "era": "Kota Modern"
+  },
+  {
+    "level": 186,
+    "xp": 198875,
+    "era": "Kota Modern"
+  },
+  {
+    "level": 187,
+    "xp": 200880,
+    "era": "Kota Modern"
+  },
+  {
+    "level": 188,
+    "xp": 202895,
+    "era": "Kota Modern"
+  },
+  {
+    "level": 189,
+    "xp": 204920,
+    "era": "Kota Modern"
+  },
+  {
+    "level": 190,
+    "xp": 206955,
+    "era": "Kota Modern"
+  },
+  {
+    "level": 191,
+    "xp": 209000,
+    "era": "Kota Modern"
+  },
+  {
+    "level": 192,
+    "xp": 211055,
+    "era": "Kota Modern"
+  },
+  {
+    "level": 193,
+    "xp": 213120,
+    "era": "Kota Modern"
+  },
+  {
+    "level": 194,
+    "xp": 215195,
+    "era": "Kota Modern"
+  },
+  {
+    "level": 195,
+    "xp": 217280,
+    "era": "Kota Modern"
+  },
+  {
+    "level": 196,
+    "xp": 219375,
+    "era": "Kota Modern"
+  },
+  {
+    "level": 197,
+    "xp": 221480,
+    "era": "Kota Modern"
+  },
+  {
+    "level": 198,
+    "xp": 223595,
+    "era": "Kota Modern"
+  },
+  {
+    "level": 199,
+    "xp": 225720,
+    "era": "Kota Modern"
+  },
+  {
+    "level": 200,
+    "xp": 227855,
+    "era": "Kota Modern"
+  },
+  {
+    "level": 201,
+    "xp": 230000,
+    "era": "Kota Modern"
+  },
+  {
+    "level": 202,
+    "xp": 232155,
+    "era": "Kota Modern"
+  },
+  {
+    "level": 203,
+    "xp": 234320,
+    "era": "Kota Modern"
+  },
+  {
+    "level": 204,
+    "xp": 236495,
+    "era": "Kota Modern"
+  },
+  {
+    "level": 205,
+    "xp": 238680,
+    "era": "Kota Modern"
+  },
+  {
+    "level": 206,
+    "xp": 240875,
+    "era": "Kota Modern"
+  },
+  {
+    "level": 207,
+    "xp": 243080,
+    "era": "Kota Modern"
+  },
+  {
+    "level": 208,
+    "xp": 245295,
+    "era": "Kota Modern"
+  },
+  {
+    "level": 209,
+    "xp": 247520,
+    "era": "Kota Modern"
+  },
+  {
+    "level": 210,
+    "xp": 249755,
+    "era": "Kota Modern"
+  },
+  {
+    "level": 211,
+    "xp": 252000,
+    "era": "Kota Modern"
+  },
+  {
+    "level": 212,
+    "xp": 254255,
+    "era": "Kota Modern"
+  },
+  {
+    "level": 213,
+    "xp": 256520,
+    "era": "Kota Modern"
+  },
+  {
+    "level": 214,
+    "xp": 258795,
+    "era": "Kota Modern"
+  },
+  {
+    "level": 215,
+    "xp": 261080,
+    "era": "Kota Modern"
+  },
+  {
+    "level": 216,
+    "xp": 263375,
+    "era": "Kota Modern"
+  },
+  {
+    "level": 217,
+    "xp": 265680,
+    "era": "Kota Modern"
+  },
+  {
+    "level": 218,
+    "xp": 267995,
+    "era": "Kota Modern"
+  },
+  {
+    "level": 219,
+    "xp": 270320,
+    "era": "Kota Modern"
+  },
+  {
+    "level": 220,
+    "xp": 272655,
+    "era": "Kota Modern"
+  },
+  {
+    "level": 221,
+    "xp": 275000,
+    "era": "Metropolitan"
+  },
+  {
+    "level": 222,
+    "xp": 277355,
+    "era": "Metropolitan"
+  },
+  {
+    "level": 223,
+    "xp": 279720,
+    "era": "Metropolitan"
+  },
+  {
+    "level": 224,
+    "xp": 282095,
+    "era": "Metropolitan"
+  },
+  {
+    "level": 225,
+    "xp": 284480,
+    "era": "Metropolitan"
+  },
+  {
+    "level": 226,
+    "xp": 286875,
+    "era": "Metropolitan"
+  },
+  {
+    "level": 227,
+    "xp": 289280,
+    "era": "Metropolitan"
+  },
+  {
+    "level": 228,
+    "xp": 291695,
+    "era": "Metropolitan"
+  },
+  {
+    "level": 229,
+    "xp": 294120,
+    "era": "Metropolitan"
+  },
+  {
+    "level": 230,
+    "xp": 296555,
+    "era": "Metropolitan"
+  },
+  {
+    "level": 231,
+    "xp": 299000,
+    "era": "Metropolitan"
+  },
+  {
+    "level": 232,
+    "xp": 301455,
+    "era": "Metropolitan"
+  },
+  {
+    "level": 233,
+    "xp": 303920,
+    "era": "Metropolitan"
+  },
+  {
+    "level": 234,
+    "xp": 306395,
+    "era": "Metropolitan"
+  },
+  {
+    "level": 235,
+    "xp": 308880,
+    "era": "Metropolitan"
+  },
+  {
+    "level": 236,
+    "xp": 311375,
+    "era": "Metropolitan"
+  },
+  {
+    "level": 237,
+    "xp": 313880,
+    "era": "Metropolitan"
+  },
+  {
+    "level": 238,
+    "xp": 316395,
+    "era": "Metropolitan"
+  },
+  {
+    "level": 239,
+    "xp": 318920,
+    "era": "Metropolitan"
+  },
+  {
+    "level": 240,
+    "xp": 321455,
+    "era": "Metropolitan"
+  },
+  {
+    "level": 241,
+    "xp": 324000,
+    "era": "Metropolitan"
+  },
+  {
+    "level": 242,
+    "xp": 326555,
+    "era": "Metropolitan"
+  },
+  {
+    "level": 243,
+    "xp": 329120,
+    "era": "Metropolitan"
+  },
+  {
+    "level": 244,
+    "xp": 331695,
+    "era": "Metropolitan"
+  },
+  {
+    "level": 245,
+    "xp": 334280,
+    "era": "Metropolitan"
+  },
+  {
+    "level": 246,
+    "xp": 336875,
+    "era": "Metropolitan"
+  },
+  {
+    "level": 247,
+    "xp": 339480,
+    "era": "Metropolitan"
+  },
+  {
+    "level": 248,
+    "xp": 342095,
+    "era": "Metropolitan"
+  },
+  {
+    "level": 249,
+    "xp": 344720,
+    "era": "Metropolitan"
+  },
+  {
+    "level": 250,
+    "xp": 347355,
+    "era": "Metropolitan"
+  },
+  {
+    "level": 251,
+    "xp": 350000,
+    "era": "Metropolitan"
+  },
+  {
+    "level": 252,
+    "xp": 352655,
+    "era": "Metropolitan"
+  },
+  {
+    "level": 253,
+    "xp": 355320,
+    "era": "Metropolitan"
+  },
+  {
+    "level": 254,
+    "xp": 357995,
+    "era": "Metropolitan"
+  },
+  {
+    "level": 255,
+    "xp": 360680,
+    "era": "Metropolitan"
+  },
+  {
+    "level": 256,
+    "xp": 363375,
+    "era": "Metropolitan"
+  },
+  {
+    "level": 257,
+    "xp": 366080,
+    "era": "Metropolitan"
+  },
+  {
+    "level": 258,
+    "xp": 368795,
+    "era": "Metropolitan"
+  },
+  {
+    "level": 259,
+    "xp": 371520,
+    "era": "Metropolitan"
+  },
+  {
+    "level": 260,
+    "xp": 374255,
+    "era": "Metropolitan"
+  },
+  {
+    "level": 261,
+    "xp": 377000,
+    "era": "Metropolitan"
+  },
+  {
+    "level": 262,
+    "xp": 379755,
+    "era": "Metropolitan"
+  },
+  {
+    "level": 263,
+    "xp": 382520,
+    "era": "Metropolitan"
+  },
+  {
+    "level": 264,
+    "xp": 385295,
+    "era": "Metropolitan"
+  },
+  {
+    "level": 265,
+    "xp": 388080,
+    "era": "Metropolitan"
+  },
+  {
+    "level": 266,
+    "xp": 390875,
+    "era": "Metropolitan"
+  },
+  {
+    "level": 267,
+    "xp": 393680,
+    "era": "Metropolitan"
+  },
+  {
+    "level": 268,
+    "xp": 396495,
+    "era": "Metropolitan"
+  },
+  {
+    "level": 269,
+    "xp": 399320,
+    "era": "Metropolitan"
+  },
+  {
+    "level": 270,
+    "xp": 402155,
+    "era": "Metropolitan"
+  },
+  {
+    "level": 271,
+    "xp": 405000,
+    "era": "Metropolitan"
+  },
+  {
+    "level": 272,
+    "xp": 407855,
+    "era": "Metropolitan"
+  },
+  {
+    "level": 273,
+    "xp": 410720,
+    "era": "Metropolitan"
+  },
+  {
+    "level": 274,
+    "xp": 413595,
+    "era": "Metropolitan"
+  },
+  {
+    "level": 275,
+    "xp": 416480,
+    "era": "Metropolitan"
+  },
+  {
+    "level": 276,
+    "xp": 419375,
+    "era": "Metropolitan"
+  },
+  {
+    "level": 277,
+    "xp": 422280,
+    "era": "Metropolitan"
+  },
+  {
+    "level": 278,
+    "xp": 425195,
+    "era": "Metropolitan"
+  },
+  {
+    "level": 279,
+    "xp": 428120,
+    "era": "Metropolitan"
+  },
+  {
+    "level": 280,
+    "xp": 431055,
+    "era": "Metropolitan"
+  },
+  {
+    "level": 281,
+    "xp": 434000,
+    "era": "Metropolitan"
+  },
+  {
+    "level": 282,
+    "xp": 436955,
+    "era": "Metropolitan"
+  },
+  {
+    "level": 283,
+    "xp": 439920,
+    "era": "Metropolitan"
+  },
+  {
+    "level": 284,
+    "xp": 442895,
+    "era": "Metropolitan"
+  },
+  {
+    "level": 285,
+    "xp": 445880,
+    "era": "Metropolitan"
+  },
+  {
+    "level": 286,
+    "xp": 448875,
+    "era": "Metropolitan"
+  },
+  {
+    "level": 287,
+    "xp": 451880,
+    "era": "Metropolitan"
+  },
+  {
+    "level": 288,
+    "xp": 454895,
+    "era": "Metropolitan"
+  },
+  {
+    "level": 289,
+    "xp": 457920,
+    "era": "Metropolitan"
+  },
+  {
+    "level": 290,
+    "xp": 460955,
+    "era": "Metropolitan"
+  },
+  {
+    "level": 291,
+    "xp": 464000,
+    "era": "Metropolitan"
+  },
+  {
+    "level": 292,
+    "xp": 467055,
+    "era": "Metropolitan"
+  },
+  {
+    "level": 293,
+    "xp": 470120,
+    "era": "Metropolitan"
+  },
+  {
+    "level": 294,
+    "xp": 473195,
+    "era": "Metropolitan"
+  },
+  {
+    "level": 295,
+    "xp": 476280,
+    "era": "Metropolitan"
+  },
+  {
+    "level": 296,
+    "xp": 479375,
+    "era": "Metropolitan"
+  },
+  {
+    "level": 297,
+    "xp": 482480,
+    "era": "Metropolitan"
+  },
+  {
+    "level": 298,
+    "xp": 485595,
+    "era": "Metropolitan"
+  },
+  {
+    "level": 299,
+    "xp": 488720,
+    "era": "Metropolitan"
+  },
+  {
+    "level": 300,
+    "xp": 491855,
+    "era": "Metropolitan"
+  }
+]

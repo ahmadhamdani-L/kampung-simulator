@@ -1,0 +1,57 @@
+{
+  "mill": {
+    "input": {
+      "paddy": 4
+    },
+    "output": {
+      "rice": 3
+    },
+    "seconds": 30
+  },
+  "tofu_factory": {
+    "input": {
+      "soy": 3
+    },
+    "output": {
+      "tofu": 4
+    },
+    "seconds": 30
+  },
+  "tempe_factory": {
+    "input": {
+      "soy": 3
+    },
+    "output": {
+      "tempe": 4
+    },
+    "seconds": 30
+  },
+  "flour_factory": {
+    "input": {
+      "corn": 3
+    },
+    "output": {
+      "flour": 4
+    },
+    "seconds": 30
+  },
+  "food_factory": {
+    "input": {
+      "rice": 2,
+      "egg": 1
+    },
+    "output": {
+      "food": 4
+    },
+    "seconds": 30
+  },
+  "sawmill": {
+    "input": {
+      "wood": 3
+    },
+    "output": {
+      "planks": 4
+    },
+    "seconds": 30
+  }
+}

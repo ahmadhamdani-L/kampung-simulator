@@ -1,0 +1,28 @@
+name: Validate game
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install pinned Godot
+        run: |
+          curl -fLsS https://github.com/godotengine/godot/releases/download/4.7.2-stable/Godot_v4.7.2-stable_linux.x86_64.zip -o /tmp/godot.zip
+          unzip -q /tmp/godot.zip -d /tmp/godot
+          sudo install /tmp/godot/Godot_v4.7.2-stable_linux.x86_64 /usr/local/bin/godot
+      - run: python3 tools/validate_content.py
+      - run: godot --headless --path . --editor --import --quit
+      - name: Simulation and persistence tests
+        run: godot --headless --path . --script tests/run.gd
+      - name: Rendered UI smoke test
+        run: xvfb-run -a godot --audio-driver Dummy --path . --script tests/ui_smoke.gd
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: screenshots
+          path: build/screenshots

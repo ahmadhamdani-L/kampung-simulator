@@ -1,0 +1,91 @@
+{
+  "seeds": {
+    "name": "Benih Unggul",
+    "level": 1,
+    "price": 700,
+    "resources": {
+      "wood": 2
+    },
+    "dependencies": [],
+    "effect": "yield",
+    "bonus": 0.2
+  },
+  "irrigation": {
+    "name": "Irigasi",
+    "level": 4,
+    "price": 1600,
+    "resources": {
+      "wood": 3
+    },
+    "dependencies": [
+      "seeds"
+    ],
+    "effect": "growth",
+    "bonus": 0.2
+  },
+  "fertilizer": {
+    "name": "Pupuk Organik",
+    "level": 7,
+    "price": 2500,
+    "resources": {
+      "wood": 4
+    },
+    "dependencies": [
+      "seeds"
+    ],
+    "effect": "yield",
+    "bonus": 0.2
+  },
+  "mechanization": {
+    "name": "Mekanisasi",
+    "level": 10,
+    "price": 3400,
+    "resources": {
+      "wood": 5
+    },
+    "dependencies": [
+      "irrigation"
+    ],
+    "effect": "growth",
+    "bonus": 0.2
+  },
+  "processing": {
+    "name": "Pengolahan Industri",
+    "level": 13,
+    "price": 4300,
+    "resources": {
+      "wood": 6
+    },
+    "dependencies": [
+      "fertilizer"
+    ],
+    "effect": "production",
+    "bonus": 0.2
+  },
+  "logistics": {
+    "name": "Logistik",
+    "level": 16,
+    "price": 5200,
+    "resources": {
+      "wood": 7
+    },
+    "dependencies": [
+      "processing"
+    ],
+    "effect": "price",
+    "bonus": 0.2
+  },
+  "renewables": {
+    "name": "Energi Terbarukan",
+    "level": 19,
+    "price": 6100,
+    "resources": {
+      "wood": 8
+    },
+    "dependencies": [
+      "logistics"
+    ],
+    "effect": "happiness",
+    "bonus": 0.2
+  }
+}

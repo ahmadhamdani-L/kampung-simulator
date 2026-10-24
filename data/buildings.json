@@ -1,0 +1,1328 @@
+{
+  "bamboo": {
+    "id": "bamboo",
+    "name": "Rumah Bambu",
+    "name_en": "Bamboo",
+    "description": "Rumah Bambu meningkatkan kapasitas dan produktivitas kampung.",
+    "category": "rumah",
+    "price": 630,
+    "resources": {},
+    "duration": 3,
+    "level": 1,
+    "footprint": [
+      1,
+      1
+    ],
+    "maintenance": 2,
+    "capacity": 6,
+    "jobs": 0,
+    "happiness": 0,
+    "road_required": true,
+    "upgrade_levels": 5,
+    "sprite": "procedural://rumah",
+    "production": {},
+    "storage": 0
+  },
+  "wood_house": {
+    "id": "wood_house",
+    "name": "Rumah Kayu",
+    "name_en": "Wood House",
+    "description": "Rumah Kayu meningkatkan kapasitas dan produktivitas kampung.",
+    "category": "rumah",
+    "price": 1090,
+    "resources": {},
+    "duration": 4,
+    "level": 3,
+    "footprint": [
+      1,
+      1
+    ],
+    "maintenance": 2,
+    "capacity": 14,
+    "jobs": 0,
+    "happiness": 0,
+    "road_required": true,
+    "upgrade_levels": 5,
+    "sprite": "procedural://rumah",
+    "production": {},
+    "storage": 0
+  },
+  "simple_house": {
+    "id": "simple_house",
+    "name": "Rumah Sederhana",
+    "name_en": "Simple House",
+    "description": "Rumah Sederhana meningkatkan kapasitas dan produktivitas kampung.",
+    "category": "rumah",
+    "price": 2090,
+    "resources": {},
+    "duration": 5,
+    "level": 8,
+    "footprint": [
+      1,
+      1
+    ],
+    "maintenance": 2,
+    "capacity": 22,
+    "jobs": 0,
+    "happiness": 0,
+    "road_required": true,
+    "upgrade_levels": 5,
+    "sprite": "procedural://rumah",
+    "production": {},
+    "storage": 0
+  },
+  "permanent": {
+    "id": "permanent",
+    "name": "Rumah Permanen",
+    "name_en": "Permanent",
+    "description": "Rumah Permanen meningkatkan kapasitas dan produktivitas kampung.",
+    "category": "rumah",
+    "price": 3450,
+    "resources": {
+      "wood": 3,
+      "stone": 3
+    },
+    "duration": 8,
+    "level": 15,
+    "footprint": [
+      1,
+      1
+    ],
+    "maintenance": 5,
+    "capacity": 30,
+    "jobs": 0,
+    "happiness": 0,
+    "road_required": true,
+    "upgrade_levels": 5,
+    "sprite": "procedural://rumah",
+    "production": {},
+    "storage": 0
+  },
+  "housing": {
+    "id": "housing",
+    "name": "Perumahan",
+    "name_en": "Housing",
+    "description": "Perumahan meningkatkan kapasitas dan produktivitas kampung.",
+    "category": "rumah",
+    "price": 7150,
+    "resources": {
+      "wood": 5,
+      "stone": 4
+    },
+    "duration": 14,
+    "level": 35,
+    "footprint": [
+      1,
+      1
+    ],
+    "maintenance": 11,
+    "capacity": 38,
+    "jobs": 0,
+    "happiness": 0,
+    "road_required": true,
+    "upgrade_levels": 5,
+    "sprite": "procedural://rumah",
+    "production": {},
+    "storage": 0
+  },
+  "apartment": {
+    "id": "apartment",
+    "name": "Apartemen",
+    "name_en": "Apartment",
+    "description": "Apartemen meningkatkan kapasitas dan produktivitas kampung.",
+    "category": "rumah",
+    "price": 18950,
+    "resources": {
+      "wood": 12,
+      "stone": 8
+    },
+    "duration": 36,
+    "level": 100,
+    "footprint": [
+      1,
+      1
+    ],
+    "maintenance": 33,
+    "capacity": 46,
+    "jobs": 0,
+    "happiness": 0,
+    "road_required": true,
+    "upgrade_levels": 5,
+    "sprite": "procedural://rumah",
+    "production": {},
+    "storage": 0
+  },
+  "condo": {
+    "id": "condo",
+    "name": "Kondominium",
+    "name_en": "Condo",
+    "description": "Kondominium meningkatkan kapasitas dan produktivitas kampung.",
+    "category": "rumah",
+    "price": 33450,
+    "resources": {
+      "wood": 20,
+      "stone": 14
+    },
+    "duration": 45,
+    "level": 180,
+    "footprint": [
+      1,
+      1
+    ],
+    "maintenance": 60,
+    "capacity": 54,
+    "jobs": 0,
+    "happiness": 0,
+    "road_required": true,
+    "upgrade_levels": 5,
+    "sprite": "procedural://rumah",
+    "production": {},
+    "storage": 0
+  },
+  "rice_field": {
+    "id": "rice_field",
+    "name": "Sawah",
+    "name_en": "Rice Field",
+    "description": "Sawah meningkatkan kapasitas dan produktivitas kampung.",
+    "category": "tani",
+    "price": 630,
+    "resources": {},
+    "duration": 3,
+    "level": 1,
+    "footprint": [
+      2,
+      2
+    ],
+    "maintenance": 2,
+    "capacity": 0,
+    "jobs": 2,
+    "happiness": 0,
+    "road_required": true,
+    "upgrade_levels": 5,
+    "sprite": "procedural://tani",
+    "production": {},
+    "storage": 0
+  },
+  "corn_field": {
+    "id": "corn_field",
+    "name": "Kebun Jagung",
+    "name_en": "Corn Field",
+    "description": "Kebun Jagung meningkatkan kapasitas dan produktivitas kampung.",
+    "category": "tani",
+    "price": 910,
+    "resources": {},
+    "duration": 3,
+    "level": 2,
+    "footprint": [
+      2,
+      2
+    ],
+    "maintenance": 2,
+    "capacity": 0,
+    "jobs": 4,
+    "happiness": 0,
+    "road_required": true,
+    "upgrade_levels": 5,
+    "sprite": "procedural://tani",
+    "production": {},
+    "storage": 0
+  },
+  "chili_field": {
+    "id": "chili_field",
+    "name": "Kebun Cabai",
+    "name_en": "Chili Field",
+    "description": "Kebun Cabai meningkatkan kapasitas dan produktivitas kampung.",
+    "category": "tani",
+    "price": 1370,
+    "resources": {},
+    "duration": 4,
+    "level": 4,
+    "footprint": [
+      2,
+      2
+    ],
+    "maintenance": 2,
+    "capacity": 0,
+    "jobs": 6,
+    "happiness": 0,
+    "road_required": true,
+    "upgrade_levels": 5,
+    "sprite": "procedural://tani",
+    "production": {},
+    "storage": 0
+  },
+  "cassava_field": {
+    "id": "cassava_field",
+    "name": "Kebun Singkong",
+    "name_en": "Cassava Field",
+    "description": "Kebun Singkong meningkatkan kapasitas dan produktivitas kampung.",
+    "category": "tani",
+    "price": 1830,
+    "resources": {},
+    "duration": 5,
+    "level": 6,
+    "footprint": [
+      2,
+      2
+    ],
+    "maintenance": 2,
+    "capacity": 0,
+    "jobs": 8,
+    "happiness": 0,
+    "road_required": true,
+    "upgrade_levels": 5,
+    "sprite": "procedural://tani",
+    "production": {},
+    "storage": 0
+  },
+  "banana_field": {
+    "id": "banana_field",
+    "name": "Kebun Pisang",
+    "name_en": "Banana Field",
+    "description": "Kebun Pisang meningkatkan kapasitas dan produktivitas kampung.",
+    "category": "tani",
+    "price": 2650,
+    "resources": {
+      "wood": 3,
+      "stone": 2
+    },
+    "duration": 6,
+    "level": 10,
+    "footprint": [
+      2,
+      2
+    ],
+    "maintenance": 3,
+    "capacity": 0,
+    "jobs": 10,
+    "happiness": 0,
+    "road_required": true,
+    "upgrade_levels": 5,
+    "sprite": "procedural://tani",
+    "production": {},
+    "storage": 0
+  },
+  "coconut_field": {
+    "id": "coconut_field",
+    "name": "Kebun Kelapa",
+    "name_en": "Coconut Field",
+    "description": "Kebun Kelapa meningkatkan kapasitas dan produktivitas kampung.",
+    "category": "tani",
+    "price": 3650,
+    "resources": {
+      "wood": 3,
+      "stone": 3
+    },
+    "duration": 8,
+    "level": 15,
+    "footprint": [
+      2,
+      2
+    ],
+    "maintenance": 5,
+    "capacity": 0,
+    "jobs": 12,
+    "happiness": 0,
+    "road_required": true,
+    "upgrade_levels": 5,
+    "sprite": "procedural://tani",
+    "production": {},
+    "storage": 0
+  },
+  "coffee_field": {
+    "id": "coffee_field",
+    "name": "Kebun Kopi",
+    "name_en": "Coffee Field",
+    "description": "Kebun Kopi meningkatkan kapasitas dan produktivitas kampung.",
+    "category": "tani",
+    "price": 6450,
+    "resources": {
+      "wood": 5,
+      "stone": 4
+    },
+    "duration": 13,
+    "level": 30,
+    "footprint": [
+      2,
+      2
+    ],
+    "maintenance": 10,
+    "capacity": 0,
+    "jobs": 14,
+    "happiness": 0,
+    "road_required": true,
+    "upgrade_levels": 5,
+    "sprite": "procedural://tani",
+    "production": {},
+    "storage": 0
+  },
+  "chicken": {
+    "id": "chicken",
+    "name": "Kandang Ayam",
+    "name_en": "Chicken",
+    "description": "Kandang Ayam meningkatkan kapasitas dan produktivitas kampung.",
+    "category": "ternak",
+    "price": 990,
+    "resources": {},
+    "duration": 4,
+    "level": 3,
+    "footprint": [
+      2,
+      2
+    ],
+    "maintenance": 2,
+    "capacity": 0,
+    "jobs": 2,
+    "happiness": 0,
+    "road_required": true,
+    "upgrade_levels": 5,
+    "sprite": "procedural://ternak",
+    "production": {},
+    "storage": 0
+  },
+  "duck": {
+    "id": "duck",
+    "name": "Peternakan Bebek",
+    "name_en": "Duck",
+    "description": "Peternakan Bebek meningkatkan kapasitas dan produktivitas kampung.",
+    "category": "ternak",
+    "price": 1990,
+    "resources": {},
+    "duration": 5,
+    "level": 8,
+    "footprint": [
+      2,
+      2
+    ],
+    "maintenance": 2,
+    "capacity": 0,
+    "jobs": 4,
+    "happiness": 0,
+    "road_required": true,
+    "upgrade_levels": 5,
+    "sprite": "procedural://ternak",
+    "production": {},
+    "storage": 0
+  },
+  "goat": {
+    "id": "goat",
+    "name": "Peternakan Kambing",
+    "name_en": "Goat",
+    "description": "Peternakan Kambing meningkatkan kapasitas dan produktivitas kampung.",
+    "category": "ternak",
+    "price": 2810,
+    "resources": {
+      "wood": 3,
+      "stone": 2
+    },
+    "duration": 7,
+    "level": 12,
+    "footprint": [
+      2,
+      2
+    ],
+    "maintenance": 4,
+    "capacity": 0,
+    "jobs": 6,
+    "happiness": 0,
+    "road_required": true,
+    "upgrade_levels": 5,
+    "sprite": "procedural://ternak",
+    "production": {},
+    "storage": 0
+  },
+  "cow": {
+    "id": "cow",
+    "name": "Peternakan Sapi",
+    "name_en": "Cow",
+    "description": "Peternakan Sapi meningkatkan kapasitas dan produktivitas kampung.",
+    "category": "ternak",
+    "price": 4350,
+    "resources": {
+      "wood": 4,
+      "stone": 3
+    },
+    "duration": 9,
+    "level": 20,
+    "footprint": [
+      2,
+      2
+    ],
+    "maintenance": 6,
+    "capacity": 0,
+    "jobs": 8,
+    "happiness": 0,
+    "road_required": true,
+    "upgrade_levels": 5,
+    "sprite": "procedural://ternak",
+    "production": {},
+    "storage": 0
+  },
+  "catfish": {
+    "id": "catfish",
+    "name": "Kolam Lele",
+    "name_en": "Catfish",
+    "description": "Kolam Lele meningkatkan kapasitas dan produktivitas kampung.",
+    "category": "ternak",
+    "price": 2290,
+    "resources": {},
+    "duration": 5,
+    "level": 8,
+    "footprint": [
+      2,
+      2
+    ],
+    "maintenance": 2,
+    "capacity": 0,
+    "jobs": 10,
+    "happiness": 0,
+    "road_required": true,
+    "upgrade_levels": 5,
+    "sprite": "procedural://ternak",
+    "production": {},
+    "storage": 0
+  },
+  "tilapia": {
+    "id": "tilapia",
+    "name": "Kolam Nila",
+    "name_en": "Tilapia",
+    "description": "Kolam Nila meningkatkan kapasitas dan produktivitas kampung.",
+    "category": "ternak",
+    "price": 3650,
+    "resources": {
+      "wood": 3,
+      "stone": 3
+    },
+    "duration": 8,
+    "level": 15,
+    "footprint": [
+      2,
+      2
+    ],
+    "maintenance": 5,
+    "capacity": 0,
+    "jobs": 12,
+    "happiness": 0,
+    "road_required": true,
+    "upgrade_levels": 5,
+    "sprite": "procedural://ternak",
+    "production": {},
+    "storage": 0
+  },
+  "warung": {
+    "id": "warung",
+    "name": "Warung",
+    "name_en": "Warung",
+    "description": "Warung meningkatkan kapasitas dan produktivitas kampung.",
+    "category": "niaga",
+    "price": 630,
+    "resources": {},
+    "duration": 3,
+    "level": 1,
+    "footprint": [
+      2,
+      2
+    ],
+    "maintenance": 2,
+    "capacity": 0,
+    "jobs": 2,
+    "happiness": 0,
+    "road_required": true,
+    "upgrade_levels": 5,
+    "sprite": "procedural://niaga",
+    "production": {},
+    "storage": 0
+  },
+  "shop": {
+    "id": "shop",
+    "name": "Toko Kelontong",
+    "name_en": "Shop",
+    "description": "Toko Kelontong meningkatkan kapasitas dan produktivitas kampung.",
+    "category": "niaga",
+    "price": 1450,
+    "resources": {},
+    "duration": 4,
+    "level": 5,
+    "footprint": [
+      2,
+      2
+    ],
+    "maintenance": 2,
+    "capacity": 0,
+    "jobs": 4,
+    "happiness": 0,
+    "road_required": true,
+    "upgrade_levels": 5,
+    "sprite": "procedural://niaga",
+    "production": {},
+    "storage": 0
+  },
+  "market": {
+    "id": "market",
+    "name": "Pasar Tradisional",
+    "name_en": "Market",
+    "description": "Pasar Tradisional meningkatkan kapasitas dan produktivitas kampung.",
+    "category": "niaga",
+    "price": 2450,
+    "resources": {
+      "wood": 3,
+      "stone": 2
+    },
+    "duration": 6,
+    "level": 10,
+    "footprint": [
+      2,
+      2
+    ],
+    "maintenance": 3,
+    "capacity": 0,
+    "jobs": 6,
+    "happiness": 0,
+    "road_required": true,
+    "upgrade_levels": 5,
+    "sprite": "procedural://niaga",
+    "production": {},
+    "storage": 0
+  },
+  "minimarket": {
+    "id": "minimarket",
+    "name": "Minimarket",
+    "name_en": "Minimarket",
+    "description": "Minimarket meningkatkan kapasitas dan produktivitas kampung.",
+    "category": "niaga",
+    "price": 5250,
+    "resources": {
+      "wood": 4,
+      "stone": 3
+    },
+    "duration": 11,
+    "level": 25,
+    "footprint": [
+      2,
+      2
+    ],
+    "maintenance": 8,
+    "capacity": 0,
+    "jobs": 8,
+    "happiness": 0,
+    "road_required": true,
+    "upgrade_levels": 5,
+    "sprite": "procedural://niaga",
+    "production": {},
+    "storage": 0
+  },
+  "supermarket": {
+    "id": "supermarket",
+    "name": "Supermarket",
+    "name_en": "Supermarket",
+    "description": "Supermarket meningkatkan kapasitas dan produktivitas kampung.",
+    "category": "niaga",
+    "price": 12550,
+    "resources": {
+      "wood": 8,
+      "stone": 6
+    },
+    "duration": 24,
+    "level": 65,
+    "footprint": [
+      2,
+      2
+    ],
+    "maintenance": 21,
+    "capacity": 0,
+    "jobs": 10,
+    "happiness": 0,
+    "road_required": true,
+    "upgrade_levels": 5,
+    "sprite": "procedural://niaga",
+    "production": {},
+    "storage": 0
+  },
+  "restaurant": {
+    "id": "restaurant",
+    "name": "Restoran",
+    "name_en": "Restaurant",
+    "description": "Restoran meningkatkan kapasitas dan produktivitas kampung.",
+    "category": "niaga",
+    "price": 8150,
+    "resources": {
+      "wood": 6,
+      "stone": 4
+    },
+    "duration": 16,
+    "level": 40,
+    "footprint": [
+      2,
+      2
+    ],
+    "maintenance": 13,
+    "capacity": 0,
+    "jobs": 12,
+    "happiness": 0,
+    "road_required": true,
+    "upgrade_levels": 5,
+    "sprite": "procedural://niaga",
+    "production": {},
+    "storage": 0
+  },
+  "hotel": {
+    "id": "hotel",
+    "name": "Hotel",
+    "name_en": "Hotel",
+    "description": "Hotel meningkatkan kapasitas dan produktivitas kampung.",
+    "category": "niaga",
+    "price": 15450,
+    "resources": {
+      "wood": 10,
+      "stone": 7
+    },
+    "duration": 29,
+    "level": 80,
+    "footprint": [
+      2,
+      2
+    ],
+    "maintenance": 26,
+    "capacity": 0,
+    "jobs": 14,
+    "happiness": 0,
+    "road_required": true,
+    "upgrade_levels": 5,
+    "sprite": "procedural://niaga",
+    "production": {},
+    "storage": 0
+  },
+  "mill": {
+    "id": "mill",
+    "name": "Penggilingan Padi",
+    "name_en": "Mill",
+    "description": "Penggilingan Padi meningkatkan kapasitas dan produktivitas kampung.",
+    "category": "industri",
+    "price": 1350,
+    "resources": {},
+    "duration": 4,
+    "level": 5,
+    "footprint": [
+      2,
+      2
+    ],
+    "maintenance": 2,
+    "capacity": 0,
+    "jobs": 2,
+    "happiness": 0,
+    "road_required": true,
+    "upgrade_levels": 5,
+    "sprite": "procedural://industri",
+    "production": {
+      "rice": 3
+    },
+    "storage": 0
+  },
+  "tofu_factory": {
+    "id": "tofu_factory",
+    "name": "Pabrik Tahu",
+    "name_en": "Tofu Factory",
+    "description": "Pabrik Tahu meningkatkan kapasitas dan produktivitas kampung.",
+    "category": "industri",
+    "price": 2710,
+    "resources": {
+      "wood": 3,
+      "stone": 2
+    },
+    "duration": 7,
+    "level": 12,
+    "footprint": [
+      2,
+      2
+    ],
+    "maintenance": 4,
+    "capacity": 0,
+    "jobs": 4,
+    "happiness": 0,
+    "road_required": true,
+    "upgrade_levels": 5,
+    "sprite": "procedural://industri",
+    "production": {
+      "tofu": 4
+    },
+    "storage": 0
+  },
+  "tempe_factory": {
+    "id": "tempe_factory",
+    "name": "Pabrik Tempe",
+    "name_en": "Tempe Factory",
+    "description": "Pabrik Tempe meningkatkan kapasitas dan produktivitas kampung.",
+    "category": "industri",
+    "price": 3350,
+    "resources": {
+      "wood": 3,
+      "stone": 3
+    },
+    "duration": 8,
+    "level": 15,
+    "footprint": [
+      2,
+      2
+    ],
+    "maintenance": 5,
+    "capacity": 0,
+    "jobs": 6,
+    "happiness": 0,
+    "road_required": true,
+    "upgrade_levels": 5,
+    "sprite": "procedural://industri",
+    "production": {
+      "tempe": 4
+    },
+    "storage": 0
+  },
+  "flour_factory": {
+    "id": "flour_factory",
+    "name": "Pabrik Tepung",
+    "name_en": "Flour Factory",
+    "description": "Pabrik Tepung meningkatkan kapasitas dan produktivitas kampung.",
+    "category": "industri",
+    "price": 4350,
+    "resources": {
+      "wood": 4,
+      "stone": 3
+    },
+    "duration": 9,
+    "level": 20,
+    "footprint": [
+      2,
+      2
+    ],
+    "maintenance": 6,
+    "capacity": 0,
+    "jobs": 8,
+    "happiness": 0,
+    "road_required": true,
+    "upgrade_levels": 5,
+    "sprite": "procedural://industri",
+    "production": {
+      "flour": 4
+    },
+    "storage": 0
+  },
+  "food_factory": {
+    "id": "food_factory",
+    "name": "Pabrik Makanan",
+    "name_en": "Food Factory",
+    "description": "Pabrik Makanan meningkatkan kapasitas dan produktivitas kampung.",
+    "category": "industri",
+    "price": 8050,
+    "resources": {
+      "wood": 6,
+      "stone": 4
+    },
+    "duration": 16,
+    "level": 40,
+    "footprint": [
+      2,
+      2
+    ],
+    "maintenance": 13,
+    "capacity": 0,
+    "jobs": 10,
+    "happiness": 0,
+    "road_required": true,
+    "upgrade_levels": 5,
+    "sprite": "procedural://industri",
+    "production": {
+      "food": 4
+    },
+    "storage": 0
+  },
+  "warehouse": {
+    "id": "warehouse",
+    "name": "Gudang",
+    "name_en": "Warehouse",
+    "description": "Gudang meningkatkan kapasitas dan produktivitas kampung.",
+    "category": "industri",
+    "price": 1490,
+    "resources": {},
+    "duration": 4,
+    "level": 3,
+    "footprint": [
+      2,
+      2
+    ],
+    "maintenance": 2,
+    "capacity": 0,
+    "jobs": 12,
+    "happiness": 0,
+    "road_required": true,
+    "upgrade_levels": 5,
+    "sprite": "procedural://industri",
+    "production": {},
+    "storage": 500
+  },
+  "industrial": {
+    "id": "industrial",
+    "name": "Kawasan Industri",
+    "name_en": "Industrial",
+    "description": "Kawasan Industri meningkatkan kapasitas dan produktivitas kampung.",
+    "category": "industri",
+    "price": 20850,
+    "resources": {
+      "wood": 13,
+      "stone": 9
+    },
+    "duration": 39,
+    "level": 110,
+    "footprint": [
+      2,
+      2
+    ],
+    "maintenance": 36,
+    "capacity": 0,
+    "jobs": 14,
+    "happiness": 0,
+    "road_required": true,
+    "upgrade_levels": 5,
+    "sprite": "procedural://industri",
+    "production": {},
+    "storage": 0
+  },
+  "sawmill": {
+    "id": "sawmill",
+    "name": "Pengolahan Kayu",
+    "name_en": "Sawmill",
+    "description": "Pengolahan Kayu meningkatkan kapasitas dan produktivitas kampung.",
+    "category": "industri",
+    "price": 2230,
+    "resources": {},
+    "duration": 5,
+    "level": 6,
+    "footprint": [
+      2,
+      2
+    ],
+    "maintenance": 2,
+    "capacity": 0,
+    "jobs": 16,
+    "happiness": 0,
+    "road_required": true,
+    "upgrade_levels": 5,
+    "sprite": "procedural://industri",
+    "production": {
+      "planks": 4
+    },
+    "storage": 0
+  },
+  "school": {
+    "id": "school",
+    "name": "Sekolah",
+    "name_en": "School",
+    "description": "Sekolah meningkatkan kapasitas dan produktivitas kampung.",
+    "category": "layanan",
+    "price": 1350,
+    "resources": {},
+    "duration": 4,
+    "level": 5,
+    "footprint": [
+      2,
+      2
+    ],
+    "maintenance": 2,
+    "capacity": 0,
+    "jobs": 2,
+    "happiness": 6,
+    "road_required": true,
+    "upgrade_levels": 5,
+    "sprite": "procedural://layanan",
+    "production": {},
+    "storage": 0
+  },
+  "clinic": {
+    "id": "clinic",
+    "name": "Puskesmas",
+    "name_en": "Clinic",
+    "description": "Puskesmas meningkatkan kapasitas dan produktivitas kampung.",
+    "category": "layanan",
+    "price": 1630,
+    "resources": {},
+    "duration": 5,
+    "level": 6,
+    "footprint": [
+      2,
+      2
+    ],
+    "maintenance": 2,
+    "capacity": 0,
+    "jobs": 4,
+    "happiness": 6,
+    "road_required": true,
+    "upgrade_levels": 5,
+    "sprite": "procedural://layanan",
+    "production": {},
+    "storage": 0
+  },
+  "hospital": {
+    "id": "hospital",
+    "name": "Rumah Sakit",
+    "name_en": "Hospital",
+    "description": "Rumah Sakit meningkatkan kapasitas dan produktivitas kampung.",
+    "category": "layanan",
+    "price": 11450,
+    "resources": {
+      "wood": 8,
+      "stone": 6
+    },
+    "duration": 23,
+    "level": 60,
+    "footprint": [
+      2,
+      2
+    ],
+    "maintenance": 20,
+    "capacity": 0,
+    "jobs": 6,
+    "happiness": 6,
+    "road_required": true,
+    "upgrade_levels": 5,
+    "sprite": "procedural://layanan",
+    "production": {},
+    "storage": 0
+  },
+  "hall": {
+    "id": "hall",
+    "name": "Kantor Desa",
+    "name_en": "Hall",
+    "description": "Kantor Desa meningkatkan kapasitas dan produktivitas kampung.",
+    "category": "layanan",
+    "price": 930,
+    "resources": {},
+    "duration": 3,
+    "level": 1,
+    "footprint": [
+      2,
+      2
+    ],
+    "maintenance": 2,
+    "capacity": 0,
+    "jobs": 8,
+    "happiness": 6,
+    "road_required": true,
+    "upgrade_levels": 5,
+    "sprite": "procedural://layanan",
+    "production": {},
+    "storage": 0
+  },
+  "police": {
+    "id": "police",
+    "name": "Kantor Polisi",
+    "name_en": "Police",
+    "description": "Kantor Polisi meningkatkan kapasitas dan produktivitas kampung.",
+    "category": "layanan",
+    "price": 3550,
+    "resources": {
+      "wood": 3,
+      "stone": 3
+    },
+    "duration": 8,
+    "level": 15,
+    "footprint": [
+      2,
+      2
+    ],
+    "maintenance": 5,
+    "capacity": 0,
+    "jobs": 10,
+    "happiness": 6,
+    "road_required": true,
+    "upgrade_levels": 5,
+    "sprite": "procedural://layanan",
+    "production": {},
+    "storage": 0
+  },
+  "fire": {
+    "id": "fire",
+    "name": "Pemadam Kebakaran",
+    "name_en": "Fire",
+    "description": "Pemadam Kebakaran meningkatkan kapasitas dan produktivitas kampung.",
+    "category": "layanan",
+    "price": 5450,
+    "resources": {
+      "wood": 4,
+      "stone": 3
+    },
+    "duration": 11,
+    "level": 25,
+    "footprint": [
+      2,
+      2
+    ],
+    "maintenance": 8,
+    "capacity": 0,
+    "jobs": 12,
+    "happiness": 6,
+    "road_required": true,
+    "upgrade_levels": 5,
+    "sprite": "procedural://layanan",
+    "production": {},
+    "storage": 0
+  },
+  "park": {
+    "id": "park",
+    "name": "Taman Kota",
+    "name_en": "Park",
+    "description": "Taman Kota meningkatkan kapasitas dan produktivitas kampung.",
+    "category": "layanan",
+    "price": 1410,
+    "resources": {},
+    "duration": 3,
+    "level": 2,
+    "footprint": [
+      2,
+      2
+    ],
+    "maintenance": 2,
+    "capacity": 0,
+    "jobs": 14,
+    "happiness": 6,
+    "road_required": true,
+    "upgrade_levels": 5,
+    "sprite": "procedural://layanan",
+    "production": {},
+    "storage": 0
+  },
+  "library": {
+    "id": "library",
+    "name": "Perpustakaan",
+    "name_en": "Library",
+    "description": "Perpustakaan meningkatkan kapasitas dan produktivitas kampung.",
+    "category": "layanan",
+    "price": 4750,
+    "resources": {
+      "wood": 4,
+      "stone": 3
+    },
+    "duration": 9,
+    "level": 20,
+    "footprint": [
+      2,
+      2
+    ],
+    "maintenance": 6,
+    "capacity": 0,
+    "jobs": 16,
+    "happiness": 6,
+    "road_required": true,
+    "upgrade_levels": 5,
+    "sprite": "procedural://layanan",
+    "production": {},
+    "storage": 0
+  },
+  "road": {
+    "id": "road",
+    "name": "Jalan Tanah",
+    "name_en": "Road",
+    "description": "Jalan Tanah meningkatkan kapasitas dan produktivitas kampung.",
+    "category": "jalan",
+    "price": 80,
+    "resources": {},
+    "duration": 1,
+    "level": 1,
+    "footprint": [
+      1,
+      1
+    ],
+    "maintenance": 0,
+    "capacity": 0,
+    "jobs": 0,
+    "happiness": 0,
+    "road_required": false,
+    "upgrade_levels": 5,
+    "sprite": "procedural://jalan",
+    "production": {},
+    "storage": 0
+  },
+  "asphalt": {
+    "id": "asphalt",
+    "name": "Jalan Aspal",
+    "name_en": "Asphalt",
+    "description": "Jalan Aspal meningkatkan kapasitas dan produktivitas kampung.",
+    "category": "jalan",
+    "price": 80,
+    "resources": {
+      "wood": 3,
+      "stone": 3
+    },
+    "duration": 1,
+    "level": 15,
+    "footprint": [
+      1,
+      1
+    ],
+    "maintenance": 0,
+    "capacity": 0,
+    "jobs": 0,
+    "happiness": 0,
+    "road_required": false,
+    "upgrade_levels": 5,
+    "sprite": "procedural://jalan",
+    "production": {},
+    "storage": 0
+  },
+  "highway": {
+    "id": "highway",
+    "name": "Jalan Raya",
+    "name_en": "Highway",
+    "description": "Jalan Raya meningkatkan kapasitas dan produktivitas kampung.",
+    "category": "jalan",
+    "price": 80,
+    "resources": {
+      "wood": 8,
+      "stone": 6
+    },
+    "duration": 1,
+    "level": 65,
+    "footprint": [
+      1,
+      1
+    ],
+    "maintenance": 0,
+    "capacity": 0,
+    "jobs": 0,
+    "happiness": 0,
+    "road_required": false,
+    "upgrade_levels": 5,
+    "sprite": "procedural://jalan",
+    "production": {},
+    "storage": 0
+  },
+  "bridge": {
+    "id": "bridge",
+    "name": "Jembatan",
+    "name_en": "Bridge",
+    "description": "Jembatan meningkatkan kapasitas dan produktivitas kampung.",
+    "category": "jalan",
+    "price": 80,
+    "resources": {
+      "wood": 3,
+      "stone": 2
+    },
+    "duration": 1,
+    "level": 10,
+    "footprint": [
+      1,
+      1
+    ],
+    "maintenance": 0,
+    "capacity": 0,
+    "jobs": 0,
+    "happiness": 0,
+    "road_required": false,
+    "upgrade_levels": 5,
+    "sprite": "procedural://jalan",
+    "production": {},
+    "storage": 0
+  },
+  "terminal": {
+    "id": "terminal",
+    "name": "Terminal",
+    "name_en": "Terminal",
+    "description": "Terminal meningkatkan kapasitas dan produktivitas kampung.",
+    "category": "jalan",
+    "price": 6250,
+    "resources": {
+      "wood": 5,
+      "stone": 4
+    },
+    "duration": 13,
+    "level": 30,
+    "footprint": [
+      2,
+      2
+    ],
+    "maintenance": 10,
+    "capacity": 0,
+    "jobs": 0,
+    "happiness": 0,
+    "road_required": false,
+    "upgrade_levels": 5,
+    "sprite": "procedural://jalan",
+    "production": {},
+    "storage": 0
+  },
+  "station": {
+    "id": "station",
+    "name": "Stasiun",
+    "name_en": "Station",
+    "description": "Stasiun meningkatkan kapasitas dan produktivitas kampung.",
+    "category": "jalan",
+    "price": 15350,
+    "resources": {
+      "wood": 10,
+      "stone": 7
+    },
+    "duration": 29,
+    "level": 80,
+    "footprint": [
+      2,
+      2
+    ],
+    "maintenance": 26,
+    "capacity": 0,
+    "jobs": 0,
+    "happiness": 0,
+    "road_required": false,
+    "upgrade_levels": 5,
+    "sprite": "procedural://jalan",
+    "production": {},
+    "storage": 0
+  },
+  "power": {
+    "id": "power",
+    "name": "Pembangkit Listrik",
+    "name_en": "Power",
+    "description": "Pembangkit Listrik meningkatkan kapasitas dan produktivitas kampung.",
+    "category": "jalan",
+    "price": 4650,
+    "resources": {
+      "wood": 4,
+      "stone": 3
+    },
+    "duration": 9,
+    "level": 20,
+    "footprint": [
+      2,
+      2
+    ],
+    "maintenance": 6,
+    "capacity": 0,
+    "jobs": 0,
+    "happiness": 0,
+    "road_required": false,
+    "upgrade_levels": 5,
+    "sprite": "procedural://jalan",
+    "production": {},
+    "storage": 0
+  },
+  "water": {
+    "id": "water",
+    "name": "Pengolahan Air",
+    "name_en": "Water",
+    "description": "Pengolahan Air meningkatkan kapasitas dan produktivitas kampung.",
+    "category": "jalan",
+    "price": 2050,
+    "resources": {},
+    "duration": 4,
+    "level": 5,
+    "footprint": [
+      2,
+      2
+    ],
+    "maintenance": 2,
+    "capacity": 0,
+    "jobs": 0,
+    "happiness": 0,
+    "road_required": false,
+    "upgrade_levels": 5,
+    "sprite": "procedural://jalan",
+    "production": {},
+    "storage": 0
+  }
+}

@@ -1,0 +1,10 @@
+.godot/
+.tools/
+build/
+android/build/
+.env
+*.keystore
+*.jks
+*.log
+.DS_Store
+export_credentials.cfg

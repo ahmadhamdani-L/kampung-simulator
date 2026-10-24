@@ -1,0 +1,50 @@
+{
+  "chicken": {
+    "product": "egg",
+    "seconds": 35,
+    "yield": 4,
+    "feed": 2,
+    "capacity": 4,
+    "animal_cost": 100
+  },
+  "duck": {
+    "product": "egg",
+    "seconds": 43,
+    "yield": 5,
+    "feed": 2,
+    "capacity": 4,
+    "animal_cost": 100
+  },
+  "goat": {
+    "product": "meat",
+    "seconds": 51,
+    "yield": 6,
+    "feed": 2,
+    "capacity": 4,
+    "animal_cost": 100
+  },
+  "cow": {
+    "product": "milk",
+    "seconds": 59,
+    "yield": 7,
+    "feed": 2,
+    "capacity": 4,
+    "animal_cost": 100
+  },
+  "catfish": {
+    "product": "fish",
+    "seconds": 67,
+    "yield": 8,
+    "feed": 2,
+    "capacity": 4,
+    "animal_cost": 100
+  },
+  "tilapia": {
+    "product": "fish",
+    "seconds": 75,
+    "yield": 9,
+    "feed": 2,
+    "capacity": 4,
+    "animal_cost": 100
+  }
+}

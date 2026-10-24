@@ -1,0 +1,24 @@
+{
+  "starting_money": 20000,
+  "starting_inventory": {
+    "seed": 40,
+    "wood": 60,
+    "stone": 40,
+    "rice": 50,
+    "corn": 30,
+    "feed": 30,
+    "soy": 20,
+    "fertilizer": 10
+  },
+  "map_size": 40,
+  "initial_land": 16,
+  "offline_cap": 7200,
+  "autosave_seconds": 30,
+  "tick_seconds": 1,
+  "event_interval": 120,
+  "daily_seconds": 120,
+  "storage": 400,
+  "tax_per_worker": 9,
+  "food_per_resident": 0.04,
+  "trade_buy_multiplier": 1.25
+}

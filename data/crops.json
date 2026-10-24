@@ -1,0 +1,51 @@
+{
+  "rice_field": {
+    "product": "paddy",
+    "seconds": 24,
+    "yield": 8,
+    "seed": 1,
+    "water": 1
+  },
+  "corn_field": {
+    "product": "corn",
+    "seconds": 32,
+    "yield": 10,
+    "seed": 1,
+    "water": 1
+  },
+  "chili_field": {
+    "product": "chili",
+    "seconds": 40,
+    "yield": 12,
+    "seed": 1,
+    "water": 1
+  },
+  "cassava_field": {
+    "product": "cassava",
+    "seconds": 48,
+    "yield": 14,
+    "seed": 1,
+    "water": 1
+  },
+  "banana_field": {
+    "product": "banana",
+    "seconds": 56,
+    "yield": 16,
+    "seed": 1,
+    "water": 1
+  },
+  "coconut_field": {
+    "product": "coconut",
+    "seconds": 64,
+    "yield": 18,
+    "seed": 1,
+    "water": 1
+  },
+  "coffee_field": {
+    "product": "coffee",
+    "seconds": 72,
+    "yield": 20,
+    "seed": 1,
+    "water": 1
+  }
+}

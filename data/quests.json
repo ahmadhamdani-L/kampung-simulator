@@ -1,0 +1,378 @@
+[
+  {
+    "id": "q01",
+    "name": "01 · Bangun Jalan Tanah",
+    "objectives": [
+      {
+        "kind": "build",
+        "target": "road",
+        "count": 3
+      }
+    ],
+    "prerequisites": [],
+    "rewards": {
+      "money": 650,
+      "xp": 100
+    }
+  },
+  {
+    "id": "q02",
+    "name": "02 · Bangun Sawah",
+    "objectives": [
+      {
+        "kind": "build",
+        "target": "rice_field",
+        "count": 1
+      }
+    ],
+    "prerequisites": [
+      "q01"
+    ],
+    "rewards": {
+      "money": 770,
+      "xp": 130
+    }
+  },
+  {
+    "id": "q03",
+    "name": "03 · Panen paddy",
+    "objectives": [
+      {
+        "kind": "harvest",
+        "target": "paddy",
+        "count": 8
+      }
+    ],
+    "prerequisites": [
+      "q02"
+    ],
+    "rewards": {
+      "money": 890,
+      "xp": 160
+    }
+  },
+  {
+    "id": "q04",
+    "name": "04 · Jual paddy",
+    "objectives": [
+      {
+        "kind": "sell",
+        "target": "paddy",
+        "count": 4
+      }
+    ],
+    "prerequisites": [
+      "q03"
+    ],
+    "rewards": {
+      "money": 1010,
+      "xp": 190
+    }
+  },
+  {
+    "id": "q05",
+    "name": "05 · Bangun Rumah Bambu",
+    "objectives": [
+      {
+        "kind": "build",
+        "target": "bamboo",
+        "count": 2
+      }
+    ],
+    "prerequisites": [
+      "q04"
+    ],
+    "rewards": {
+      "money": 1130,
+      "xp": 220
+    }
+  },
+  {
+    "id": "q06",
+    "name": "06 · Penduduk any",
+    "objectives": [
+      {
+        "kind": "population",
+        "target": "any",
+        "count": 12
+      }
+    ],
+    "prerequisites": [
+      "q05"
+    ],
+    "rewards": {
+      "money": 1250,
+      "xp": 250
+    }
+  },
+  {
+    "id": "q07",
+    "name": "07 · Bangun Warung",
+    "objectives": [
+      {
+        "kind": "build",
+        "target": "warung",
+        "count": 1
+      }
+    ],
+    "prerequisites": [
+      "q06"
+    ],
+    "rewards": {
+      "money": 1370,
+      "xp": 280
+    }
+  },
+  {
+    "id": "q08",
+    "name": "08 · Bangun Taman Kota",
+    "objectives": [
+      {
+        "kind": "build",
+        "target": "park",
+        "count": 1
+      }
+    ],
+    "prerequisites": [
+      "q07"
+    ],
+    "rewards": {
+      "money": 1490,
+      "xp": 310
+    }
+  },
+  {
+    "id": "q09",
+    "name": "09 · Kebahagiaan any",
+    "objectives": [
+      {
+        "kind": "happiness",
+        "target": "any",
+        "count": 65
+      }
+    ],
+    "prerequisites": [
+      "q08"
+    ],
+    "rewards": {
+      "money": 1610,
+      "xp": 340
+    }
+  },
+  {
+    "id": "q10",
+    "name": "10 · Bangun Penggilingan Padi",
+    "objectives": [
+      {
+        "kind": "build",
+        "target": "mill",
+        "count": 1
+      }
+    ],
+    "prerequisites": [
+      "q09"
+    ],
+    "rewards": {
+      "money": 1730,
+      "xp": 370
+    }
+  },
+  {
+    "id": "q11",
+    "name": "11 · Produksi rice",
+    "objectives": [
+      {
+        "kind": "produce",
+        "target": "rice",
+        "count": 3
+      }
+    ],
+    "prerequisites": [
+      "q10"
+    ],
+    "rewards": {
+      "money": 1850,
+      "xp": 400
+    }
+  },
+  {
+    "id": "q12",
+    "name": "12 · Riset seeds",
+    "objectives": [
+      {
+        "kind": "research",
+        "target": "seeds",
+        "count": 1
+      }
+    ],
+    "prerequisites": [
+      "q11"
+    ],
+    "rewards": {
+      "money": 1970,
+      "xp": 430
+    }
+  },
+  {
+    "id": "q13",
+    "name": "13 · Bangun Kandang Ayam",
+    "objectives": [
+      {
+        "kind": "build",
+        "target": "chicken",
+        "count": 1
+      }
+    ],
+    "prerequisites": [
+      "q12"
+    ],
+    "rewards": {
+      "money": 2090,
+      "xp": 460
+    }
+  },
+  {
+    "id": "q14",
+    "name": "14 · Produksi egg",
+    "objectives": [
+      {
+        "kind": "produce",
+        "target": "egg",
+        "count": 4
+      }
+    ],
+    "prerequisites": [
+      "q13"
+    ],
+    "rewards": {
+      "money": 2210,
+      "xp": 490
+    }
+  },
+  {
+    "id": "q15",
+    "name": "15 · Bangun Sekolah",
+    "objectives": [
+      {
+        "kind": "build",
+        "target": "school",
+        "count": 1
+      }
+    ],
+    "prerequisites": [
+      "q14"
+    ],
+    "rewards": {
+      "money": 2330,
+      "xp": 520
+    }
+  },
+  {
+    "id": "q16",
+    "name": "16 · Bangun Puskesmas",
+    "objectives": [
+      {
+        "kind": "build",
+        "target": "clinic",
+        "count": 1
+      }
+    ],
+    "prerequisites": [
+      "q15"
+    ],
+    "rewards": {
+      "money": 2450,
+      "xp": 550
+    }
+  },
+  {
+    "id": "q17",
+    "name": "17 · Jual rice",
+    "objectives": [
+      {
+        "kind": "sell",
+        "target": "rice",
+        "count": 10
+      }
+    ],
+    "prerequisites": [
+      "q16"
+    ],
+    "rewards": {
+      "money": 2570,
+      "xp": 580
+    }
+  },
+  {
+    "id": "q18",
+    "name": "18 · Perluas any",
+    "objectives": [
+      {
+        "kind": "expand",
+        "target": "any",
+        "count": 1
+      }
+    ],
+    "prerequisites": [
+      "q17"
+    ],
+    "rewards": {
+      "money": 2690,
+      "xp": 610
+    }
+  },
+  {
+    "id": "q19",
+    "name": "19 · Riset irrigation",
+    "objectives": [
+      {
+        "kind": "research",
+        "target": "irrigation",
+        "count": 1
+      }
+    ],
+    "prerequisites": [
+      "q18"
+    ],
+    "rewards": {
+      "money": 2810,
+      "xp": 640
+    }
+  },
+  {
+    "id": "q20",
+    "name": "20 · Bangun Pasar Tradisional",
+    "objectives": [
+      {
+        "kind": "build",
+        "target": "market",
+        "count": 1
+      }
+    ],
+    "prerequisites": [
+      "q19"
+    ],
+    "rewards": {
+      "money": 2930,
+      "xp": 670
+    }
+  },
+  {
+    "id": "q21",
+    "name": "21 · Penduduk any",
+    "objectives": [
+      {
+        "kind": "population",
+        "target": "any",
+        "count": 100
+      }
+    ],
+    "prerequisites": [
+      "q20"
+    ],
+    "rewards": {
+      "money": 3050,
+      "xp": 700
+    }
+  }
+]
