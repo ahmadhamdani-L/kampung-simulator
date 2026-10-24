@@ -9,22 +9,66 @@ var target_zoom := 0.85
 var hover := Vector2i(-1,-1)
 var placement := ""
 var overlay := false
+var overlay_kind := "road"
 var dragging := false
 var moved := false
 var press := Vector2.ZERO
 var fingers: Dictionary = {}
 var clock := 0.0
 var font := ThemeDB.fallback_font
+var terrain_chunks: Array[Node2D] = []
+var cached_land := -1
+var route_hash := 0
+var routes: Array = []
+
+func _ready() -> void:
+	for x in range(5):
+		for y in range(5):
+			var node := VillageTerrainChunk.new()
+			node.sim = sim
+			node.chunk = Vector2i(x,y)
+			node.show_behind_parent = true
+			add_child(node)
+			terrain_chunks.append(node)
 
 func _process(dt: float) -> void:
 	clock += dt
 	zoom_factor = lerpf(zoom_factor,target_zoom,minf(1,dt*12))
+	for chunk in terrain_chunks:
+		chunk.position = pan
+		chunk.scale = Vector2.ONE*zoom_factor
+		if cached_land!=int(sim.state.land): chunk.queue_redraw()
+	cached_land = int(sim.state.land)
+	var current_hash := hash([sim.road_access,sim.state.buildings.size()])
+	if current_hash!=route_hash:
+		routes.clear()
+		var roads: Array = sim.road_access.keys()
+		for i in range(mini(12,roads.size())):
+			var destinations: Array = []
+			var purpose: String = ["rumah","niaga","tani","industri"][i%4]
+			for b in sim.state.buildings:
+				if sim.content.buildings[b.type].category==purpose: destinations.append(b)
+			var destination: Vector2i = roads[(i*3+roads.size()-1)%roads.size()]
+			if not destinations.is_empty():
+				var target: Dictionary = destinations[i%destinations.size()]
+				var best := 100000
+				for cell in roads:
+					var delta: Vector2i = cell-Vector2i(int(target.x),int(target.y))
+					var distance := absi(delta.x)+absi(delta.y)
+					if distance<best:
+						best = distance
+						destination = cell
+			routes.append(VillagePathfinder.find_path(roads[i],destination,sim.road_access))
+		route_hash = current_hash
+	var night := maxf(0.0,sin(float(sim.state.time)/120.0*TAU-PI*0.5))
+	modulate = Color(1.0-night*0.35,1.0-night*0.28,1.0-night*0.12)
 	queue_redraw()
 
 func world_point(p: Vector2) -> Vector2:
 	return (p-pan)/zoom_factor
 
 func _unhandled_input(event: InputEvent) -> void:
+	if event is InputEventMouse and event.device == -1: return
 	if event is InputEventMouseButton:
 		if event.button_index==MOUSE_BUTTON_WHEEL_UP and event.pressed: target_zoom = clampf(target_zoom*1.12,0.3,1.7)
 		if event.button_index==MOUSE_BUTTON_WHEEL_DOWN and event.pressed: target_zoom = clampf(target_zoom/1.12,0.3,1.7)
@@ -54,7 +98,8 @@ func _unhandled_input(event: InputEvent) -> void:
 		if fingers.size()==2:
 			var keys: Array = fingers.keys()
 			var other: Vector2 = fingers[keys[1] if keys[0]==event.index else keys[0]]
-			var old_distance: float = event.position.distance_to(other)-event.relative.dot((event.position-other).normalized())
+			var old_position: Vector2 = fingers.get(event.index,event.position-event.relative)
+			var old_distance: float = old_position.distance_to(other)
 			if old_distance>10: target_zoom = clampf(target_zoom*event.position.distance_to(other)/old_distance,0.3,1.7)
 		else: pan += event.relative
 		fingers[event.index] = event.position
@@ -71,37 +116,48 @@ func _draw() -> void:
 	if sim==null: return
 	draw_set_transform(pan,0,Vector2.ONE*zoom_factor)
 	var size := int(sim.content.balance.map_size)
-	for diagonal in range(size*2):
-		for x in range(maxi(0,diagonal-size+1),mini(size,diagonal+1)):
-			var y := diagonal-x
-			var p := sim.grid_to_iso(Vector2(x,y))
-			var variation := float(posmod(x*17+y*31,7))*0.009
-			var color := Color(0.37+variation,0.57+variation,0.32+variation)
-			if sim.terrain(Vector2i(x,y))=="water": color = Color(0.22,0.55+variation,0.64)
-			if x>=int(sim.state.land) or y>=int(sim.state.land): color = color.darkened(0.42)
-			diamond(p,color)
-			if (x+y)%3==0 and sim.terrain(Vector2i(x,y))=="grass":
-				draw_line(p+Vector2(-7,1),p+Vector2(-4,-3),color.lightened(0.1),1)
-			if x==int(sim.state.land)-1 or y==int(sim.state.land)-1:
-				draw_line(p+Vector2(48,0),p+Vector2(0,24),Color(0.9,0.78,0.46,0.5),2)
+	if overlay and overlay_kind!="road":
+		for x in range(int(sim.state.land)):
+			for y in range(int(sim.state.land)):
+				if sim.infrastructure.coverage(Vector2i(x,y),overlay_kind)>0:
+					diamond(sim.grid_to_iso(Vector2(x,y)),Color(0.2,0.8,0.85,0.24))
 	var ordered: Array = sim.state.buildings.duplicate()
 	ordered.sort_custom(func(a: Dictionary,b: Dictionary) -> bool: return int(a.x)+int(a.y)<int(b.x)+int(b.y))
-	for b in ordered:
-		draw_building(b)
-	# Sparse ambient scenery is deterministic and has no independent simulation brains.
-	for i in range(65):
+	for i in range(85):
 		var cell := Vector2i(posmod(i*7+2,38),posmod(i*13+3,38))
-		if cell.x<16 and cell.y<16: continue
+		if cell.x<12 and cell.y<12: continue
 		if sim.terrain(cell)!="grass" or not sim.building_at(cell).is_empty(): continue
-		var p := sim.grid_to_iso(cell)
-		draw_line(p,p-Vector2(0,35),Color("81644a"),5)
-		for j in range(3): draw_circle(p+Vector2((j-1)*11,-35-abs(j-1)*3),15,Color("356747").lightened(j*0.03))
+		ordered.append({"x":cell.x,"y":cell.y,"decoration":true,"palm":i%3==0})
+	ordered.sort_custom(func(a: Dictionary,b: Dictionary) -> bool: return int(a.x)+int(a.y)<int(b.x)+int(b.y))
+	for b in ordered:
+		if not b.get("decoration",false):
+			draw_building(b)
+			continue
+		var p := sim.grid_to_iso(Vector2(int(b.x),int(b.y)))
+		draw_line(p,p-Vector2(0,38),Color("81644a"),4)
+		if b.palm:
+			for j in range(5):
+				var angle := float(j)*TAU/5.0+0.4
+				var tip := p+Vector2(cos(angle)*26,-38+sin(angle)*12)
+				draw_line(p-Vector2(0,38),tip,Color("7eab56"),5)
+				draw_line(tip,tip+Vector2(0,6),Color("4a854b"),3)
+		else:
+			for j in range(3): draw_circle(p+Vector2((j-1)*11,-35-abs(j-1)*3),15,Color("356747").lightened(j*0.03))
 	if not bool(sim.state.settings.get("reduced_motion",false)):
-		for i in range(mini(12,int(sim.state.population))):
-			var t := fmod(clock*0.28+i*0.7,5.0)
-			var p := sim.grid_to_iso(Vector2(6+t,8))
+		for i in range(mini(routes.size(),int(sim.state.population))):
+			var path: Array = routes[i]
+			if path.is_empty(): continue
+			# Alternate purposeful trips and a brief idle at each endpoint.
+			var trip := maxf(1.0,float(path.size()-1))
+			var phase := fmod(clock*0.65+i*0.7,trip*2.0+2.0)
+			var distance := clampf(phase if phase<=trip+1.0 else trip*2.0+1.0-phase,0.0,trip)
+			var first := mini(path.size()-1,int(distance))
+			var last := mini(path.size()-1,first+1)
+			var cell := Vector2(path[first]).lerp(Vector2(path[last]),fmod(distance,1.0))
+			var p := sim.grid_to_iso(cell)
 			draw_circle(p+Vector2(0,-8),3.0,Color("ebbd8c"))
 			draw_line(p+Vector2(0,-5),p+Vector2(0,2),[Color("efc369"),Color("d86f50"),Color("e7eee0")][i%3],4)
+
 			if not sim.state.event.is_empty() and sim.state.event.id=="rain":
 				for j in range(80):
 					var p2 := Vector2(posmod(j*137,2000)-1000,fmod(clock*350+j*73,1300))
@@ -166,7 +222,8 @@ func draw_building(b: Dictionary) -> void:
 		draw_line(p+Vector2(-w,-8),p+Vector2(w,-8),Color("ead681"),4)
 		draw_string(font,p+Vector2(-24,-75),"%ds"%ceili(b.construction),HORIZONTAL_ALIGNMENT_LEFT,-1,16,Color("fff4cf"))
 	if overlay:
-		diamond(p,Color(0.2,0.85,0.6,0.4) if sim.connected(b) else Color(0.95,0.3,0.2,0.5),w+5,w*0.5+3)
+		var covered: bool = sim.connected(b) if overlay_kind=="road" else sim.infrastructure.coverage(Vector2i(int(b.x),int(b.y)),overlay_kind)>0
+		diamond(p,Color(0.2,0.85,0.6,0.4) if covered else Color(0.95,0.3,0.2,0.5),w+5,w*0.5+3)
 
 func draw_ellipse_shadow(p: Vector2, width: float) -> void:
 	draw_set_transform(pan+(p+Vector2(0,12))*zoom_factor,0,Vector2(zoom_factor,zoom_factor*0.45))

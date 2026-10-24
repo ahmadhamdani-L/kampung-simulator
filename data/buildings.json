@@ -2,7 +2,7 @@
   "bamboo": {
     "id": "bamboo",
     "name": "Rumah Bambu",
-    "name_en": "Bamboo",
+    "name_en": "Bamboo house",
     "description": "Rumah Bambu meningkatkan kapasitas dan produktivitas kampung.",
     "category": "rumah",
     "price": 630,
@@ -21,12 +21,13 @@
     "upgrade_levels": 5,
     "sprite": "procedural://rumah",
     "production": {},
-    "storage": 0
+    "storage": 0,
+    "description_en": "Bamboo house adds village capacity and productivity. Connect it to the village road network to activate its effects."
   },
   "wood_house": {
     "id": "wood_house",
     "name": "Rumah Kayu",
-    "name_en": "Wood House",
+    "name_en": "Timber house",
     "description": "Rumah Kayu meningkatkan kapasitas dan produktivitas kampung.",
     "category": "rumah",
     "price": 1090,
@@ -45,12 +46,13 @@
     "upgrade_levels": 5,
     "sprite": "procedural://rumah",
     "production": {},
-    "storage": 0
+    "storage": 0,
+    "description_en": "Timber house adds village capacity and productivity. Connect it to the village road network to activate its effects."
   },
   "simple_house": {
     "id": "simple_house",
     "name": "Rumah Sederhana",
-    "name_en": "Simple House",
+    "name_en": "Simple house",
     "description": "Rumah Sederhana meningkatkan kapasitas dan produktivitas kampung.",
     "category": "rumah",
     "price": 2090,
@@ -69,12 +71,13 @@
     "upgrade_levels": 5,
     "sprite": "procedural://rumah",
     "production": {},
-    "storage": 0
+    "storage": 0,
+    "description_en": "Simple house adds village capacity and productivity. Connect it to the village road network to activate its effects."
   },
   "permanent": {
     "id": "permanent",
     "name": "Rumah Permanen",
-    "name_en": "Permanent",
+    "name_en": "Brick house",
     "description": "Rumah Permanen meningkatkan kapasitas dan produktivitas kampung.",
     "category": "rumah",
     "price": 3450,
@@ -96,12 +99,13 @@
     "upgrade_levels": 5,
     "sprite": "procedural://rumah",
     "production": {},
-    "storage": 0
+    "storage": 0,
+    "description_en": "Brick house adds village capacity and productivity. Connect it to the village road network to activate its effects."
   },
   "housing": {
     "id": "housing",
     "name": "Perumahan",
-    "name_en": "Housing",
+    "name_en": "Housing estate",
     "description": "Perumahan meningkatkan kapasitas dan produktivitas kampung.",
     "category": "rumah",
     "price": 7150,
@@ -123,7 +127,8 @@
     "upgrade_levels": 5,
     "sprite": "procedural://rumah",
     "production": {},
-    "storage": 0
+    "storage": 0,
+    "description_en": "Housing estate adds village capacity and productivity. Connect it to the village road network to activate its effects."
   },
   "apartment": {
     "id": "apartment",
@@ -150,12 +155,13 @@
     "upgrade_levels": 5,
     "sprite": "procedural://rumah",
     "production": {},
-    "storage": 0
+    "storage": 0,
+    "description_en": "Apartment adds village capacity and productivity. Connect it to the village road network to activate its effects."
   },
   "condo": {
     "id": "condo",
     "name": "Kondominium",
-    "name_en": "Condo",
+    "name_en": "Condominium",
     "description": "Kondominium meningkatkan kapasitas dan produktivitas kampung.",
     "category": "rumah",
     "price": 33450,
@@ -177,12 +183,13 @@
     "upgrade_levels": 5,
     "sprite": "procedural://rumah",
     "production": {},
-    "storage": 0
+    "storage": 0,
+    "description_en": "Condominium adds village capacity and productivity. Connect it to the village road network to activate its effects."
   },
   "rice_field": {
     "id": "rice_field",
     "name": "Sawah",
-    "name_en": "Rice Field",
+    "name_en": "Rice paddy",
     "description": "Sawah meningkatkan kapasitas dan produktivitas kampung.",
     "category": "tani",
     "price": 630,
@@ -201,12 +208,13 @@
     "upgrade_levels": 5,
     "sprite": "procedural://tani",
     "production": {},
-    "storage": 0
+    "storage": 0,
+    "description_en": "Rice paddy adds village capacity and productivity. Connect it to the village road network to activate its effects."
   },
   "corn_field": {
     "id": "corn_field",
     "name": "Kebun Jagung",
-    "name_en": "Corn Field",
+    "name_en": "Corn field",
     "description": "Kebun Jagung meningkatkan kapasitas dan produktivitas kampung.",
     "category": "tani",
     "price": 910,
@@ -225,12 +233,13 @@
     "upgrade_levels": 5,
     "sprite": "procedural://tani",
     "production": {},
-    "storage": 0
+    "storage": 0,
+    "description_en": "Corn field adds village capacity and productivity. Connect it to the village road network to activate its effects."
   },
   "chili_field": {
     "id": "chili_field",
     "name": "Kebun Cabai",
-    "name_en": "Chili Field",
+    "name_en": "Chili garden",
     "description": "Kebun Cabai meningkatkan kapasitas dan produktivitas kampung.",
     "category": "tani",
     "price": 1370,
@@ -249,12 +258,13 @@
     "upgrade_levels": 5,
     "sprite": "procedural://tani",
     "production": {},
-    "storage": 0
+    "storage": 0,
+    "description_en": "Chili garden adds village capacity and productivity. Connect it to the village road network to activate its effects."
   },
   "cassava_field": {
     "id": "cassava_field",
     "name": "Kebun Singkong",
-    "name_en": "Cassava Field",
+    "name_en": "Cassava field",
     "description": "Kebun Singkong meningkatkan kapasitas dan produktivitas kampung.",
     "category": "tani",
     "price": 1830,
@@ -273,12 +283,13 @@
     "upgrade_levels": 5,
     "sprite": "procedural://tani",
     "production": {},
-    "storage": 0
+    "storage": 0,
+    "description_en": "Cassava field adds village capacity and productivity. Connect it to the village road network to activate its effects."
   },
   "banana_field": {
     "id": "banana_field",
     "name": "Kebun Pisang",
-    "name_en": "Banana Field",
+    "name_en": "Banana plantation",
     "description": "Kebun Pisang meningkatkan kapasitas dan produktivitas kampung.",
     "category": "tani",
     "price": 2650,
@@ -300,12 +311,13 @@
     "upgrade_levels": 5,
     "sprite": "procedural://tani",
     "production": {},
-    "storage": 0
+    "storage": 0,
+    "description_en": "Banana plantation adds village capacity and productivity. Connect it to the village road network to activate its effects."
   },
   "coconut_field": {
     "id": "coconut_field",
     "name": "Kebun Kelapa",
-    "name_en": "Coconut Field",
+    "name_en": "Coconut grove",
     "description": "Kebun Kelapa meningkatkan kapasitas dan produktivitas kampung.",
     "category": "tani",
     "price": 3650,
@@ -327,12 +339,13 @@
     "upgrade_levels": 5,
     "sprite": "procedural://tani",
     "production": {},
-    "storage": 0
+    "storage": 0,
+    "description_en": "Coconut grove adds village capacity and productivity. Connect it to the village road network to activate its effects."
   },
   "coffee_field": {
     "id": "coffee_field",
     "name": "Kebun Kopi",
-    "name_en": "Coffee Field",
+    "name_en": "Coffee plantation",
     "description": "Kebun Kopi meningkatkan kapasitas dan produktivitas kampung.",
     "category": "tani",
     "price": 6450,
@@ -354,12 +367,13 @@
     "upgrade_levels": 5,
     "sprite": "procedural://tani",
     "production": {},
-    "storage": 0
+    "storage": 0,
+    "description_en": "Coffee plantation adds village capacity and productivity. Connect it to the village road network to activate its effects."
   },
   "chicken": {
     "id": "chicken",
     "name": "Kandang Ayam",
-    "name_en": "Chicken",
+    "name_en": "Chicken coop",
     "description": "Kandang Ayam meningkatkan kapasitas dan produktivitas kampung.",
     "category": "ternak",
     "price": 990,
@@ -378,12 +392,13 @@
     "upgrade_levels": 5,
     "sprite": "procedural://ternak",
     "production": {},
-    "storage": 0
+    "storage": 0,
+    "description_en": "Chicken coop adds village capacity and productivity. Connect it to the village road network to activate its effects."
   },
   "duck": {
     "id": "duck",
     "name": "Peternakan Bebek",
-    "name_en": "Duck",
+    "name_en": "Duck farm",
     "description": "Peternakan Bebek meningkatkan kapasitas dan produktivitas kampung.",
     "category": "ternak",
     "price": 1990,
@@ -402,12 +417,13 @@
     "upgrade_levels": 5,
     "sprite": "procedural://ternak",
     "production": {},
-    "storage": 0
+    "storage": 0,
+    "description_en": "Duck farm adds village capacity and productivity. Connect it to the village road network to activate its effects."
   },
   "goat": {
     "id": "goat",
     "name": "Peternakan Kambing",
-    "name_en": "Goat",
+    "name_en": "Goat farm",
     "description": "Peternakan Kambing meningkatkan kapasitas dan produktivitas kampung.",
     "category": "ternak",
     "price": 2810,
@@ -429,12 +445,13 @@
     "upgrade_levels": 5,
     "sprite": "procedural://ternak",
     "production": {},
-    "storage": 0
+    "storage": 0,
+    "description_en": "Goat farm adds village capacity and productivity. Connect it to the village road network to activate its effects."
   },
   "cow": {
     "id": "cow",
     "name": "Peternakan Sapi",
-    "name_en": "Cow",
+    "name_en": "Dairy farm",
     "description": "Peternakan Sapi meningkatkan kapasitas dan produktivitas kampung.",
     "category": "ternak",
     "price": 4350,
@@ -456,12 +473,13 @@
     "upgrade_levels": 5,
     "sprite": "procedural://ternak",
     "production": {},
-    "storage": 0
+    "storage": 0,
+    "description_en": "Dairy farm adds village capacity and productivity. Connect it to the village road network to activate its effects."
   },
   "catfish": {
     "id": "catfish",
     "name": "Kolam Lele",
-    "name_en": "Catfish",
+    "name_en": "Catfish pond",
     "description": "Kolam Lele meningkatkan kapasitas dan produktivitas kampung.",
     "category": "ternak",
     "price": 2290,
@@ -480,12 +498,13 @@
     "upgrade_levels": 5,
     "sprite": "procedural://ternak",
     "production": {},
-    "storage": 0
+    "storage": 0,
+    "description_en": "Catfish pond adds village capacity and productivity. Connect it to the village road network to activate its effects."
   },
   "tilapia": {
     "id": "tilapia",
     "name": "Kolam Nila",
-    "name_en": "Tilapia",
+    "name_en": "Tilapia pond",
     "description": "Kolam Nila meningkatkan kapasitas dan produktivitas kampung.",
     "category": "ternak",
     "price": 3650,
@@ -507,12 +526,13 @@
     "upgrade_levels": 5,
     "sprite": "procedural://ternak",
     "production": {},
-    "storage": 0
+    "storage": 0,
+    "description_en": "Tilapia pond adds village capacity and productivity. Connect it to the village road network to activate its effects."
   },
   "warung": {
     "id": "warung",
     "name": "Warung",
-    "name_en": "Warung",
+    "name_en": "Village stall",
     "description": "Warung meningkatkan kapasitas dan produktivitas kampung.",
     "category": "niaga",
     "price": 630,
@@ -531,12 +551,13 @@
     "upgrade_levels": 5,
     "sprite": "procedural://niaga",
     "production": {},
-    "storage": 0
+    "storage": 0,
+    "description_en": "Village stall adds village capacity and productivity. Connect it to the village road network to activate its effects."
   },
   "shop": {
     "id": "shop",
     "name": "Toko Kelontong",
-    "name_en": "Shop",
+    "name_en": "Grocery shop",
     "description": "Toko Kelontong meningkatkan kapasitas dan produktivitas kampung.",
     "category": "niaga",
     "price": 1450,
@@ -555,12 +576,13 @@
     "upgrade_levels": 5,
     "sprite": "procedural://niaga",
     "production": {},
-    "storage": 0
+    "storage": 0,
+    "description_en": "Grocery shop adds village capacity and productivity. Connect it to the village road network to activate its effects."
   },
   "market": {
     "id": "market",
     "name": "Pasar Tradisional",
-    "name_en": "Market",
+    "name_en": "Traditional market",
     "description": "Pasar Tradisional meningkatkan kapasitas dan produktivitas kampung.",
     "category": "niaga",
     "price": 2450,
@@ -582,12 +604,13 @@
     "upgrade_levels": 5,
     "sprite": "procedural://niaga",
     "production": {},
-    "storage": 0
+    "storage": 0,
+    "description_en": "Traditional market adds village capacity and productivity. Connect it to the village road network to activate its effects."
   },
   "minimarket": {
     "id": "minimarket",
     "name": "Minimarket",
-    "name_en": "Minimarket",
+    "name_en": "Convenience store",
     "description": "Minimarket meningkatkan kapasitas dan produktivitas kampung.",
     "category": "niaga",
     "price": 5250,
@@ -609,7 +632,8 @@
     "upgrade_levels": 5,
     "sprite": "procedural://niaga",
     "production": {},
-    "storage": 0
+    "storage": 0,
+    "description_en": "Convenience store adds village capacity and productivity. Connect it to the village road network to activate its effects."
   },
   "supermarket": {
     "id": "supermarket",
@@ -636,7 +660,8 @@
     "upgrade_levels": 5,
     "sprite": "procedural://niaga",
     "production": {},
-    "storage": 0
+    "storage": 0,
+    "description_en": "Supermarket adds village capacity and productivity. Connect it to the village road network to activate its effects."
   },
   "restaurant": {
     "id": "restaurant",
@@ -663,7 +688,8 @@
     "upgrade_levels": 5,
     "sprite": "procedural://niaga",
     "production": {},
-    "storage": 0
+    "storage": 0,
+    "description_en": "Restaurant adds village capacity and productivity. Connect it to the village road network to activate its effects."
   },
   "hotel": {
     "id": "hotel",
@@ -690,12 +716,13 @@
     "upgrade_levels": 5,
     "sprite": "procedural://niaga",
     "production": {},
-    "storage": 0
+    "storage": 0,
+    "description_en": "Hotel adds village capacity and productivity. Connect it to the village road network to activate its effects."
   },
   "mill": {
     "id": "mill",
     "name": "Penggilingan Padi",
-    "name_en": "Mill",
+    "name_en": "Rice mill",
     "description": "Penggilingan Padi meningkatkan kapasitas dan produktivitas kampung.",
     "category": "industri",
     "price": 1350,
@@ -716,12 +743,13 @@
     "production": {
       "rice": 3
     },
-    "storage": 0
+    "storage": 0,
+    "description_en": "Rice mill adds village capacity and productivity. Connect it to the village road network to activate its effects."
   },
   "tofu_factory": {
     "id": "tofu_factory",
     "name": "Pabrik Tahu",
-    "name_en": "Tofu Factory",
+    "name_en": "Tofu factory",
     "description": "Pabrik Tahu meningkatkan kapasitas dan produktivitas kampung.",
     "category": "industri",
     "price": 2710,
@@ -745,12 +773,13 @@
     "production": {
       "tofu": 4
     },
-    "storage": 0
+    "storage": 0,
+    "description_en": "Tofu factory adds village capacity and productivity. Connect it to the village road network to activate its effects."
   },
   "tempe_factory": {
     "id": "tempe_factory",
     "name": "Pabrik Tempe",
-    "name_en": "Tempe Factory",
+    "name_en": "Tempe factory",
     "description": "Pabrik Tempe meningkatkan kapasitas dan produktivitas kampung.",
     "category": "industri",
     "price": 3350,
@@ -774,12 +803,13 @@
     "production": {
       "tempe": 4
     },
-    "storage": 0
+    "storage": 0,
+    "description_en": "Tempe factory adds village capacity and productivity. Connect it to the village road network to activate its effects."
   },
   "flour_factory": {
     "id": "flour_factory",
     "name": "Pabrik Tepung",
-    "name_en": "Flour Factory",
+    "name_en": "Flour mill",
     "description": "Pabrik Tepung meningkatkan kapasitas dan produktivitas kampung.",
     "category": "industri",
     "price": 4350,
@@ -803,12 +833,13 @@
     "production": {
       "flour": 4
     },
-    "storage": 0
+    "storage": 0,
+    "description_en": "Flour mill adds village capacity and productivity. Connect it to the village road network to activate its effects."
   },
   "food_factory": {
     "id": "food_factory",
     "name": "Pabrik Makanan",
-    "name_en": "Food Factory",
+    "name_en": "Food factory",
     "description": "Pabrik Makanan meningkatkan kapasitas dan produktivitas kampung.",
     "category": "industri",
     "price": 8050,
@@ -832,7 +863,8 @@
     "production": {
       "food": 4
     },
-    "storage": 0
+    "storage": 0,
+    "description_en": "Food factory adds village capacity and productivity. Connect it to the village road network to activate its effects."
   },
   "warehouse": {
     "id": "warehouse",
@@ -856,12 +888,13 @@
     "upgrade_levels": 5,
     "sprite": "procedural://industri",
     "production": {},
-    "storage": 500
+    "storage": 500,
+    "description_en": "Warehouse adds village capacity and productivity. Connect it to the village road network to activate its effects."
   },
   "industrial": {
     "id": "industrial",
     "name": "Kawasan Industri",
-    "name_en": "Industrial",
+    "name_en": "Industrial district",
     "description": "Kawasan Industri meningkatkan kapasitas dan produktivitas kampung.",
     "category": "industri",
     "price": 20850,
@@ -883,7 +916,8 @@
     "upgrade_levels": 5,
     "sprite": "procedural://industri",
     "production": {},
-    "storage": 0
+    "storage": 0,
+    "description_en": "Industrial district adds village capacity and productivity. Connect it to the village road network to activate its effects."
   },
   "sawmill": {
     "id": "sawmill",
@@ -909,7 +943,8 @@
     "production": {
       "planks": 4
     },
-    "storage": 0
+    "storage": 0,
+    "description_en": "Sawmill adds village capacity and productivity. Connect it to the village road network to activate its effects."
   },
   "school": {
     "id": "school",
@@ -933,12 +968,13 @@
     "upgrade_levels": 5,
     "sprite": "procedural://layanan",
     "production": {},
-    "storage": 0
+    "storage": 0,
+    "description_en": "School adds village capacity and productivity. Connect it to the village road network to activate its effects."
   },
   "clinic": {
     "id": "clinic",
     "name": "Puskesmas",
-    "name_en": "Clinic",
+    "name_en": "Village clinic",
     "description": "Puskesmas meningkatkan kapasitas dan produktivitas kampung.",
     "category": "layanan",
     "price": 1630,
@@ -957,7 +993,8 @@
     "upgrade_levels": 5,
     "sprite": "procedural://layanan",
     "production": {},
-    "storage": 0
+    "storage": 0,
+    "description_en": "Village clinic adds village capacity and productivity. Connect it to the village road network to activate its effects."
   },
   "hospital": {
     "id": "hospital",
@@ -984,12 +1021,13 @@
     "upgrade_levels": 5,
     "sprite": "procedural://layanan",
     "production": {},
-    "storage": 0
+    "storage": 0,
+    "description_en": "Hospital adds village capacity and productivity. Connect it to the village road network to activate its effects."
   },
   "hall": {
     "id": "hall",
     "name": "Kantor Desa",
-    "name_en": "Hall",
+    "name_en": "Village hall",
     "description": "Kantor Desa meningkatkan kapasitas dan produktivitas kampung.",
     "category": "layanan",
     "price": 930,
@@ -1008,12 +1046,13 @@
     "upgrade_levels": 5,
     "sprite": "procedural://layanan",
     "production": {},
-    "storage": 0
+    "storage": 0,
+    "description_en": "Village hall adds village capacity and productivity. Connect it to the village road network to activate its effects."
   },
   "police": {
     "id": "police",
     "name": "Kantor Polisi",
-    "name_en": "Police",
+    "name_en": "Police station",
     "description": "Kantor Polisi meningkatkan kapasitas dan produktivitas kampung.",
     "category": "layanan",
     "price": 3550,
@@ -1035,12 +1074,13 @@
     "upgrade_levels": 5,
     "sprite": "procedural://layanan",
     "production": {},
-    "storage": 0
+    "storage": 0,
+    "description_en": "Police station adds village capacity and productivity. Connect it to the village road network to activate its effects."
   },
   "fire": {
     "id": "fire",
     "name": "Pemadam Kebakaran",
-    "name_en": "Fire",
+    "name_en": "Fire station",
     "description": "Pemadam Kebakaran meningkatkan kapasitas dan produktivitas kampung.",
     "category": "layanan",
     "price": 5450,
@@ -1062,12 +1102,13 @@
     "upgrade_levels": 5,
     "sprite": "procedural://layanan",
     "production": {},
-    "storage": 0
+    "storage": 0,
+    "description_en": "Fire station adds village capacity and productivity. Connect it to the village road network to activate its effects."
   },
   "park": {
     "id": "park",
     "name": "Taman Kota",
-    "name_en": "Park",
+    "name_en": "City park",
     "description": "Taman Kota meningkatkan kapasitas dan produktivitas kampung.",
     "category": "layanan",
     "price": 1410,
@@ -1086,7 +1127,8 @@
     "upgrade_levels": 5,
     "sprite": "procedural://layanan",
     "production": {},
-    "storage": 0
+    "storage": 0,
+    "description_en": "City park adds village capacity and productivity. Connect it to the village road network to activate its effects."
   },
   "library": {
     "id": "library",
@@ -1113,12 +1155,13 @@
     "upgrade_levels": 5,
     "sprite": "procedural://layanan",
     "production": {},
-    "storage": 0
+    "storage": 0,
+    "description_en": "Library adds village capacity and productivity. Connect it to the village road network to activate its effects."
   },
   "road": {
     "id": "road",
     "name": "Jalan Tanah",
-    "name_en": "Road",
+    "name_en": "Dirt road",
     "description": "Jalan Tanah meningkatkan kapasitas dan produktivitas kampung.",
     "category": "jalan",
     "price": 80,
@@ -1137,12 +1180,13 @@
     "upgrade_levels": 5,
     "sprite": "procedural://jalan",
     "production": {},
-    "storage": 0
+    "storage": 0,
+    "description_en": "Dirt road adds village capacity and productivity. Connect it to the village road network to activate its effects."
   },
   "asphalt": {
     "id": "asphalt",
     "name": "Jalan Aspal",
-    "name_en": "Asphalt",
+    "name_en": "Asphalt road",
     "description": "Jalan Aspal meningkatkan kapasitas dan produktivitas kampung.",
     "category": "jalan",
     "price": 80,
@@ -1164,7 +1208,8 @@
     "upgrade_levels": 5,
     "sprite": "procedural://jalan",
     "production": {},
-    "storage": 0
+    "storage": 0,
+    "description_en": "Asphalt road adds village capacity and productivity. Connect it to the village road network to activate its effects."
   },
   "highway": {
     "id": "highway",
@@ -1191,7 +1236,8 @@
     "upgrade_levels": 5,
     "sprite": "procedural://jalan",
     "production": {},
-    "storage": 0
+    "storage": 0,
+    "description_en": "Highway adds village capacity and productivity. Connect it to the village road network to activate its effects."
   },
   "bridge": {
     "id": "bridge",
@@ -1218,12 +1264,13 @@
     "upgrade_levels": 5,
     "sprite": "procedural://jalan",
     "production": {},
-    "storage": 0
+    "storage": 0,
+    "description_en": "Bridge adds village capacity and productivity. Connect it to the village road network to activate its effects."
   },
   "terminal": {
     "id": "terminal",
     "name": "Terminal",
-    "name_en": "Terminal",
+    "name_en": "Bus terminal",
     "description": "Terminal meningkatkan kapasitas dan produktivitas kampung.",
     "category": "jalan",
     "price": 6250,
@@ -1245,12 +1292,13 @@
     "upgrade_levels": 5,
     "sprite": "procedural://jalan",
     "production": {},
-    "storage": 0
+    "storage": 0,
+    "description_en": "Bus terminal adds village capacity and productivity. Connect it to the village road network to activate its effects."
   },
   "station": {
     "id": "station",
     "name": "Stasiun",
-    "name_en": "Station",
+    "name_en": "Train station",
     "description": "Stasiun meningkatkan kapasitas dan produktivitas kampung.",
     "category": "jalan",
     "price": 15350,
@@ -1272,12 +1320,13 @@
     "upgrade_levels": 5,
     "sprite": "procedural://jalan",
     "production": {},
-    "storage": 0
+    "storage": 0,
+    "description_en": "Train station adds village capacity and productivity. Connect it to the village road network to activate its effects."
   },
   "power": {
     "id": "power",
     "name": "Pembangkit Listrik",
-    "name_en": "Power",
+    "name_en": "Power station",
     "description": "Pembangkit Listrik meningkatkan kapasitas dan produktivitas kampung.",
     "category": "jalan",
     "price": 4650,
@@ -1299,12 +1348,13 @@
     "upgrade_levels": 5,
     "sprite": "procedural://jalan",
     "production": {},
-    "storage": 0
+    "storage": 0,
+    "description_en": "Power station adds village capacity and productivity. Connect it to the village road network to activate its effects."
   },
   "water": {
     "id": "water",
     "name": "Pengolahan Air",
-    "name_en": "Water",
+    "name_en": "Water treatment",
     "description": "Pengolahan Air meningkatkan kapasitas dan produktivitas kampung.",
     "category": "jalan",
     "price": 2050,
@@ -1323,6 +1373,34 @@
     "upgrade_levels": 5,
     "sprite": "procedural://jalan",
     "production": {},
-    "storage": 0
+    "storage": 0,
+    "description_en": "Water treatment adds village capacity and productivity. Connect it to the village road network to activate its effects."
+  },
+  "feed_mill": {
+    "id": "feed_mill",
+    "name": "Pabrik Pakan",
+    "name_en": "Feed mill",
+    "description": "Mengolah jagung menjadi pakan untuk ternak.",
+    "category": "industri",
+    "price": 1500,
+    "resources": {},
+    "duration": 4,
+    "level": 4,
+    "footprint": [
+      2,
+      2
+    ],
+    "maintenance": 2,
+    "capacity": 0,
+    "jobs": 2,
+    "happiness": 0,
+    "road_required": true,
+    "upgrade_levels": 5,
+    "sprite": "procedural://industri",
+    "production": {
+      "feed": 6
+    },
+    "storage": 0,
+    "description_en": "Feed mill adds village capacity and productivity. Connect it to the village road network to activate its effects."
   }
 }

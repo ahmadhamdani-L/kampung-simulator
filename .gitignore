@@ -1,10 +1,14 @@
 .godot/
 .tools/
-build/
-android/build/
+/build/
+/android/build/
 .env
 *.keystore
 *.jks
 *.log
 .DS_Store
 export_credentials.cfg
+
+/android/.build_version
+
+/android/.gdignore

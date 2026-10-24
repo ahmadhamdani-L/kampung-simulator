@@ -5,3 +5,5 @@ Executed headless suite: grid round trips over all 1,600 cells, footprint bounds
 `tests/ui_smoke.gd` instantiates the real scene, opens all 11 panels, asserts content exists and captures a rendered frame. This verifies scene/resource wiring rather than human usability. Run with a display (or Xvfb); its frame-post-draw wait requires rendering.
 
 Before release: physical entry-level Android phone, install/start, airplane-mode farming/trading/reload, multitouch zoom and camera, notches/safe areas, language, TalkBack/readability, audio settings, 30 minute play, memory/thermal/FPS, repeated pause/resume, process kill during save, upgrade install and save migration. No physical device testing has yet been performed. Emulator results, if executed, are recorded separately in PROGRESS.md.
+
+Additional executed checks: malformed nested save types and unknown technologies, interrupted first-save recovery, crop moisture pause/watering, feed processing, occupancy invalidation, bounded local water/education coverage, disconnected service inactivity, shortest road paths and v2-to-v3 road access migration. Final suite: 2,378 checks.

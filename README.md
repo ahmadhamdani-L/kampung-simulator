@@ -9,9 +9,9 @@ Open `project.godot` in Godot 4.7.2 and press F6 on `scenes/game/game.tscn` (or 
 ## Implemented
 
 * 40×40 logical world, expandable owned land, multi-tile placement, construction and upgrades, roads and access graph.
-* 51 data-defined buildings, seven crops, six livestock producers, six processing recipes, warehouse and trading.
+* 52 data-defined buildings, seven crops, six livestock producers, seven processing recipes, warehouse and trading.
 * Integer currency and stock, prices, food, housing, workforce, taxes, maintenance, happiness, public services, water and power.
-* Seven technologies, 21 ordered quests, repeatable market contracts, eight achievements, 300 levels / seven eras, prestige.
+* Seven technologies, 28 ordered quests, repeatable market contracts, eight achievements, 300 levels / seven eras, prestige.
 * Seeded weather/events, local versioned atomic saves, backup recovery, migrations and capped offline progress.
 * Touch/desktop controls, 11 gameplay panels, Indonesian/English interface choices, audio settings and reduced motion.
 * Ad-free platform boundary with verified callback token/deduplication tests. No native advertising SDK bundled.

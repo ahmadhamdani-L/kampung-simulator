@@ -16,8 +16,10 @@ func _initialize() -> void:
 	economy_tests()
 	farm_tests()
 	population_tests()
+	infrastructure_tests()
 	progression_tests()
 	persistence_tests()
+	malformed_save_tests()
 	ads_tests()
 	long_simulation()
 	print("TEST RESULT: %d checks, %d failures"%[checks,failures])
@@ -106,6 +108,19 @@ func population_tests() -> void:
 	sim.recompute()
 	check(float(sim.state.happiness)>happiness,"food affects happiness")
 
+func infrastructure_tests() -> void:
+	fresh()
+	sim._add_building("water",Vector2i(10,9),true)
+	sim._add_building("school",Vector2i(13,7),true)
+	sim.recompute()
+	check(sim.infrastructure.coverage(Vector2i(8,9),"water")>0,"water coverage near source")
+	check(sim.infrastructure.coverage(Vector2i(35,35),"water")==0,"water radius bounded")
+	check(sim.infrastructure.coverage(Vector2i(7,7),"education")==0,"isolated service inactive")
+	sim._add_building("road",Vector2i(12,8),true)
+	sim.recompute()
+	check(sim.infrastructure.coverage(Vector2i(7,7),"education")>0,"connected service coverage")
+	check(int(sim.metrics.education)>20,"education affects residents")
+
 func progression_tests() -> void:
 	fresh()
 	check(sim.claim_quest("q01"),"first quest")
@@ -145,7 +160,12 @@ func persistence_tests() -> void:
 	check(saves.recovered,"recovery reported")
 	sim.state.version = 1
 	check(saves.save_game(sim,path),"v1 write")
-	check(saves.load_game(sim,path,false) and int(sim.state.version)==2,"schema migration")
+	check(saves.load_game(sim,path,false) and int(sim.state.version)==3,"schema migration")
+	sim.demolish(sim.building_at(Vector2i(5,8)))
+	sim.state.version = 2
+	check(saves.save_game(sim,path),"v2 migration fixture")
+	check(saves.load_game(sim,path,false),"v2 entrance migration")
+	check(sim.connected(sim.building_at(Vector2i(8,9))),"v2 access preserved on upgrade")
 	var invalid: Dictionary = sim.state.duplicate(true)
 	invalid.inventory.rice = -1
 	check(not saves.validate(invalid,sim),"negative inventory save rejected")
@@ -169,6 +189,52 @@ func persistence_tests() -> void:
 	check(saves.load_game(sim,path) and int(sim.state.offline_seconds)==0,"clock rollback safe")
 	for suffix in ["",".bak",".tmp"]:
 		if FileAccess.file_exists(path+suffix): DirAccess.remove_absolute(path+suffix)
+
+func malformed_save_tests() -> void:
+	fresh()
+	var saves := VillageSave.new()
+	for key in ["money","population","level","last_seen","inventory","buildings","research","quests","settings","counters","event"]:
+		var bad: Dictionary = sim.state.duplicate(true)
+		bad[key] = "malformed"
+		check(not saves.validate(bad,sim),"malformed field rejected: "+key)
+	for bad_value in [-1.0,0.5,"5",null]:
+		var bad: Dictionary = sim.state.duplicate(true)
+		bad.inventory.rice = bad_value
+		check(not saves.validate(bad,sim),"invalid stock type rejected")
+	var bad: Dictionary = sim.state.duplicate(true)
+	bad.buildings[0].x = "oops"
+	check(not saves.validate(bad,sim),"malformed building coordinate rejected")
+	bad = sim.state.duplicate(true)
+	bad.research = ["unregistered"]
+	check(not saves.validate(bad,sim),"unknown technology rejected")
+	var path := "user://test_interrupt.json"
+	var file := FileAccess.open(path+".tmp",FileAccess.WRITE)
+	file.store_string(JSON.stringify(sim.state))
+	file.close()
+	check(saves.load_game(sim,path,false) and saves.recovered,"interrupted first save recovered")
+	DirAccess.remove_absolute(path+".tmp")
+	var field := sim.building_at(Vector2i(8,9))
+	check(sim.plant(field),"dry field planting")
+	field.moisture = 0.0
+	sim.tick(5)
+	check(float(field.progress)==0,"dry crops pause")
+	check(sim.water_field(field),"manual watering")
+	sim.tick(2)
+	check(float(field.progress)>0,"water resumes crop growth")
+	check(sim.building_at(Vector2i(5,8)).type=="road","hall access road")
+	sim.demolish(sim.building_at(Vector2i(5,8)))
+	check(not sim.connected(field),"removing hall road disconnects farms")
+	check(sim.building_at(Vector2i(5,8)).is_empty(),"occupancy index invalidates")
+	fresh()
+	sim.state.level = 4
+	var mill := sim._add_building("feed_mill",Vector2i(10,9),true)
+	var initial_feed := int(sim.state.inventory.feed)
+	sim.tick(110)
+	check(int(sim.state.inventory.feed)>initial_feed,"corn-to-feed chain")
+	check(sim.grid.chunks.size()>0,"chunk index populated")
+	var walk_path := VillagePathfinder.find_path(Vector2i(5,8),Vector2i(11,8),sim.road_access)
+	check(walk_path.size()==7,"road path length")
+	check(VillagePathfinder.find_path(Vector2i(0,0),Vector2i(11,8),sim.road_access).is_empty(),"unwalkable endpoint rejected")
 
 func ads_tests() -> void:
 	var ads := VillageAds.new()

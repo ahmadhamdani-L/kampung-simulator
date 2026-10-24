@@ -13,7 +13,8 @@
     "rewards": {
       "money": 650,
       "xp": 100
-    }
+    },
+    "name_en": "01 · Build road"
   },
   {
     "id": "q02",
@@ -31,7 +32,8 @@
     "rewards": {
       "money": 770,
       "xp": 130
-    }
+    },
+    "name_en": "02 · Build rice field"
   },
   {
     "id": "q03",
@@ -49,7 +51,8 @@
     "rewards": {
       "money": 890,
       "xp": 160
-    }
+    },
+    "name_en": "03 · Harvest paddy"
   },
   {
     "id": "q04",
@@ -67,7 +70,8 @@
     "rewards": {
       "money": 1010,
       "xp": 190
-    }
+    },
+    "name_en": "04 · Sell paddy"
   },
   {
     "id": "q05",
@@ -85,7 +89,8 @@
     "rewards": {
       "money": 1130,
       "xp": 220
-    }
+    },
+    "name_en": "05 · Build bamboo"
   },
   {
     "id": "q06",
@@ -103,7 +108,8 @@
     "rewards": {
       "money": 1250,
       "xp": 250
-    }
+    },
+    "name_en": "06 · Population any"
   },
   {
     "id": "q07",
@@ -121,7 +127,8 @@
     "rewards": {
       "money": 1370,
       "xp": 280
-    }
+    },
+    "name_en": "07 · Build warung"
   },
   {
     "id": "q08",
@@ -139,7 +146,8 @@
     "rewards": {
       "money": 1490,
       "xp": 310
-    }
+    },
+    "name_en": "08 · Build park"
   },
   {
     "id": "q09",
@@ -157,7 +165,8 @@
     "rewards": {
       "money": 1610,
       "xp": 340
-    }
+    },
+    "name_en": "09 · Happiness any"
   },
   {
     "id": "q10",
@@ -175,7 +184,8 @@
     "rewards": {
       "money": 1730,
       "xp": 370
-    }
+    },
+    "name_en": "10 · Build mill"
   },
   {
     "id": "q11",
@@ -193,7 +203,8 @@
     "rewards": {
       "money": 1850,
       "xp": 400
-    }
+    },
+    "name_en": "11 · Produce rice"
   },
   {
     "id": "q12",
@@ -211,7 +222,8 @@
     "rewards": {
       "money": 1970,
       "xp": 430
-    }
+    },
+    "name_en": "12 · Research seeds"
   },
   {
     "id": "q13",
@@ -229,7 +241,8 @@
     "rewards": {
       "money": 2090,
       "xp": 460
-    }
+    },
+    "name_en": "13 · Build chicken"
   },
   {
     "id": "q14",
@@ -247,7 +260,8 @@
     "rewards": {
       "money": 2210,
       "xp": 490
-    }
+    },
+    "name_en": "14 · Produce egg"
   },
   {
     "id": "q15",
@@ -265,7 +279,8 @@
     "rewards": {
       "money": 2330,
       "xp": 520
-    }
+    },
+    "name_en": "15 · Build school"
   },
   {
     "id": "q16",
@@ -283,7 +298,8 @@
     "rewards": {
       "money": 2450,
       "xp": 550
-    }
+    },
+    "name_en": "16 · Build clinic"
   },
   {
     "id": "q17",
@@ -301,7 +317,8 @@
     "rewards": {
       "money": 2570,
       "xp": 580
-    }
+    },
+    "name_en": "17 · Sell rice"
   },
   {
     "id": "q18",
@@ -319,7 +336,8 @@
     "rewards": {
       "money": 2690,
       "xp": 610
-    }
+    },
+    "name_en": "18 · Expand any"
   },
   {
     "id": "q19",
@@ -337,7 +355,8 @@
     "rewards": {
       "money": 2810,
       "xp": 640
-    }
+    },
+    "name_en": "19 · Research irrigation"
   },
   {
     "id": "q20",
@@ -355,7 +374,8 @@
     "rewards": {
       "money": 2930,
       "xp": 670
-    }
+    },
+    "name_en": "20 · Build market"
   },
   {
     "id": "q21",
@@ -373,6 +393,245 @@
     "rewards": {
       "money": 3050,
       "xp": 700
+    },
+    "name_en": "21 · Population any"
+  },
+  {
+    "id": "era2",
+    "name": "Desa Berkembang",
+    "name_en": "Growing Village",
+    "objectives": [
+      {
+        "kind": "level",
+        "target": "any",
+        "count": 11
+      },
+      {
+        "kind": "population",
+        "target": "any",
+        "count": 20
+      },
+      {
+        "kind": "build",
+        "target": "market",
+        "count": 1
+      },
+      {
+        "kind": "happiness",
+        "target": "any",
+        "count": 70
+      }
+    ],
+    "prerequisites": [
+      "q21"
+    ],
+    "rewards": {
+      "money": 16500,
+      "xp": 1320
+    }
+  },
+  {
+    "id": "era3",
+    "name": "Desa Mandiri",
+    "name_en": "Independent Village",
+    "objectives": [
+      {
+        "kind": "level",
+        "target": "any",
+        "count": 31
+      },
+      {
+        "kind": "population",
+        "target": "any",
+        "count": 50
+      },
+      {
+        "kind": "build",
+        "target": "water",
+        "count": 1
+      },
+      {
+        "kind": "happiness",
+        "target": "any",
+        "count": 70
+      }
+    ],
+    "prerequisites": [
+      "era2"
+    ],
+    "rewards": {
+      "money": 46500,
+      "xp": 3720
+    }
+  },
+  {
+    "id": "era4",
+    "name": "Pusat Perdagangan",
+    "name_en": "Trading Center",
+    "objectives": [
+      {
+        "kind": "level",
+        "target": "any",
+        "count": 61
+      },
+      {
+        "kind": "population",
+        "target": "any",
+        "count": 100
+      },
+      {
+        "kind": "build",
+        "target": "supermarket",
+        "count": 1
+      },
+      {
+        "kind": "happiness",
+        "target": "any",
+        "count": 70
+      }
+    ],
+    "prerequisites": [
+      "era3"
+    ],
+    "rewards": {
+      "money": 91500,
+      "xp": 7320
+    }
+  },
+  {
+    "id": "era5",
+    "name": "Kota Industri",
+    "name_en": "Industrial City",
+    "objectives": [
+      {
+        "kind": "level",
+        "target": "any",
+        "count": 101
+      },
+      {
+        "kind": "population",
+        "target": "any",
+        "count": 180
+      },
+      {
+        "kind": "build",
+        "target": "industrial",
+        "count": 1
+      },
+      {
+        "kind": "happiness",
+        "target": "any",
+        "count": 70
+      }
+    ],
+    "prerequisites": [
+      "era4"
+    ],
+    "rewards": {
+      "money": 151500,
+      "xp": 12120
+    }
+  },
+  {
+    "id": "era6",
+    "name": "Kota Modern",
+    "name_en": "Modern City",
+    "objectives": [
+      {
+        "kind": "level",
+        "target": "any",
+        "count": 161
+      },
+      {
+        "kind": "population",
+        "target": "any",
+        "count": 300
+      },
+      {
+        "kind": "build",
+        "target": "hospital",
+        "count": 1
+      },
+      {
+        "kind": "happiness",
+        "target": "any",
+        "count": 70
+      }
+    ],
+    "prerequisites": [
+      "era5"
+    ],
+    "rewards": {
+      "money": 241500,
+      "xp": 19320
+    }
+  },
+  {
+    "id": "era7",
+    "name": "Metropolitan",
+    "name_en": "Metropolis",
+    "objectives": [
+      {
+        "kind": "level",
+        "target": "any",
+        "count": 221
+      },
+      {
+        "kind": "population",
+        "target": "any",
+        "count": 500
+      },
+      {
+        "kind": "build",
+        "target": "condo",
+        "count": 1
+      },
+      {
+        "kind": "happiness",
+        "target": "any",
+        "count": 70
+      }
+    ],
+    "prerequisites": [
+      "era6"
+    ],
+    "rewards": {
+      "money": 331500,
+      "xp": 26520
+    }
+  },
+  {
+    "id": "era8",
+    "name": "Warisan Kampung",
+    "name_en": "Village Legacy",
+    "objectives": [
+      {
+        "kind": "level",
+        "target": "any",
+        "count": 250
+      },
+      {
+        "kind": "population",
+        "target": "any",
+        "count": 750
+      },
+      {
+        "kind": "build",
+        "target": "station",
+        "count": 1
+      },
+      {
+        "kind": "happiness",
+        "target": "any",
+        "count": 70
+      }
+    ],
+    "prerequisites": [
+      "era7"
+    ],
+    "rewards": {
+      "money": 375000,
+      "xp": 30000
     }
   }
 ]

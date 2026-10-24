@@ -7,7 +7,8 @@
     "cooldown": 180,
     "level": 1,
     "effect": "price",
-    "multiplier": 1.3
+    "multiplier": 1.3,
+    "name_en": "Harvest festival"
   },
   {
     "id": "rain",
@@ -17,7 +18,8 @@
     "cooldown": 180,
     "level": 1,
     "effect": "growth",
-    "multiplier": 1.3
+    "multiplier": 1.3,
+    "name_en": "Tropical rain"
   },
   {
     "id": "dry",
@@ -27,7 +29,8 @@
     "cooldown": 180,
     "level": 3,
     "effect": "growth",
-    "multiplier": 0.75
+    "multiplier": 0.75,
+    "name_en": "Dry season"
   },
   {
     "id": "pests",
@@ -37,7 +40,8 @@
     "cooldown": 180,
     "level": 5,
     "effect": "growth",
-    "multiplier": 0.8
+    "multiplier": 0.8,
+    "name_en": "Crop pests"
   },
   {
     "id": "flood",
@@ -47,7 +51,8 @@
     "cooldown": 180,
     "level": 10,
     "effect": "production",
-    "multiplier": 0.7
+    "multiplier": 0.7,
+    "name_en": "River flood"
   },
   {
     "id": "tourism",
@@ -57,7 +62,8 @@
     "cooldown": 180,
     "level": 8,
     "effect": "price",
-    "multiplier": 1.5
+    "multiplier": 1.5,
+    "name_en": "Village tourism"
   },
   {
     "id": "labor",
@@ -67,6 +73,7 @@
     "cooldown": 180,
     "level": 8,
     "effect": "production",
-    "multiplier": 0.8
+    "multiplier": 0.8,
+    "name_en": "Labor shortage"
   }
 ]

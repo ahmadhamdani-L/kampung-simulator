@@ -1,6 +1,7 @@
 class_name VillageSimulation
 extends RefCounted
 
+signal feedback(kind: String)
 signal changed
 signal notification(message: String)
 
@@ -10,6 +11,9 @@ var rng := RandomNumberGenerator.new()
 var metrics: Dictionary = {}
 var road_access: Dictionary = {}
 var connectivity_dirty := true
+var grid := VillageGrid.new()
+var grid_dirty := true
+var infrastructure := VillageInfrastructure.new()
 
 func _init(seed_value: int = 42) -> void:
 	rng.seed = seed_value
@@ -18,8 +22,8 @@ func _init(seed_value: int = 42) -> void:
 	new_game()
 
 func new_game() -> void:
-	state = {"version":2,"money":int(content.balance.starting_money),"inventory":content.balance.starting_inventory.duplicate(true),"buildings":[],"next_id":1,"population":8,"happiness":60.0,"xp":0,"level":1,"land":16,"time":0.0,"day_accum":0.0,"event_accum":0.0,"event":{},"event_history":{},"research":[],"quests":{},"counters":{},"achievements":[],"settings":{"language":"id","music":0.35,"sfx":0.6,"ambient":0.3,"reduced_motion":false},"last_seen":int(Time.get_unix_time_from_system()),"profit":0,"prestige":0,"offline_seconds":0}
-	for cell in [Vector2i(6,8),Vector2i(7,8),Vector2i(8,8),Vector2i(9,8),Vector2i(10,8),Vector2i(11,8)]:
+	state = {"version":3,"money":int(content.balance.starting_money),"inventory":content.balance.starting_inventory.duplicate(true),"buildings":[],"next_id":1,"population":8,"happiness":60.0,"xp":0,"level":1,"land":16,"time":0.0,"day_accum":0.0,"event_accum":0.0,"event":{},"event_history":{},"research":[],"quests":{},"counters":{},"achievements":[],"settings":{"language":"id","master":1.0,"music":0.35,"sfx":0.6,"ambient":0.3,"reduced_motion":false},"last_seen":int(Time.get_unix_time_from_system()),"profit":0,"prestige":0,"offline_seconds":0}
+	for cell in [Vector2i(5,8),Vector2i(6,8),Vector2i(7,8),Vector2i(8,8),Vector2i(9,8),Vector2i(10,8),Vector2i(11,8)]:
 		_add_building("road",cell,true)
 	_add_building("bamboo",Vector2i(7,7),true)
 	_add_building("bamboo",Vector2i(9,7),true)
@@ -41,11 +45,10 @@ func terrain(cell: Vector2i) -> String:
 	return "grass"
 
 func building_at(cell: Vector2i) -> Dictionary:
-	for b in state.buildings:
-		var size: Array = content.buildings[b.type].footprint
-		if Rect2i(int(b.x),int(b.y),int(size[0]),int(size[1])).has_point(cell):
-			return b
-	return {}
+	if grid_dirty:
+		grid.rebuild(state.buildings,content.buildings)
+		grid_dirty = false
+	return grid.at(cell)
 
 func placement_error(type: String, cell: Vector2i) -> String:
 	if not content.buildings.has(type): return "Bangunan tidak dikenal"
@@ -77,9 +80,10 @@ func record(kind: String, target: String, amount: int) -> void:
 	state.counters[key] = int(state.counters.get(key,0))+amount
 
 func _add_building(type: String, cell: Vector2i, complete: bool = false) -> Dictionary:
-	var b := {"id":int(state.next_id),"type":type,"x":cell.x,"y":cell.y,"upgrade":1,"construction":0.0 if complete else float(content.buildings[type].duration),"progress":0.0,"crop":"EMPTY","animals":0,"health":100.0,"fertilized":false,"stored":0}
+	var b := {"id":int(state.next_id),"type":type,"x":cell.x,"y":cell.y,"upgrade":1,"construction":0.0 if complete else float(content.buildings[type].duration),"progress":0.0,"crop":"EMPTY","animals":0,"health":100.0,"fertilized":false,"stored":0,"moisture":100.0}
 	state.next_id = int(state.next_id)+1
 	state.buildings.append(b)
+	grid_dirty = true
 	record("build",type,1)
 	connectivity_dirty = true
 	return b
@@ -92,6 +96,7 @@ func build(type: String, cell: Vector2i) -> bool:
 	var d: Dictionary = content.buildings[type]
 	if not pay(int(d.price),d.resources): return false
 	_add_building(type,cell)
+	feedback.emit("construction")
 	add_xp(25)
 	recompute()
 	changed.emit()
@@ -104,6 +109,7 @@ func add_xp(amount: int) -> void:
 	for d in content.levels:
 		if int(state.xp) >= int(d.xp): state.level = int(d.level)
 	if int(state.level) > old:
+		feedback.emit("levelup")
 		notification.emit("Naik level %d!" % int(state.level))
 
 func plant(b: Dictionary, fertilize: bool = false) -> bool:
@@ -114,6 +120,7 @@ func plant(b: Dictionary, fertilize: bool = false) -> bool:
 	b.crop = "PLANTED"
 	b.progress = 0.0
 	b.fertilized = fertilize
+	feedback.emit("plant")
 	changed.emit()
 	return true
 
@@ -127,6 +134,7 @@ func harvest(b: Dictionary) -> bool:
 	b.progress = 0.0
 	record("harvest",crop.product,amount)
 	add_xp(amount*3)
+	feedback.emit("harvest")
 	notification.emit("Panen +%d %s" % [amount,crop.product])
 	changed.emit()
 	return true
@@ -161,6 +169,7 @@ func demolish(b: Dictionary) -> bool:
 	if not state.buildings.has(b) or b.type == "hall": return false
 	state.money = int(state.money)+int(float(content.buildings[b.type].price)*0.35)
 	state.buildings.erase(b)
+	grid_dirty = true
 	connectivity_dirty = true
 	recompute()
 	return true
@@ -205,6 +214,7 @@ func trade(product: String, amount: int, buy: bool = false) -> bool:
 		state.profit = int(state.profit)+earnings
 		record("sell",product,amount)
 		add_xp(amount)
+	feedback.emit("purchase")
 	changed.emit()
 	return true
 
@@ -244,12 +254,12 @@ func refresh_connectivity() -> void:
 		if b.type in ["road","asphalt","highway","bridge"]: roads[Vector2i(int(b.x),int(b.y))] = true
 		if b.type == "hall":
 			for dx in range(-1,3):
-				for dy in range(-1,3): roots.append(Vector2i(int(b.x)+dx,int(b.y)+dy))
+				for dy in range(-1,3):
+					if (dx in [-1,2]) and (dy in [-1,2]): continue
+					roots.append(Vector2i(int(b.x)+dx,int(b.y)+dy))
 	var queue: Array[Vector2i] = []
 	for p in roots:
 		if roads.has(p): queue.append(p)
-	# Initial central road is the village entrance if hall is separated.
-	if roads.has(Vector2i(6,8)): queue.append(Vector2i(6,8))
 	var index := 0
 	while index < queue.size():
 		var p := queue[index]
@@ -277,10 +287,18 @@ func recompute() -> void:
 	var happiness := 45.0+bonus("happiness")*100.0
 	var services := {"health":30,"education":20,"security":30,"water":0,"power":0}
 	var maintenance := 0
+	var active_ids: Dictionary = {}
+	for candidate in state.buildings:
+		if float(candidate.construction)<=0 and connected(candidate): active_ids[int(candidate.id)] = true
+	infrastructure.rebuild(state.buildings,active_ids)
+	var residential_services := {"health":0.0,"education":0.0,"security":0.0,"happiness":0.0}
 	for b in state.buildings:
 		if float(b.construction)>0 or not connected(b): continue
 		var d: Dictionary = content.buildings[b.type]
 		housing += int(d.capacity)*int(b.upgrade)
+		if int(d.capacity)>0:
+			for kind in residential_services:
+				residential_services[kind] += float(infrastructure.coverage(Vector2i(int(b.x),int(b.y)),kind))*int(d.capacity)*int(b.upgrade)
 		jobs += int(d.jobs)*int(b.upgrade)
 		happiness += float(d.happiness)*minf(2.0,float(b.upgrade))
 		maintenance += int(d.maintenance)*int(b.upgrade)
@@ -291,6 +309,9 @@ func recompute() -> void:
 		if b.type == "power": services.power += 50*int(b.upgrade)
 	if int(state.inventory.get("rice",0))>0: happiness += 15
 	else: happiness -= 15
+	for kind in ["health","education","security"]:
+		services[kind] = {"health":30,"education":20,"security":30}[kind]+int(float(residential_services[kind])/maxf(1.0,housing))
+	happiness += float(residential_services.happiness)/maxf(1.0,housing)
 	var workers := mini(int(float(state.population)*0.6),jobs)
 	happiness += minf(10.0,float(workers))
 	state.happiness = clampf(happiness,10.0,100.0)
@@ -322,12 +343,14 @@ func _step(dt: float) -> void:
 		if not connected(b): continue
 		var speed := (1.0+bonus("growth"))*event_multiplier("growth")
 		if content.crops.has(b.type) and b.crop in ["PLANTED","GROWING"]:
-			b.progress = float(b.progress)+dt*speed*(1.15 if int(metrics.get("water",0))>0 else 1.0)
+			if event_multiplier("growth")>1.0 or infrastructure.coverage(Vector2i(int(b.x),int(b.y)),"water")>0: b.moisture = minf(100.0,float(b.get("moisture",100.0))+dt*2.0)
+			b.moisture = maxf(0.0,float(b.get("moisture",100.0))-dt*(1.5 if event_multiplier("growth")<1.0 else 0.3))
+			b.progress = float(b.progress)+dt*speed*(1.15 if infrastructure.coverage(Vector2i(int(b.x),int(b.y)),"water")>0 else 1.0)*(1.0 if float(b.moisture)>0 else 0.0)
 			b.crop = "GROWING"
 			if float(b.progress)>=float(content.crops[b.type].seconds): b.crop = "READY"
 		elif content.recipes.has(b.type):
 			var recipe: Dictionary = content.recipes[b.type]
-			b.progress = minf(float(recipe.seconds),float(b.progress)+dt*float(metrics.get("efficiency",0.25))*(1.0+bonus("production"))*event_multiplier("production")*(1.2 if int(metrics.get("power",0))>0 else 1.0))
+			b.progress = minf(float(recipe.seconds),float(b.progress)+dt*float(metrics.get("efficiency",0.25))*int(b.upgrade)*(1.0+bonus("production"))*event_multiplier("production")*(1.2 if infrastructure.coverage(Vector2i(int(b.x),int(b.y)),"power")>0 else 1.0))
 			if float(b.progress)>=float(recipe.seconds) and fits(recipe.output,recipe.input) and pay(0,recipe.input):
 				give(recipe.output)
 				for product in recipe.output: record("produce",product,int(recipe.output[product]))
@@ -338,7 +361,7 @@ func _step(dt: float) -> void:
 			b.progress = minf(float(animal.seconds),float(b.progress)+dt*event_multiplier("production"))
 			if float(b.progress)>=float(animal.seconds) and int(b.stored)<100:
 				if pay(0,{"feed":int(animal.feed)}):
-					b.stored = int(b.stored)+int(animal.yield)*int(b.animals)
+					b.stored = mini(100,int(b.stored)+maxi(1,int(float(animal.yield)*int(b.animals)*float(b.health)/100.0)))
 					b.health = minf(100,float(b.health)+10)
 					b.progress = 0.0
 				else: b.health = maxf(20,float(b.health)-dt)
@@ -381,6 +404,8 @@ func quest_progress(q: Dictionary) -> Array:
 	var values: Array = []
 	for objective in q.objectives:
 		var value := int(state.counters.get(objective.kind+":"+objective.target,0))
+		if objective.kind=="level": value = int(state.level)
+		if objective.kind=="profit": value = int(state.profit)
 		if objective.kind=="population": value = int(state.population)
 		if objective.kind=="happiness": value = int(state.happiness)
 		values.append(mini(value,int(objective.count)))
@@ -404,6 +429,7 @@ func claim_quest(id: String) -> bool:
 		state.quests[id] = true
 		state.money = int(state.money)+int(q.rewards.money)
 		add_xp(int(q.rewards.xp))
+		feedback.emit("quest")
 		notification.emit("Misi selesai · +Rp %d" % int(q.rewards.money))
 		return true
 	return false
@@ -436,3 +462,8 @@ func update_achievements() -> void:
 		if conditions[key] and key not in state.achievements:
 			state.achievements.append(key)
 			notification.emit("Prestasi · "+key)
+
+func water_field(b: Dictionary) -> bool:
+	if not content.crops.has(b.get("type","")) or not pay(5): return false
+	b.moisture = 100.0
+	return true

@@ -7,7 +7,9 @@
 - [x] Original assets and attribution recorded.
 - [x] Ads excluded from unvalidated candidate.
 - [ ] Physical Android installation and entry-level performance at 30 FPS measured.
-- [ ] Android lifecycle/gesture/save upgrade acceptance completed.
+- [x] Emulator airplane-mode planting, background save, force-stop/offline reload checked.
+- [x] Development APK and debug-signed AAB exported and package/signatures verified.
+- [ ] Physical Android lifecycle/gesture/save upgrade acceptance completed.
 - [ ] Full English copy review, responsive safe-area and accessibility QA completed.
 - [ ] Late-game strategy/content balance tested across all eras.
 - [ ] Indexed/chunked mobile renderer and memory measurements completed.

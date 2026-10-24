@@ -8,7 +8,8 @@
     },
     "dependencies": [],
     "effect": "yield",
-    "bonus": 0.2
+    "bonus": 0.2,
+    "name_en": "Better seeds"
   },
   "irrigation": {
     "name": "Irigasi",
@@ -21,7 +22,8 @@
       "seeds"
     ],
     "effect": "growth",
-    "bonus": 0.2
+    "bonus": 0.2,
+    "name_en": "Irrigation"
   },
   "fertilizer": {
     "name": "Pupuk Organik",
@@ -34,7 +36,8 @@
       "seeds"
     ],
     "effect": "yield",
-    "bonus": 0.2
+    "bonus": 0.2,
+    "name_en": "Organic fertilizer"
   },
   "mechanization": {
     "name": "Mekanisasi",
@@ -47,7 +50,8 @@
       "irrigation"
     ],
     "effect": "growth",
-    "bonus": 0.2
+    "bonus": 0.2,
+    "name_en": "Mechanized farming"
   },
   "processing": {
     "name": "Pengolahan Industri",
@@ -60,7 +64,8 @@
       "fertilizer"
     ],
     "effect": "production",
-    "bonus": 0.2
+    "bonus": 0.2,
+    "name_en": "Industrial processing"
   },
   "logistics": {
     "name": "Logistik",
@@ -73,7 +78,8 @@
       "processing"
     ],
     "effect": "price",
-    "bonus": 0.2
+    "bonus": 0.2,
+    "name_en": "Logistics optimization"
   },
   "renewables": {
     "name": "Energi Terbarukan",
@@ -86,6 +92,7 @@
       "logistics"
     ],
     "effect": "happiness",
-    "bonus": 0.2
+    "bonus": 0.2,
+    "name_en": "Renewable energy"
   }
 }

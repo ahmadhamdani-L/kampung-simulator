@@ -9,6 +9,7 @@ func configure() -> void:
 	while EditorInterface.get_resource_filesystem().is_scanning():
 		await process_frame
 	var settings := EditorInterface.get_editor_settings()
+	settings.set_setting("export/android/shutdown_adb_on_exit",false)
 	settings.set_setting("export/android/android_sdk_path",OS.get_environment("ANDROID_HOME"))
 	settings.set_setting("export/android/java_sdk_path",OS.get_environment("JAVA_HOME"))
 	print("Android tool paths configured (no credential values)")

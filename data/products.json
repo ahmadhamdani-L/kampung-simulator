@@ -1,98 +1,122 @@
 {
   "rice": {
     "price": 24,
-    "name": "Beras"
+    "name": "Beras",
+    "name_en": "Rice"
   },
   "paddy": {
     "price": 14,
-    "name": "Padi"
+    "name": "Padi",
+    "name_en": "Unmilled rice"
   },
   "corn": {
     "price": 20,
-    "name": "Jagung"
+    "name": "Jagung",
+    "name_en": "Corn"
   },
   "chili": {
     "price": 45,
-    "name": "Chili"
+    "name": "Cabai",
+    "name_en": "Chili"
   },
   "cassava": {
     "price": 17,
-    "name": "Cassava"
+    "name": "Singkong",
+    "name_en": "Cassava"
   },
   "banana": {
     "price": 28,
-    "name": "Banana"
+    "name": "Pisang",
+    "name_en": "Banana"
   },
   "coconut": {
     "price": 32,
-    "name": "Coconut"
+    "name": "Kelapa",
+    "name_en": "Coconut"
   },
   "coffee": {
     "price": 65,
-    "name": "Coffee"
+    "name": "Kopi",
+    "name_en": "Coffee"
   },
   "soy": {
     "price": 22,
-    "name": "Soy"
+    "name": "Kedelai",
+    "name_en": "Soy"
   },
   "egg": {
     "price": 35,
-    "name": "Telur"
+    "name": "Telur",
+    "name_en": "Egg"
   },
   "milk": {
     "price": 48,
-    "name": "Susu"
+    "name": "Susu",
+    "name_en": "Milk"
   },
   "meat": {
     "price": 70,
-    "name": "Meat"
+    "name": "Daging",
+    "name_en": "Meat"
   },
   "fish": {
     "price": 36,
-    "name": "Fish"
+    "name": "Ikan",
+    "name_en": "Fish"
   },
   "wood": {
     "price": 30,
-    "name": "Kayu"
+    "name": "Kayu",
+    "name_en": "Wood"
   },
   "stone": {
     "price": 35,
-    "name": "Batu"
+    "name": "Batu",
+    "name_en": "Stone"
   },
   "cement": {
     "price": 80,
-    "name": "Cement"
+    "name": "Semen",
+    "name_en": "Cement"
   },
   "flour": {
     "price": 42,
-    "name": "Flour"
+    "name": "Tepung",
+    "name_en": "Flour"
   },
   "tofu": {
     "price": 48,
-    "name": "Tofu"
+    "name": "Tahu",
+    "name_en": "Tofu"
   },
   "tempe": {
     "price": 50,
-    "name": "Tempe"
+    "name": "Tempe",
+    "name_en": "Tempe"
   },
   "feed": {
     "price": 15,
-    "name": "Feed"
+    "name": "Pakan",
+    "name_en": "Animal feed"
   },
   "planks": {
     "price": 65,
-    "name": "Planks"
+    "name": "Papan",
+    "name_en": "Planks"
   },
   "food": {
     "price": 85,
-    "name": "Food"
+    "name": "Makanan",
+    "name_en": "Food"
   },
   "seed": {
     "price": 8,
-    "name": "Benih"
+    "name": "Benih",
+    "name_en": "Seeds"
   },
   "fertilizer": {
     "price": 18,
-    "name": "Fertilizer"
+    "name": "Pupuk",
+    "name_en": "Fertilizer"
   }
 }

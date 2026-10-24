@@ -53,5 +53,14 @@
       "planks": 4
     },
     "seconds": 30
+  },
+  "feed_mill": {
+    "input": {
+      "corn": 3
+    },
+    "output": {
+      "feed": 6
+    },
+    "seconds": 25
   }
 }

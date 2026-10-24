@@ -1,6 +1,11 @@
 name: Android development APK
 on:
   workflow_dispatch:
+    inputs:
+      release:
+        description: Build signed release APK and AAB (requires project secrets)
+        type: boolean
+        default: false
   push:
     tags: ['v*']
 permissions:
@@ -27,8 +32,36 @@ jobs:
           mkdir -p ~/.local/share/godot/export_templates/4.7.2.stable
           cp /tmp/templates/templates/android* ~/.local/share/godot/export_templates/4.7.2.stable/
       - run: python3 tools/validate_content.py
-      - run: tools/build/android.sh
+      - run: godot --headless --path . --editor --import --quit
+      - run: godot --headless --path . --script tests/run.gd
+      - name: Debug APK and bundle
+        if: ${{ !inputs.release }}
+        env:
+          GODOT_ANDROID_TEMPLATE_SOURCE: /tmp/templates/templates/android_source.zip
+        run: tools/build/debug_bundle.sh
+      - name: Signed release APK and bundle
+        if: ${{ inputs.release }}
+        env:
+          KAMPUNG_RELEASE_KEYSTORE_BASE64: ${{ secrets.KAMPUNG_RELEASE_KEYSTORE_BASE64 }}
+          GODOT_ANDROID_KEYSTORE_RELEASE_USER: ${{ secrets.KAMPUNG_RELEASE_ALIAS }}
+          GODOT_ANDROID_KEYSTORE_RELEASE_PASSWORD: ${{ secrets.KAMPUNG_RELEASE_PASSWORD }}
+          GODOT_ANDROID_KEYSTORE_RELEASE_PATH: ${{ runner.temp }}/kampung-release.keystore
+          GODOT_ANDROID_TEMPLATE_SOURCE: /tmp/templates/templates/android_source.zip
+        run: |
+          test -n "$KAMPUNG_RELEASE_KEYSTORE_BASE64" || { echo 'Missing Kampung release keystore secret'; exit 1; }
+          trap 'rm -f "$GODOT_ANDROID_KEYSTORE_RELEASE_PATH"' EXIT
+          python3 - <<'PYKEY'
+          import base64, os
+          path = os.environ['GODOT_ANDROID_KEYSTORE_RELEASE_PATH']
+          with open(path, 'wb') as f:
+              f.write(base64.b64decode(os.environ['KAMPUNG_RELEASE_KEYSTORE_BASE64'], validate=True))
+          os.chmod(path, 0o600)
+          PYKEY
+          tools/build/release.sh
       - uses: actions/upload-artifact@v4
         with:
-          name: kampung-android-debug
-          path: build/android/*.apk
+          retention-days: 7
+          name: kampung-android
+          path: |
+            build/android/*.apk
+            build/android/*.aab
