@@ -9,12 +9,66 @@ func run() -> void:
 	game = load("res://scenes/game/game.tscn").instantiate()
 	root.add_child(game)
 	await process_frame
+	if not (not game.running and game.nav_buttons.all(func(b): return b.disabled)):
+		push_error("Main menu must block gameplay navigation")
+		quit(1)
+		return
 	# Exercise the actual Continue button connection.
 	game.rows.get_child(1).pressed.emit()
-	if not (game.running and not game.panel.visible):
+	if not (game.running and not game.panel.visible and game.nav_buttons.all(func(b): return not b.disabled)):
 		push_error("Continue enters playable world")
 		quit(1)
 		return
+	game.show_menu()
+	game.open_panel("settings")
+	game.close_panel()
+	if not (game.modal=="menu" and not game.running):
+		push_error("Closing menu settings returns to the main menu")
+		quit(1)
+		return
+	game.close_panel()
+	if not game.running:
+		push_error("Closing the main menu resumes gameplay")
+		quit(1)
+		return
+	game.placement = "bamboo"
+	game.world.placement = "bamboo"
+	game.handle_back()
+	if not (game.placement.is_empty() and game.world.placement.is_empty() and game.running and not game.panel.visible):
+		push_error("Back cancels placement without opening the menu")
+		quit(1)
+		return
+	game.handle_back()
+	if not (game.modal=="menu" and not game.running):
+		push_error("Back from gameplay opens the main menu")
+		quit(1)
+		return
+	game.continue_game()
+	await process_frame
+	if not (game.world.camera.current and game.world.ground_root.get_child_count()<=4):
+		push_error("3D world must render with an active camera and batched terrain")
+		quit(1)
+		return
+	var instance_total := 0
+	for terrain_batch in game.world.ground_root.get_children():
+		instance_total += terrain_batch.multimesh.instance_count
+	if instance_total!=1600:
+		push_error("3D terrain must cover the full 40x40 world")
+		quit(1)
+		return
+	var field_point := Vector3(8.0*game.world.TILE_SIZE,0,9.0*game.world.TILE_SIZE)
+	if game.world.raycast_to_grid(game.world.camera.unproject_position(field_point))!=Vector2i(8,9):
+		push_error("3D camera tap picking must hit the intended field")
+		quit(1)
+		return
+	game.world.overlay = true
+	game.world.overlay_kind = "road"
+	game.world._sync_overlay()
+	if game.world.overlay_root.get_child_count()==0:
+		push_error("Road coverage overlay must render in 3D")
+		quit(1)
+		return
+	game.world.overlay = false
 	for language in ["id","en"]:
 		game.lang = language
 		for kind in ["build","farm","inventory","economy","population","research","quests","achievements","settings","credits"]:

@@ -59,3 +59,11 @@ Touch follow-up: emulator swipes over child buttons initially failed to scroll l
 - Content validation passed: 52 buildings, 28 quests and 300 levels. Godot headless suite passed 2,403 checks with zero failures; desktop UI smoke loaded all 11 panels in both languages and passed touch scrolling checks.
 - Rebuilt debug APK and development-signed AAB from the third milestone source. APK signing/package checks, AAB signing/package checks and bundletool validation passed. Exact artifact hashes and source commit are recorded in ignored `build/android/artifacts.json`.
 - Prior commit `924dc43` passed both GitHub validation (run 40070845307) and Android (run 40070859895) workflows. Third milestone workflow results should be checked after pushing this commit.
+
+## Fourth milestone: 3D visual rebuild and Android audit (2026-10-25)
+
+- Replaced the flat world with a procedural 3D village: distinct buildings, crops, tools, trees, roads and animated residents. Added camera rotation, panning, zoom, raycast selection and 3D road/service overlays.
+- Refined the HUD and menus for landscape safe areas. Android Back now cancels placement or opens the menu. Menu input no longer pans the world.
+- Content validation passed (52 buildings, 28 quests, 300 levels). Godot headless suite passed 2,403 checks with zero failures. Desktop UI smoke loaded all 11 panels in Indonesian and English and rendered the 3D scene.
+- Rebuilt and verified debug APK and development-signed AAB. On the `Kampung_QA` Android 17 emulator, inspected the 3D scene, selected and harvested a rice field, read the saved `HARVESTED` state from schema v3, resumed after Home, and checked Back/menu behavior.
+- Remaining visual work: authored character/building assets, animation polish and better material/lighting variety. Current procedural low-poly world is functional but below premium production art quality. Physical Android FPS, thermals and multitouch remain unmeasured.

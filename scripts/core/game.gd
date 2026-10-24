@@ -1,4 +1,4 @@
-extends Node2D
+extends Node3D
 
 const Sim = preload("res://scripts/core/simulation.gd")
 const Save = preload("res://scripts/persistence/save_manager.gd")
@@ -28,6 +28,9 @@ var confirm_action: Callable
 var lang := "id"
 var menu_art: TextureRect
 var nav_buttons: Array[Button] = []
+var top_bar: PanelContainer
+var bottom_bar: HBoxContainer
+var side_controls: VBoxContainer
 var feedback_streams: Dictionary = {}
 var raining := false
 
@@ -45,8 +48,13 @@ func _ready() -> void:
 	if saver.load_game(sim):
 		lang = str(sim.state.settings.language)
 		saver.save_game(sim)
-		world.pan = Vector2(get_viewport_rect().size.x*0.5,70)
+		world.target_pan = Vector3(8.0 * 1.5, 0, 8.0 * 1.5)
+	else:
+		sim.new_game()
+		saver.save_game(sim)
+		world.target_pan = Vector3(8.0 * 1.5, 0, 8.0 * 1.5)
 	apply_audio()
+	update_hud()
 	show_menu()
 
 func t(id: String, en: String) -> String:
@@ -54,33 +62,39 @@ func t(id: String, en: String) -> String:
 
 func create_theme() -> void:
 	var theme := Theme.new()
-	theme.default_font_size = 17
+	theme.default_font_size = 16
 	var normal := StyleBoxFlat.new()
-	normal.bg_color = Color("28534d")
-	normal.set_corner_radius_all(10)
-	normal.content_margin_left = 16
-	normal.content_margin_right = 16
-	normal.content_margin_top = 12
-	normal.content_margin_bottom = 12
+	normal.bg_color = Color("234c48")
+	normal.border_color = Color("4d756c")
+	normal.set_border_width_all(1)
+	normal.set_corner_radius_all(12)
+	normal.content_margin_left = 12
+	normal.content_margin_right = 12
+	normal.content_margin_top = 9
+	normal.content_margin_bottom = 9
 	theme.set_stylebox("normal","Button",normal)
 	var hover := normal.duplicate()
-	hover.bg_color = Color("3c7062")
+	hover.bg_color = Color("34695c")
 	theme.set_stylebox("hover","Button",hover)
 	var pressed := normal.duplicate()
-	pressed.bg_color = Color("a67b42")
+	pressed.bg_color = Color("836335")
 	theme.set_stylebox("pressed","Button",pressed)
 	var disabled := normal.duplicate()
-	disabled.bg_color = Color("344844")
+	disabled.bg_color = Color("263b39")
 	theme.set_stylebox("disabled","Button",disabled)
-	theme.set_color("font_color","Button",Color("fff5dc"))
-	theme.set_color("font_color","Label",Color("f6efd9"))
+	theme.set_color("font_color","Button",Color("f8f3e8"))
+	theme.set_color("font_color","Label",Color("f7f3e7"))
 	var surface := StyleBoxFlat.new()
-	surface.bg_color = Color("142f2e")
-	surface.set_corner_radius_all(18)
-	surface.content_margin_left = 22
-	surface.content_margin_right = 22
-	surface.content_margin_top = 18
-	surface.content_margin_bottom = 18
+	surface.bg_color = Color("172d2d")
+	surface.border_color = Color("42665f")
+	surface.set_border_width_all(1)
+	surface.set_corner_radius_all(16)
+	surface.content_margin_left = 18
+	surface.content_margin_right = 18
+	surface.content_margin_top = 15
+	surface.content_margin_bottom = 15
+	surface.shadow_color = Color(0.04,0.12,0.11,0.48)
+	surface.shadow_size = 10
 	theme.set_stylebox("panel","PanelContainer",surface)
 	ui = CanvasLayer.new()
 	add_child(ui)
@@ -134,41 +148,53 @@ func create_ui() -> void:
 	var root: Control = ui.get_child(0)
 	var safe := DisplayServer.get_display_safe_area()
 	var win := DisplayServer.window_get_size()
-	var pad_top := 14
-	var pad_bottom := 18
+	var pad_top := 16
+	var pad_bottom := 16
 	var pad_left := 18
 	var pad_right := 18
-	if win.x > 0 and win.y > 0 and safe.size.x > 0 and safe.size.y > 0:
-		pad_top = maxi(14, safe.position.y + 4)
-		pad_bottom = maxi(18, win.y - (safe.position.y + safe.size.y) + 4)
-		pad_left = maxi(18, safe.position.x + 4)
-		pad_right = maxi(18, win.x - (safe.position.x + safe.size.x) + 4)
+	if OS.get_name() in ["Android","iOS"] and win.x > 0 and win.y > 0 and safe.size.x > 0 and safe.size.y > 0:
+		var view_size: Vector2 = get_viewport().get_visible_rect().size
+		var scale_x := view_size.x / float(win.x)
+		var scale_y := view_size.y / float(win.y)
+		pad_top = maxi(16,roundi(float(safe.position.y) * scale_y) + 6)
+		pad_bottom = maxi(16,roundi(float(win.y - safe.end.y) * scale_y) + 6)
+		pad_left = maxi(18,roundi(float(safe.position.x) * scale_x) + 6)
+		pad_right = maxi(18,roundi(float(win.x - safe.end.x) * scale_x) + 6)
 	var top := PanelContainer.new()
+	top_bar = top
+	var top_style: StyleBoxFlat = root.theme.get_stylebox("panel","PanelContainer").duplicate()
+	top_style.content_margin_top = 8
+	top_style.content_margin_bottom = 8
+	top.add_theme_stylebox_override("panel",top_style)
 	top.set_anchors_and_offsets_preset(Control.PRESET_TOP_WIDE)
 	top.offset_left = pad_left
 	top.offset_right = -pad_right
 	top.offset_top = pad_top
-	top.offset_bottom = pad_top + 76
+	top.offset_bottom = pad_top + 70
 	root.add_child(top)
 	var top_box := HBoxContainer.new()
-	top_box.add_theme_constant_override("separation",24)
+	top_box.add_theme_constant_override("separation",18)
 	top.add_child(top_box)
 	var brand := Label.new()
-	brand.text = "KAMPUNG\nDari desa jadi kota"
-	brand.add_theme_font_size_override("font_size",20)
-	brand.add_theme_color_override("font_color",Color("f2d38e"))
+	brand.text = "KAMPUNG\nDESA → KOTA"
+	brand.custom_minimum_size.x = 165
+	brand.add_theme_font_size_override("font_size",18)
+	brand.add_theme_color_override("font_color",Color("e7c47d"))
 	top_box.add_child(brand)
 	hud = Label.new()
 	hud.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	hud.add_theme_font_size_override("font_size",16)
 	top_box.add_child(hud)
-	button(top_box,"☰",show_menu)
+	var menu_button := button(top_box,"☰",show_menu)
+	menu_button.custom_minimum_size.x = 54
 	var bottom := HBoxContainer.new()
+	bottom_bar = bottom
 	bottom.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_WIDE)
 	bottom.offset_left = pad_left
 	bottom.offset_right = -pad_right
-	bottom.offset_top = -pad_bottom - 54
+	bottom.offset_top = -pad_bottom - 50
 	bottom.offset_bottom = -pad_bottom
-	bottom.add_theme_constant_override("separation",8)
+	bottom.add_theme_constant_override("separation",6)
 	root.add_child(bottom)
 	for item in [["Bangun","Build","build"],["Bertani","Farm","farm"],["Gudang","Stock","inventory"],["Ekonomi","Trade","economy"],["Warga","People","population"],["Riset","Research","research"],["Misi","Quests","quests"],["Prestasi","Awards","achievements"]]:
 		var key: String = item[2]
@@ -179,29 +205,36 @@ func create_ui() -> void:
 		nav_buttons.append(b)
 	status = Label.new()
 	status.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_LEFT)
-	status.offset_left = 28
-	status.offset_top = -102
-	status.offset_bottom = -78
+	status.offset_left = pad_left + 8
+	status.offset_top = -pad_bottom - 87
+	status.offset_bottom = -pad_bottom - 61
+	status.add_theme_color_override("font_outline_color",Color("102322"))
+	status.add_theme_constant_override("outline_size",4)
 	root.add_child(status)
 	toast_label = Label.new()
-	toast_label.position = Vector2(28,104)
-	toast_label.add_theme_font_size_override("font_size",21)
-	toast_label.add_theme_color_override("font_color",Color("ffdf8b"))
+	toast_label.position = Vector2(pad_left + 8,pad_top + 84)
+	toast_label.add_theme_font_size_override("font_size",18)
+	toast_label.add_theme_color_override("font_color",Color("f1d38d"))
+	toast_label.add_theme_color_override("font_outline_color",Color("102322"))
+	toast_label.add_theme_constant_override("outline_size",4)
 	root.add_child(toast_label)
 	var side := VBoxContainer.new()
+	side_controls = side
 	side.set_anchors_and_offsets_preset(Control.PRESET_CENTER_RIGHT)
 	side.offset_left = -85
 	side.offset_right = -25
-	side.offset_top = -100
-	side.offset_bottom = 100
+	side.offset_top = -130
+	side.offset_bottom = 130
+	side.add_theme_constant_override("separation", 6)
 	root.add_child(side)
 	button(side,"+",func(): world.target_zoom = minf(1.7,world.target_zoom*1.2))
 	button(side,"−",func(): world.target_zoom = maxf(0.3,world.target_zoom/1.2))
-	button(side,"⌂",func(): world.pan = Vector2(640,60); world.target_zoom = 0.85)
+	button(side,"↻",func(): world.rotate_camera(1); notify(t("Putar sudut kamera 3D","Rotate 3D camera angle")))
+	button(side,"⌂",func(): world.target_pan = Vector3(8.0 * 1.5, 0, 8.0 * 1.5); world.target_dist = 24.0)
 	button(side,"≋",func(): world.overlay = not world.overlay; world.overlay_kind = "road"; notify(t("Overlay akses jalan","Road access overlay")))
 	panel = PanelContainer.new()
-	panel.position = Vector2(760,108)
-	panel.size = Vector2(490,490)
+	panel.position = Vector2(770,108)
+	panel.size = Vector2(480,490)
 	root.add_child(panel)
 	var column := VBoxContainer.new()
 	column.mouse_filter = Control.MOUSE_FILTER_PASS
@@ -211,12 +244,12 @@ func create_ui() -> void:
 	column.add_child(title_row)
 	panel_title = Label.new()
 	panel_title.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	panel_title.add_theme_font_size_override("font_size",25)
+	panel_title.add_theme_font_size_override("font_size",23)
 	title_row.add_child(panel_title)
 	button(title_row,"×",close_panel)
 	var scroll := ScrollContainer.new()
 	scroll.scroll_deadzone = 12
-	scroll.custom_minimum_size = Vector2(436,380)
+	scroll.custom_minimum_size = Vector2(430,380)
 	scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	column.add_child(scroll)
 	rows = VBoxContainer.new()
@@ -256,9 +289,26 @@ func clear_rows() -> void:
 		child.queue_free()
 
 func close_panel() -> void:
+	if not running:
+		if modal=="menu":
+			continue_game()
+		else:
+			show_menu()
+		return
 	menu_art.hide()
 	panel.hide()
 	modal = ""
+
+func continue_game() -> void:
+	running = true
+	world.set_process_unhandled_input(true)
+	top_bar.show()
+	bottom_bar.show()
+	side_controls.show()
+	status.show()
+	for b in nav_buttons: b.disabled = false
+	close_panel()
+	notify(t("Ketuk sawah untuk menanam. Misi memandu perkembanganmu.","Tap a field to plant. Quests guide your progress."))
 
 func notify(message: String) -> void:
 	if toast_label==null: return
@@ -274,20 +324,30 @@ func confirm(text_value: String, action: Callable) -> void:
 	confirmation.popup_centered(Vector2i(500,180))
 
 func show_menu() -> void:
+	if running: saver.save_game(sim)
+	running = false
+	world.set_process_unhandled_input(false)
+	top_bar.hide()
+	bottom_bar.hide()
+	side_controls.hide()
+	status.hide()
+	toast_label.text = ""
+	for b in nav_buttons: b.disabled = true
 	menu_art.show()
 	modal = "menu"
 	panel.show()
 	clear_rows()
 	panel_title.text = "KAMPUNG SIMULATOR"
 	label(t("Dari desa jadi kota\nBangun masa depan kampungmu.","From village to city\nBuild your village's future."))
-	button(rows,t("Lanjutkan","Continue"),func(): running = true; close_panel(); notify(t("Ketuk sawah untuk menanam. Misi memandu perkembanganmu.","Tap a field to plant. Quests guide your progress.")))
-	button(rows,t("Permainan baru","New game"),func(): confirm(t("Mulai ulang kampung? Simpanan saat ini diganti.","Start a new village? Current progress will be replaced."),func(): sim.new_game(); running = true; save_game(); close_panel()))
+	button(rows,t("Lanjutkan","Continue"),continue_game)
+	button(rows,t("Permainan baru","New game"),func(): confirm(t("Mulai ulang kampung? Simpanan saat ini diganti.","Start a new village? Current progress will be replaced."),func(): sim.new_game(); update_hud(); save_game(); continue_game()))
 	button(rows,t("Pengaturan","Settings"),func(): open_panel("settings"))
 	button(rows,"Bahasa Indonesia / English",func(): lang = "en" if lang=="id" else "id"; sim.state.settings.language = lang; update_hud(); show_menu())
 	button(rows,t("Kredit","Credits"),func(): open_panel("credits"))
 	button(rows,t("Simpan & keluar","Save & quit"),func(): if save_game(): get_tree().quit())
 
 func open_panel(kind: String) -> void:
+	if not running and kind not in ["settings","credits"]: return
 	if running: menu_art.hide()
 	modal = kind
 	panel.show()
@@ -494,24 +554,30 @@ func _process(dt: float) -> void:
 		save_accum = 0
 
 func _unhandled_key_input(event: InputEvent) -> void:
-	if event.is_action_pressed("ui_cancel"):
+	if OS.get_name()!="Android" and event.is_action_pressed("ui_cancel"):
+		handle_back()
+
+func handle_back() -> void:
+	if not placement.is_empty():
 		placement = ""
 		world.placement = ""
-		if panel.visible: close_panel()
-		else: show_menu()
+	elif panel.visible:
+		close_panel()
+	else:
+		show_menu()
+	update_hud()
 
 func _notification(what: int) -> void:
 	if what==NOTIFICATION_WM_CLOSE_REQUEST:
 		if saver.save_game(sim): get_tree().quit()
-	if what==NOTIFICATION_APPLICATION_PAUSED and running: saver.save_game(sim)
+	if what==NOTIFICATION_APPLICATION_PAUSED: saver.save_game(sim)
 	if what==NOTIFICATION_APPLICATION_RESUMED and running:
 		# Reload saved timestamp once, then checkpoint to prevent repeated offline grants.
-		if saver.load_game(sim): saver.save_game(sim)
+		if saver.load_game(sim):
+			saver.save_game(sim)
+			update_hud()
 	if what==NOTIFICATION_WM_GO_BACK_REQUEST:
-		placement = ""
-		world.placement = ""
-		if panel.visible: close_panel()
-		else: show_menu()
+		handle_back()
 
 func _exit_tree() -> void:
 	confirm_action = Callable()

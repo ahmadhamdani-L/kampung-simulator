@@ -1,290 +1,509 @@
 class_name VillageWorld
-extends Node2D
+extends Node3D
 
 signal tile_clicked(cell: Vector2i)
+
+const TILE_SIZE: float = 1.5
+const WorldMaterials = preload("res://scripts/world/world_materials.gd")
+const BuildingMeshFactory = preload("res://scripts/world/building_mesh_factory.gd")
+const Pathfinder = preload("res://scripts/world/pathfinder.gd")
+const M = WorldMaterials
+
 var sim: VillageSimulation
-var pan := Vector2(640,40)
-var zoom_factor := 0.85
-var target_zoom := 0.85
-var hover := Vector2i(-1,-1)
 var placement := ""
 var overlay := false
 var overlay_kind := "road"
+
+# Camera Gimbal & Navigation
+var gimbal: Node3D
+var inner_gimbal: Node3D
+var camera: Camera3D
+var sun: DirectionalLight3D
+var env_node: WorldEnvironment
+
+var target_pan := Vector3(8.0 * TILE_SIZE, 0, 8.0 * TILE_SIZE)
+var target_yaw := deg_to_rad(45.0)
+var target_dist := 24.0
+var min_dist := 10.0
+var max_dist := 48.0
+
+# Backward-compatibility properties
+var pan: Vector2:
+	get: return Vector2(target_pan.x, target_pan.z)
+	set(v): target_pan = Vector3(v.x * 0.03, 0, v.y * 0.03)
+
+var target_zoom: float:
+	get: return 24.0 / target_dist
+	set(v): target_dist = clampf(24.0 / maxf(0.1, v), min_dist, max_dist)
+
+var zoom_factor: float = 1.0
+
+# Input tracking
 var dragging := false
 var moved := false
-var press := Vector2.ZERO
+var press_pos := Vector2.ZERO
 var fingers: Dictionary = {}
-var clock := 0.0
-var font := ThemeDB.fallback_font
-var terrain_chunks: Array[Node2D] = []
-var cached_land := -1
-var route_hash := 0
+var hover_cell := Vector2i(-1, -1)
+
+# Scene nodes
+var ground_root: Node3D
+var building_root: Node3D
+var foliage_root: Node3D
+var npc_root: Node3D
+var rain_root: Node3D
+var overlay_root: Node3D
+var hover_box: MeshInstance3D
+
+var buildings_map: Dictionary = {}
+var building_hash: int = 0
+var cached_land: int = -1
+var foliage_hash: int = -1
+var clock: float = 0.0
 var routes: Array = []
+var route_hash: int = 0
+var overlay_hash: int = -1
 
 func _ready() -> void:
-	for x in range(5):
-		for y in range(5):
-			var node := VillageTerrainChunk.new()
-			node.sim = sim
-			node.chunk = Vector2i(x,y)
-			node.show_behind_parent = true
-			add_child(node)
-			terrain_chunks.append(node)
+	_setup_lighting_and_sky()
+	_setup_camera()
+	_setup_scene_roots()
+	_build_ground_grid()
+	_build_natural_foliage()
+
+func _setup_lighting_and_sky() -> void:
+	# 1. Environment & Sky
+	env_node = WorldEnvironment.new()
+	var env := Environment.new()
+	var sky := Sky.new()
+	var sky_mat := ProceduralSkyMaterial.new()
+	sky_mat.sky_top_color = Color("5aa3dc")
+	sky_mat.sky_horizon_color = Color("d5dfd3")
+	sky_mat.ground_bottom_color = Color("283b34")
+	sky_mat.ground_horizon_color = Color("bdc7ae")
+	sky_mat.sun_angle_max = 30.0
+	sky.sky_material = sky_mat
+	env.sky = sky
+	env.background_mode = Environment.BG_SKY
+	env.ambient_light_source = Environment.AMBIENT_SOURCE_SKY
+	env.ambient_light_sky_contribution = 0.45
+	env.ambient_light_energy = 0.45
+	env.tonemap_mode = Environment.TONE_MAPPER_FILMIC
+	env_node.environment = env
+	add_child(env_node)
+
+	# 2. Warm Sun Light with Soft Shadows
+	sun = DirectionalLight3D.new()
+	sun.light_color = Color(1.0, 0.91, 0.77)
+	sun.light_energy = 0.75
+	sun.shadow_enabled = true
+	sun.shadow_blur = 1.3
+	sun.rotation_degrees = Vector3(-38.0, 45.0, 0.0)
+	add_child(sun)
+
+func _setup_camera() -> void:
+	gimbal = Node3D.new()
+	gimbal.position = target_pan
+	gimbal.rotation.y = target_yaw
+	add_child(gimbal)
+
+	inner_gimbal = Node3D.new()
+	inner_gimbal.rotation_degrees.x = -36.0
+	gimbal.add_child(inner_gimbal)
+
+	camera = Camera3D.new()
+	camera.position = Vector3(0, 0, target_dist)
+	camera.fov = 32.0
+	camera.current = true
+	inner_gimbal.add_child(camera)
+
+func _setup_scene_roots() -> void:
+	ground_root = Node3D.new()
+	add_child(ground_root)
+
+	building_root = Node3D.new()
+	add_child(building_root)
+
+	foliage_root = Node3D.new()
+	add_child(foliage_root)
+
+	npc_root = Node3D.new()
+	add_child(npc_root)
+
+	rain_root = Node3D.new()
+	add_child(rain_root)
+
+	overlay_root = Node3D.new()
+	add_child(overlay_root)
+
+	# Hover selection preview box
+	hover_box = MeshInstance3D.new()
+	var hm := BoxMesh.new()
+	hm.size = Vector3(TILE_SIZE * 0.96, 0.1, TILE_SIZE * 0.96)
+	hover_box.mesh = hm
+	hover_box.material_override = M.get_mat("hover_valid")
+	hover_box.visible = false
+	add_child(hover_box)
+
+func _build_ground_grid() -> void:
+	for c in ground_root.get_children():
+		c.queue_free()
+
+	if sim == null: return
+	var land_size: int = int(sim.state.land)
+	cached_land = land_size
+	var positions := {"grass": [], "grass_alt": [], "grass_wild": [], "water": []}
+	for x in range(40):
+		for z in range(40):
+			var is_unlocked := x < land_size and z < land_size
+			var kind := "grass_wild"
+			if is_unlocked:
+				kind = "water" if sim.terrain(Vector2i(x,z))=="water" else ("grass_alt" if (x * 7 + z * 11) % 5 == 0 else "grass")
+			positions[kind].append(Vector3(float(x) * TILE_SIZE, -0.18, float(z) * TILE_SIZE))
+	for kind in positions:
+		var cells: Array = positions[kind]
+		if cells.is_empty(): continue
+		var mesh := BoxMesh.new()
+		mesh.size = Vector3(TILE_SIZE, 0.36, TILE_SIZE)
+		var batch := MultiMesh.new()
+		batch.transform_format = MultiMesh.TRANSFORM_3D
+		batch.mesh = mesh
+		batch.instance_count = cells.size()
+		for i in cells.size(): batch.set_instance_transform(i, Transform3D(Basis.IDENTITY, cells[i]))
+		var instance := MultiMeshInstance3D.new()
+		instance.multimesh = batch
+		instance.material_override = M.get_mat(kind)
+		instance.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+		ground_root.add_child(instance)
+
+func _build_natural_foliage() -> void:
+	for c in foliage_root.get_children():
+		c.queue_free()
+	if sim == null: return
+	foliage_hash = hash([int(sim.state.land),sim.state.buildings.size()])
+	var land_size := int(sim.state.land)
+	for x in range(2,land_size-1):
+		for z in range(2,land_size-1):
+			var cell := Vector2i(x,z)
+			if not sim.building_at(cell).is_empty() or sim.terrain(cell)=="water": continue
+			if (x*17+z*23)%37!=0: continue
+			var nearby_road := false
+			for delta in [Vector2i.UP,Vector2i.DOWN,Vector2i.LEFT,Vector2i.RIGHT]:
+				if sim.road_access.has(cell+delta): nearby_road = true
+			if nearby_road: continue
+			var tree_node: Node3D = BuildingMeshFactory.create_coconut_palm() if (x+z)%3==0 else BuildingMeshFactory.create_banyan_tree()
+			tree_node.position = Vector3(float(x)*TILE_SIZE,0,float(z)*TILE_SIZE)
+			tree_node.rotation.y = float(x*13+z*7)*0.2
+			foliage_root.add_child(tree_node)
+	for i in range(36):
+		var x: int = posmod(i * 11 + 3, 38)
+		var z: int = posmod(i * 17 + 5, 38)
+		if x < land_size+3 or z < land_size+3: continue
+
+		var tree_node: Node3D
+		if i % 3 == 0:
+			tree_node = BuildingMeshFactory.create_coconut_palm()
+		else:
+			tree_node = BuildingMeshFactory.create_banyan_tree()
+
+		tree_node.position = Vector3(float(x) * TILE_SIZE, 0, float(z) * TILE_SIZE)
+		tree_node.rotation.y = float(i) * 0.7
+		foliage_root.add_child(tree_node)
+	var grass_mesh := BoxMesh.new()
+	grass_mesh.size = Vector3(0.035,0.16,0.035)
+	var grass_positions: Array[Vector3] = []
+	for x in range(1,land_size-1):
+		for z in range(1,land_size-1):
+			if (x*19+z*31)%4!=0: continue
+			var cell := Vector2i(x,z)
+			if not sim.building_at(cell).is_empty() or sim.terrain(cell)=="water": continue
+			for tuft in range(3):
+				grass_positions.append(Vector3((float(x)+float(tuft-1)*0.12)*TILE_SIZE,0.1,(float(z)+float((x+z+tuft)%3-1)*0.1)*TILE_SIZE))
+	if not grass_positions.is_empty():
+		var grass_batch := MultiMesh.new()
+		grass_batch.transform_format = MultiMesh.TRANSFORM_3D
+		grass_batch.mesh = grass_mesh
+		grass_batch.instance_count = grass_positions.size()
+		for i in grass_positions.size(): grass_batch.set_instance_transform(i,Transform3D(Basis.IDENTITY,grass_positions[i]))
+		var grass_instance := MultiMeshInstance3D.new()
+		grass_instance.multimesh = grass_batch
+		grass_instance.material_override = M.get_mat("grass_detail")
+		grass_instance.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+		foliage_root.add_child(grass_instance)
+
+func rotate_camera(direction: int = 1) -> void:
+	target_yaw += deg_to_rad(45.0 * float(direction))
 
 func _process(dt: float) -> void:
 	clock += dt
-	zoom_factor = lerpf(zoom_factor,target_zoom,minf(1,dt*12))
-	for chunk in terrain_chunks:
-		chunk.position = pan
-		chunk.scale = Vector2.ONE*zoom_factor
-		if cached_land!=int(sim.state.land): chunk.queue_redraw()
-	cached_land = int(sim.state.land)
-	var current_hash := hash([sim.road_access,sim.state.buildings.size()])
-	if current_hash!=route_hash:
-		routes.clear()
-		var roads: Array = sim.road_access.keys()
-		for i in range(mini(12,roads.size())):
-			var destinations: Array = []
-			var purpose: String = ["rumah","niaga","tani","industri"][i%4]
-			for b in sim.state.buildings:
-				if sim.content.buildings[b.type].category==purpose: destinations.append(b)
-			var destination: Vector2i = roads[(i*3+roads.size()-1)%roads.size()]
-			if not destinations.is_empty():
-				var target: Dictionary = destinations[i%destinations.size()]
-				var best := 100000
-				for cell in roads:
-					var delta: Vector2i = cell-Vector2i(int(target.x),int(target.y))
-					var distance := absi(delta.x)+absi(delta.y)
-					if distance<best:
-						best = distance
-						destination = cell
-			routes.append(VillagePathfinder.find_path(roads[i],destination,sim.road_access))
-		route_hash = current_hash
-	var night := maxf(0.0,sin(float(sim.state.time)/120.0*TAU-PI*0.5))
-	modulate = Color(1.0-night*0.35,1.0-night*0.28,1.0-night*0.12)
-	queue_redraw()
 
-func world_point(p: Vector2) -> Vector2:
-	return (p-pan)/zoom_factor
+	gimbal.position = gimbal.position.lerp(target_pan, clampf(dt * 10.0, 0.0, 1.0))
+	gimbal.rotation.y = lerp_angle(gimbal.rotation.y, target_yaw, clampf(dt * 8.0, 0.0, 1.0))
+	camera.position.z = lerpf(camera.position.z, target_dist, clampf(dt * 10.0, 0.0, 1.0))
+	zoom_factor = 24.0 / camera.position.z
+
+	if sim == null: return
+
+	if cached_land != int(sim.state.land):
+		_build_ground_grid()
+	if foliage_hash != hash([int(sim.state.land),sim.state.buildings.size()]):
+		_build_natural_foliage()
+
+	_sync_buildings()
+	_sync_overlay()
+
+	# Day/Night cycle
+	var day_time: float = float(sim.state.time)
+	var sun_phase: float = sin(day_time / 120.0 * TAU - PI * 0.5)
+	var is_night: bool = sun_phase > 0.35
+	if is_night:
+		sun.light_color = Color(0.35, 0.45, 0.7)
+		sun.light_energy = 0.3
+		env_node.environment.ambient_light_energy = 0.45
+	else:
+		sun.light_color = Color(1.0, 0.94, 0.82)
+		sun.light_energy = 0.75
+		env_node.environment.ambient_light_energy = 0.45
+
+	_sync_villagers(dt)
+	_sync_weather()
+
+func _sync_buildings() -> void:
+	var cur_hash := hash([sim.state.buildings.size(), sim.state.money, int(clock)])
+	if cur_hash == building_hash:
+		return
+	building_hash = cur_hash
+
+	var existing_ids := buildings_map.keys()
+	var current_ids: Array = []
+
+	for b in sim.state.buildings:
+		var b_id: int = int(b.id)
+		current_ids.append(b_id)
+		var bdef: Dictionary = sim.content.buildings[b.type]
+		var footprint: Array = bdef.get("footprint", [1, 1])
+
+		var center_x := (float(b.x) + (float(footprint[0]) - 1.0) * 0.5) * TILE_SIZE
+		var center_z := (float(b.y) + (float(footprint[1]) - 1.0) * 0.5) * TILE_SIZE
+		var b_pos := Vector3(center_x, 0, center_z)
+
+		var node: Node3D
+		if buildings_map.has(b_id):
+			node = buildings_map[b_id]
+			if node.get_meta("crop", "") != b.get("crop", "") or node.get_meta("upgrade", 1) != b.get("upgrade", 1):
+				node.queue_free()
+				node = BuildingMeshFactory.create_building_node(b, bdef)
+				node.set_meta("crop", b.get("crop", ""))
+				node.set_meta("upgrade", b.get("upgrade", 1))
+				building_root.add_child(node)
+				buildings_map[b_id] = node
+		else:
+			node = BuildingMeshFactory.create_building_node(b, bdef)
+			node.set_meta("crop", b.get("crop", ""))
+			node.set_meta("upgrade", b.get("upgrade", 1))
+			building_root.add_child(node)
+			buildings_map[b_id] = node
+
+		node.position = b_pos
+
+	for old_id in existing_ids:
+		if not current_ids.has(old_id):
+			if buildings_map.has(old_id) and is_instance_valid(buildings_map[old_id]):
+				buildings_map[old_id].queue_free()
+			buildings_map.erase(old_id)
+
+func _sync_overlay() -> void:
+	var coverage_sources: Array = []
+	for building in sim.state.buildings:
+		coverage_sources.append([building.get("type"),building.get("x"),building.get("y"),building.get("upgrade")])
+	var state_hash := hash([overlay,overlay_kind,int(sim.state.land),coverage_sources,sim.road_access.keys()])
+	if state_hash == overlay_hash: return
+	overlay_hash = state_hash
+	for child in overlay_root.get_children(): child.queue_free()
+	if not overlay: return
+	var cells: Array[Vector3] = []
+	for x in int(sim.state.land):
+		for z in int(sim.state.land):
+			var cell := Vector2i(x,z)
+			var covered := sim.road_access.has(cell) if overlay_kind=="road" else sim.infrastructure.coverage(cell,overlay_kind)>0
+			if covered: cells.append(Vector3(float(x)*TILE_SIZE,0.035,float(z)*TILE_SIZE))
+	if cells.is_empty(): return
+	var mesh := BoxMesh.new()
+	mesh.size = Vector3(TILE_SIZE*0.91,0.025,TILE_SIZE*0.91)
+	var batch := MultiMesh.new()
+	batch.transform_format = MultiMesh.TRANSFORM_3D
+	batch.mesh = mesh
+	batch.instance_count = cells.size()
+	for i in cells.size(): batch.set_instance_transform(i,Transform3D(Basis.IDENTITY,cells[i]))
+	var instance := MultiMeshInstance3D.new()
+	instance.multimesh = batch
+	instance.material_override = M.get_mat("overlay_road" if overlay_kind=="road" else "overlay_service")
+	instance.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	overlay_root.add_child(instance)
+
+func _sync_villagers(dt: float) -> void:
+	if bool(sim.state.settings.get("reduced_motion", false)):
+		for c in npc_root.get_children(): c.queue_free()
+		return
+
+	var pop := mini(12, int(sim.state.population))
+	var child_count := npc_root.get_child_count()
+	while child_count < pop:
+		var npc := BuildingMeshFactory.create_villager()
+		npc_root.add_child(npc)
+		child_count += 1
+	while child_count > pop:
+		npc_root.get_child(child_count - 1).queue_free()
+		child_count -= 1
+
+	var roads: Array = sim.road_access.keys()
+	if roads.is_empty(): return
+	var new_route_hash := hash([roads, pop])
+	if new_route_hash != route_hash:
+		route_hash = new_route_hash
+		routes.clear()
+		for i in pop:
+			var start_cell: Vector2i = roads[i % roads.size()]
+			var end_cell: Vector2i = roads[(i * 3 + roads.size()/2) % roads.size()]
+			var path: Array[Vector2i] = Pathfinder.find_path(start_cell,end_cell,sim.road_access)
+			if path.is_empty(): path = [start_cell]
+			routes.append(path)
+
+	for i in range(pop):
+		var npc: Node3D = npc_root.get_child(i)
+		var path: Array[Vector2i] = routes[i]
+		var travel := clock * 0.45 + float(i) * 1.7
+		var segment := int(floorf(travel)) % maxi(1,(path.size()-1)*2)
+		var forward := segment < path.size()-1
+		var from_index := segment if forward else (path.size()-1)*2-segment
+		var to_index := mini(path.size()-1,from_index+1) if forward else maxi(0,from_index-1)
+		var road_cell: Vector2i = path[from_index]
+		var next_cell: Vector2i = path[to_index]
+		var t := fmod(travel,1.0)
+		var current_p := Vector3(float(road_cell.x) * TILE_SIZE, 0.05, float(road_cell.y) * TILE_SIZE)
+		var next_p := Vector3(float(next_cell.x) * TILE_SIZE, 0.05, float(next_cell.y) * TILE_SIZE)
+		npc.position = current_p.lerp(next_p, t)
+		npc.position.y += absf(sin(clock*8.0+float(i)))*0.018
+		if current_p.distance_to(next_p) > 0.01:
+			npc.look_at(next_p, Vector3.UP)
+
+func _sync_weather() -> void:
+	var is_raining: bool = not sim.state.event.is_empty() and sim.state.event.id == "rain"
+	if is_raining and rain_root.get_child_count() == 0:
+		for j in range(40):
+			var rx := (randf() - 0.5) * 20.0
+			var rz := (randf() - 0.5) * 20.0
+			var ry := randf() * 8.0 + 2.0
+			var drop := MeshInstance3D.new()
+			var dm := BoxMesh.new()
+			dm.size = Vector3(0.03, 0.6, 0.03)
+			drop.mesh = dm
+			drop.material_override = M.get_mat("water")
+			drop.position = Vector3(rx, ry, rz)
+			rain_root.add_child(drop)
+	elif not is_raining and rain_root.get_child_count() > 0:
+		for c in rain_root.get_children(): c.queue_free()
+
+	if is_raining:
+		rain_root.position = gimbal.position
+		for drop in rain_root.get_children():
+			drop.position.y -= 18.0 * get_process_delta_time()
+			if drop.position.y < 0.2: drop.position.y = 8.0
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouse and event.device == -1: return
+
 	if event is InputEventMouseButton:
-		if event.button_index==MOUSE_BUTTON_WHEEL_UP and event.pressed: target_zoom = clampf(target_zoom*1.12,0.3,1.7)
-		if event.button_index==MOUSE_BUTTON_WHEEL_DOWN and event.pressed: target_zoom = clampf(target_zoom/1.12,0.3,1.7)
-		if event.button_index==MOUSE_BUTTON_LEFT:
+		if event.button_index == MOUSE_BUTTON_WHEEL_UP and event.pressed:
+			target_dist = clampf(target_dist * 0.9, min_dist, max_dist)
+		elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN and event.pressed:
+			target_dist = clampf(target_dist * 1.1, min_dist, max_dist)
+		elif event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
+			rotate_camera(1)
+		elif event.button_index == MOUSE_BUTTON_LEFT:
 			if event.pressed:
 				dragging = true
 				moved = false
-				press = event.position
+				press_pos = event.position
 			else:
-				if dragging and not moved: tile_clicked.emit(sim.iso_to_grid(world_point(event.position)))
+				if dragging and not moved:
+					var hit_cell := raycast_to_grid(event.position)
+					if hit_cell.x >= 0:
+						tile_clicked.emit(hit_cell)
 				dragging = false
+
 	elif event is InputEventMouseMotion:
-		hover = sim.iso_to_grid(world_point(event.position))
+		var hit_cell := raycast_to_grid(event.position)
+		_update_hover(hit_cell)
 		if dragging:
-			if event.position.distance_to(press)>8: moved = true
-			if moved: pan += event.relative
+			if event.position.distance_to(press_pos) > 8:
+				moved = true
+			if moved:
+				_pan_camera_by_screen_delta(event.relative)
+
 	elif event is InputEventScreenTouch:
 		if event.pressed:
 			fingers[event.index] = event.position
-			press = event.position
+			press_pos = event.position
 			moved = false
 		else:
-			if fingers.size()==1 and not moved: tile_clicked.emit(sim.iso_to_grid(world_point(event.position)))
+			if fingers.size() == 1 and not moved:
+				var hit_cell := raycast_to_grid(event.position)
+				if hit_cell.x >= 0:
+					tile_clicked.emit(hit_cell)
 			fingers.erase(event.index)
+
 	elif event is InputEventScreenDrag:
 		moved = true
-		if fingers.size()==2:
+		if fingers.size() == 2:
 			var keys: Array = fingers.keys()
-			var other: Vector2 = fingers[keys[1] if keys[0]==event.index else keys[0]]
-			var old_position: Vector2 = fingers.get(event.index,event.position-event.relative)
-			var old_distance: float = old_position.distance_to(other)
-			if old_distance>10: target_zoom = clampf(target_zoom*event.position.distance_to(other)/old_distance,0.3,1.7)
-		else: pan += event.relative
-		fingers[event.index] = event.position
-	pan.x = clampf(pan.x,-2200,3200)
-	pan.y = clampf(pan.y,-2200,900)
-
-func diamond(p: Vector2, color: Color, sx: float=48.0, sy: float=24.0) -> void:
-	draw_colored_polygon(PackedVector2Array([p+Vector2(0,-sy),p+Vector2(sx,0),p+Vector2(0,sy),p+Vector2(-sx,0)]),color)
-
-func poly(points: Array, color: Color) -> void:
-	draw_colored_polygon(PackedVector2Array(points),color)
-
-func _draw() -> void:
-	if sim==null: return
-	draw_set_transform(pan,0,Vector2.ONE*zoom_factor)
-	var size := int(sim.content.balance.map_size)
-	if overlay and overlay_kind!="road":
-		for x in range(int(sim.state.land)):
-			for y in range(int(sim.state.land)):
-				if sim.infrastructure.coverage(Vector2i(x,y),overlay_kind)>0:
-					diamond(sim.grid_to_iso(Vector2(x,y)),Color(0.2,0.8,0.85,0.24))
-	var ordered: Array = sim.state.buildings.duplicate()
-	ordered.sort_custom(func(a: Dictionary,b: Dictionary) -> bool: return int(a.x)+int(a.y)<int(b.x)+int(b.y))
-	for i in range(85):
-		var cell := Vector2i(posmod(i*7+2,38),posmod(i*13+3,38))
-		if cell.x<12 and cell.y<12: continue
-		if sim.terrain(cell)!="grass" or not sim.building_at(cell).is_empty(): continue
-		ordered.append({"x":cell.x,"y":cell.y,"decoration":true,"palm":i%3==0})
-	ordered.sort_custom(func(a: Dictionary,b: Dictionary) -> bool: return int(a.x)+int(a.y)<int(b.x)+int(b.y))
-	for b in ordered:
-		if not b.get("decoration",false):
-			draw_building(b)
-			continue
-		var p := sim.grid_to_iso(Vector2(int(b.x),int(b.y)))
-		draw_line(p,p-Vector2(0,38),Color("81644a"),4)
-		if b.palm:
-			for j in range(5):
-				var angle := float(j)*TAU/5.0+0.4
-				var tip := p+Vector2(cos(angle)*26,-38+sin(angle)*12)
-				draw_line(p-Vector2(0,38),tip,Color("7eab56"),5)
-				draw_line(tip,tip+Vector2(0,6),Color("4a854b"),3)
+			var other: Vector2 = fingers[keys[1] if keys[0] == event.index else keys[0]]
+			var old_pos: Vector2 = fingers.get(event.index, event.position - event.relative)
+			var old_dist: float = old_pos.distance_to(other)
+			var new_dist: float = event.position.distance_to(other)
+			if old_dist > 10.0 and new_dist > 10.0:
+				target_dist = clampf(target_dist * (old_dist / new_dist), min_dist, max_dist)
 		else:
-			for j in range(3): draw_circle(p+Vector2((j-1)*11,-35-abs(j-1)*3),15,Color("356747").lightened(j*0.03))
-	if not bool(sim.state.settings.get("reduced_motion",false)):
-		for i in range(mini(routes.size(),int(sim.state.population))):
-			var path: Array = routes[i]
-			if path.is_empty(): continue
-			# Alternate purposeful trips and a brief idle at each endpoint.
-			var trip := maxf(1.0,float(path.size()-1))
-			var phase := fmod(clock*0.65+i*0.7,trip*2.0+2.0)
-			var distance := clampf(phase if phase<=trip+1.0 else trip*2.0+1.0-phase,0.0,trip)
-			var first := mini(path.size()-1,int(distance))
-			var last := mini(path.size()-1,first+1)
-			var cell := Vector2(path[first]).lerp(Vector2(path[last]),fmod(distance,1.0))
-			var p := sim.grid_to_iso(cell)
-			draw_circle(p+Vector2(0,-8),3.0,Color("ebbd8c"))
-			draw_line(p+Vector2(0,-5),p+Vector2(0,2),[Color("efc369"),Color("d86f50"),Color("e7eee0")][i%3],4)
+			_pan_camera_by_screen_delta(event.relative)
+		fingers[event.index] = event.position
 
-			if not sim.state.event.is_empty() and sim.state.event.id=="rain":
-				for j in range(80):
-					var p2 := Vector2(posmod(j*137,2000)-1000,fmod(clock*350+j*73,1300))
-					draw_line(p2,p2+Vector2(-5,14),Color(0.7,0.86,0.95,0.4),1)
-	if hover.x>=0 and hover.y>=0 and hover.x<size and hover.y<size:
-		var p := sim.grid_to_iso(Vector2(hover))
-		var valid := placement.is_empty() or sim.placement_error(placement,hover).is_empty()
-		var footprint: Array = [1,1] if placement.is_empty() else sim.content.buildings[placement].footprint
-		for x in range(int(footprint[0])):
-			for y in range(int(footprint[1])): diamond(p+sim.grid_to_iso(Vector2(x,y)),Color(0.95,0.84,0.45,0.55) if valid else Color(0.95,0.3,0.25,0.6))
+func _pan_camera_by_screen_delta(rel: Vector2) -> void:
+	var factor := (target_dist / 24.0) * 0.035
+	var forward := -gimbal.transform.basis.z
+	forward.y = 0.0
+	forward = forward.normalized()
+	var right := gimbal.transform.basis.x
+	right.y = 0.0
+	right = right.normalized()
 
-func draw_building(b: Dictionary) -> void:
-	var d: Dictionary = sim.content.buildings[b.type]
-	var p := sim.grid_to_iso(Vector2(float(b.x),float(b.y)))
-	var category: String = d.category
-	var wide := int(d.footprint[0])>1
-	if category=="jalan" and b.type in ["road","asphalt","highway","bridge"]:
-		diamond(p,Color("b8a082") if b.type=="road" else Color("69797b"),46,22)
-		if b.type!="road": draw_line(p-Vector2(22,11),p+Vector2(22,11),Color("ead9a4"),2)
+	var delta := (-right * rel.x + forward * rel.y) * factor
+	target_pan += delta
+	var max_coord := 40.0 * TILE_SIZE
+	target_pan.x = clampf(target_pan.x, -5.0, max_coord + 5.0)
+	target_pan.z = clampf(target_pan.z, -5.0, max_coord + 5.0)
+
+func raycast_to_grid(screen_pos: Vector2) -> Vector2i:
+	if camera == null: return Vector2i(-1, -1)
+	var ray_origin := camera.project_ray_origin(screen_pos)
+	var ray_dir := camera.project_ray_normal(screen_pos)
+	var ground_plane := Plane(Vector3.UP, 0.0)
+	var hit = ground_plane.intersects_ray(ray_origin, ray_dir)
+	if hit != null:
+		var gx := int(round(hit.x / TILE_SIZE))
+		var gz := int(round(hit.z / TILE_SIZE))
+		if gx >= 0 and gx < 40 and gz >= 0 and gz < 40:
+			return Vector2i(gx, gz)
+	return Vector2i(-1, -1)
+
+func _update_hover(cell: Vector2i) -> void:
+	hover_cell = cell
+	if cell.x < 0 or sim == null:
+		hover_box.visible = false
 		return
-	if wide: p.y += 24
-	var w := 35.0 if not wide else 62.0
-	var h := 36.0+float(b.upgrade)*5
-	if category=="tani":
-		if wide: diamond(p,Color("6b8350"),88,43)
-		for row in range(4):
-			for col in range(5):
-				var crop_pos := p+Vector2((col-row)*12-7,(col+row)*6-18)
-				var ready: bool = b.crop=="READY"
-				var planted: bool = b.crop in ["READY","GROWING","PLANTED"]
-				draw_line(crop_pos,crop_pos+Vector2(0,-11 if planted else -2),Color("edcb62") if ready else Color("bfd477"),3)
-		if b.crop=="READY": draw_circle(p+Vector2(0,-32+sin(clock*3)*2),7,Color("ffda79"))
-	elif b.type in ["catfish","tilapia"]:
-		diamond(p,Color("4a5c53"),88,43)
-		diamond(p,Color("265868"),78,38)
-		for i in range(mini(int(b.animals)*2+2,8)):
-			var phase := clock*2.2+float(i)*1.4
-			var fx := cos(phase)*26.0+sin(float(i)*2.1)*8.0
-			var fy := sin(phase)*12.0
-			var fp := p+Vector2(fx,fy)
-			draw_line(fp-Vector2(4,2),fp+Vector2(4,2),Color("16333c") if b.type=="catfish" else Color("d46b50"),3)
-			draw_circle(fp,1.5,Color("d8eef0"))
-	elif category=="ternak":
-		diamond(p,Color("c8b387"),85,42)
-		for i in range(mini(int(b.animals),8)):
-			var ap := p+Vector2(posmod(i*17,60)-25,posmod(i*13,30)-10)
-			draw_circle(ap,6,Color("fff1c9"))
-			draw_circle(ap+Vector2(4,-4),3,Color("dc7754"))
-		poly([p+Vector2(-60,5),p+Vector2(-60,-22),p+Vector2(-18,-5),p+Vector2(-18,25)],Color("9c7954"))
-	elif b.type=="park":
-		diamond(p,Color("80aa60"),85,42)
-		draw_circle(p+Vector2(0,-16),24,Color("437d50"))
-		draw_line(p+Vector2(-35,10),p+Vector2(25,40),Color("e0cd95"),6)
-	elif b.type=="hall":
-		draw_ellipse_shadow(p,w)
-		poly([p+Vector2(-w,0),p+Vector2(0,w*0.5),p+Vector2(0,w*0.5-h),p+Vector2(-w,-h)],Color("c9a473"))
-		poly([p+Vector2(0,w*0.5),p+Vector2(w,0),p+Vector2(w,-h),p+Vector2(0,w*0.5-h)],Color("deb885"))
-		# Joglo tiered roof
-		poly([p+Vector2(-w-8,-h),p+Vector2(0,-h-26),p+Vector2(w+8,-h),p+Vector2(0,-h+w*0.5)],Color("944432"))
-		poly([p+Vector2(-w-8,-h),p+Vector2(0,-h-26),p+Vector2(0,-h+w*0.5)],Color("ad5540"))
-		poly([p+Vector2(-w*0.55,-h-22),p+Vector2(0,-h-48),p+Vector2(w*0.55,-h-22),p+Vector2(0,-h-6)],Color("7a3526"))
-		poly([p+Vector2(-w*0.55,-h-22),p+Vector2(0,-h-48),p+Vector2(0,-h-6)],Color("8f4231"))
-		# Pendopo open pillars
-		for j in range(4):
-			var px := -w*0.6+float(j)*(w*0.4)
-			draw_line(p+Vector2(px,-2),p+Vector2(px,-h+10),Color("4a3022"),5)
-		# Flagpole with Merah-Putih
-		var flag_base := p+Vector2(w-8,8)
-		draw_line(flag_base,flag_base-Vector2(0,44),Color("e8eceb"),2)
-		poly([flag_base-Vector2(0,44),flag_base+Vector2(14,-41),flag_base+Vector2(14,-34),flag_base-Vector2(0,37)],Color("d93829"))
-		poly([flag_base-Vector2(0,37),flag_base+Vector2(14,-34),flag_base+Vector2(14,-27),flag_base-Vector2(0,30)],Color("ffffff"))
-	elif b.type=="water":
-		draw_ellipse_shadow(p,w)
-		poly([p+Vector2(-w*0.7,0),p+Vector2(0,w*0.35),p+Vector2(0,w*0.35-h-20),p+Vector2(-w*0.7,-h-20)],Color("436b7a"))
-		poly([p+Vector2(0,w*0.35),p+Vector2(w*0.7,0),p+Vector2(w*0.7,-h-20),p+Vector2(0,w*0.35-h-20)],Color("578a9c"))
-		poly([p+Vector2(-w*0.75,-h-20),p+Vector2(0,-h-34),p+Vector2(w*0.75,-h-20),p+Vector2(0,-h-6)],Color("2f4d59"))
-		draw_line(p+Vector2(w*0.35,-4),p+Vector2(w*0.35,-h-12),Color("79a3b2"),6)
-	elif b.type=="power":
-		draw_ellipse_shadow(p,w)
-		poly([p+Vector2(-w,0),p+Vector2(0,w*0.5),p+Vector2(0,w*0.5-h),p+Vector2(-w,-h)],Color("5c6966"))
-		poly([p+Vector2(0,w*0.5),p+Vector2(w,0),p+Vector2(w,-h),p+Vector2(0,w*0.5-h)],Color("72827f"))
-		poly([p+Vector2(-w-3,-h),p+Vector2(0,-h-16),p+Vector2(w+3,-h),p+Vector2(0,-h+w*0.4)],Color("3b4543"))
-		draw_line(p+Vector2(0,-h*0.5),p+Vector2(6,-h*0.5-12),Color("ffd152"),4)
-		draw_line(p+Vector2(6,-h*0.5-12),p+Vector2(-3,-h*0.5-12),Color("ffd152"),4)
-		draw_line(p+Vector2(-3,-h*0.5-12),p+Vector2(3,-h*0.5-24),Color("ffd152"),4)
-	else:
-		var colors := {"rumah":Color("e8cc99"),"niaga":Color("e9ab78"),"industri":Color("a6b4b0"),"layanan":Color("e4e4c5"),"jalan":Color("a5c8c4")}
-		var wall: Color = colors.get(category,Color("e8cc99"))
-		if b.type in ["apartment","condo","hotel","hospital"]: h += 70
-		draw_ellipse_shadow(p,w)
-		poly([p+Vector2(-w,0),p+Vector2(0,w*0.5),p+Vector2(0,w*0.5-h),p+Vector2(-w,-h)],wall.darkened(0.12))
-		poly([p+Vector2(0,w*0.5),p+Vector2(w,0),p+Vector2(w,-h),p+Vector2(0,w*0.5-h)],wall)
-		var roof := Color("bd6850") if category=="rumah" else Color("487b78")
-		if b.type=="bamboo": roof = Color("5c4938")
-		poly([p+Vector2(-w-5,-h),p+Vector2(0,-h-30),p+Vector2(w+5,-h),p+Vector2(0,-h+w*0.5)],roof)
-		poly([p+Vector2(-w-5,-h),p+Vector2(0,-h-30),p+Vector2(0,-h+w*0.5)],roof.lightened(0.16))
-		draw_line(p+Vector2(16,-2),p+Vector2(16,-24),Color("405b55"),12)
-		for j in range(2): draw_line(p+Vector2(-w+12+j*18,-h+12),p+Vector2(-w+12+j*18,-h+24),Color("597d77"),8)
-		if b.type=="warung":
-			# Indonesian roadside warung striped awning (red/white)
-			poly([p+Vector2(-w+2,-10),p+Vector2(0,-1),p+Vector2(0,-16),p+Vector2(-w+2,-25)],Color("bf392c"))
-			for k in range(3):
-				var sx := -w+8+float(k)*10
-				draw_line(p+Vector2(sx,-14-float(k)*2),p+Vector2(sx+6,-11-float(k)*2),Color("f4eedb"),4)
-		elif category=="niaga":
-			draw_line(p+Vector2(3,-h+25),p+Vector2(w-2,-h+5),Color("f0cd77"),9)
-		if b.type in ["clinic","hospital"]:
-			var cross_color := Color("2da866") if b.type=="clinic" else Color("d63636")
-			var cp := p+Vector2(w*0.5,-h*0.5-6)
-			draw_line(cp-Vector2(7,0),cp+Vector2(7,0),cross_color,4)
-			draw_line(cp-Vector2(0,7),cp+Vector2(0,7),cross_color,4)
-		elif b.type=="school":
-			var flag_p := p+Vector2(0,-h-30)
-			draw_line(flag_p,flag_p-Vector2(0,20),Color("d0d5d4"),2)
-			poly([flag_p-Vector2(0,20),flag_p+Vector2(10,-18),flag_p+Vector2(10,-12),flag_p-Vector2(0,14)],Color("d93829"))
-		if category=="industri":
-			draw_line(p+Vector2(25,-h-5),p+Vector2(25,-h-50),Color("929891"),12)
-			if not bool(sim.state.settings.get("reduced_motion",false)):
-				for i in range(3): draw_circle(p+Vector2(25+sin(clock+i)*6,-h-55-i*10-fmod(clock*6,10)),5+i*2,Color(0.9,0.9,0.85,0.3))
-	if float(b.construction)>0:
-		draw_line(p+Vector2(-w,-8),p+Vector2(w,-8),Color("ead681"),4)
-		draw_string(font,p+Vector2(-24,-75),"%ds"%ceili(b.construction),HORIZONTAL_ALIGNMENT_LEFT,-1,16,Color("fff4cf"))
-	if overlay:
-		var covered: bool = sim.connected(b) if overlay_kind=="road" else sim.infrastructure.coverage(Vector2i(int(b.x),int(b.y)),overlay_kind)>0
-		diamond(p,Color(0.2,0.85,0.6,0.4) if covered else Color(0.95,0.3,0.2,0.5),w+5,w*0.5+3)
 
-func draw_ellipse_shadow(p: Vector2, width: float) -> void:
-	draw_set_transform(pan+(p+Vector2(0,12))*zoom_factor,0,Vector2(zoom_factor,zoom_factor*0.45))
-	draw_circle(Vector2.ZERO,width+5,Color(0.08,0.18,0.12,0.19))
-	draw_set_transform(pan,0,Vector2.ONE*zoom_factor)
+	if not placement.is_empty():
+		var valid := sim.placement_error(placement, cell).is_empty()
+		hover_box.material_override = M.get_mat("hover_valid" if valid else "hover_invalid")
+		hover_box.position = Vector3(float(cell.x) * TILE_SIZE, 0.05, float(cell.y) * TILE_SIZE)
+		hover_box.visible = true
+	else:
+		hover_box.visible = false

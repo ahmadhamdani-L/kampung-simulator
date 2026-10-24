@@ -1,6 +1,6 @@
 # Kampung Simulator: Dari Desa Jadi Kota
 
-Offline Godot 4.7.2 / GDScript village builder for Android, with original procedural isometric graphics and synthesized audio. Development candidate, **not a verified production release**.
+Offline Godot 4.7.2 / GDScript village builder for Android, with a procedural 3D village, animated residents and synthesized audio. Development candidate, **not a verified production release**.
 
 ## Play
 

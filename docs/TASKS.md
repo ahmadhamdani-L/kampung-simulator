@@ -3,6 +3,7 @@
 ## Validation and delivery
 
 - [x] Kampung_QA emulator installation and startup.
+- [x] Emulator 3D smoke check: launch, field selection, harvest, save, relaunch and Android Back.
 - [x] Airplane-mode touch planting, background save, force-stop and offline crop recovery.
 - [x] Grid/chunk/coverage/pathfinding and nested persistence regression tests.
 - [x] Debug APK export/signature/package validation.
